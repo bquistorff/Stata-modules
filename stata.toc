@@ -1,9 +1,12 @@
 v 3
 d Some minor utilities by Brian Quistorff
 
+* See: -help usersite-
+
 t a
 t c
 t e
+t i
 t l
 t m
 t n

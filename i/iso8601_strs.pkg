@@ -1,0 +1,6 @@
+v 3
+d iso8601_strs.  A program to return ISO 8601 date/time strings.
+d Program by Brian Quistorff
+
+f iso8601_strs.ado
+f iso8601_strs.sthlp
