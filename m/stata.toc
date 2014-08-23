@@ -1,0 +1,4 @@
+v 3
+d M-directory
+
+p matrix_post_lines Creates the post init and post string lines that will come from a matrix

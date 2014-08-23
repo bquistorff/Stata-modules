@@ -1,0 +1,5 @@
+v 3
+d C-directory
+
+p closeallmatafiles Closes all files that were open in mata. -clear all- doesn't close mata open files!
+p collapseandpreserve This will collapse the dataset and preserve the variable and value labels. 

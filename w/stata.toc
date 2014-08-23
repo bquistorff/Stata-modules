@@ -1,0 +1,4 @@
+v 3
+d W-directory
+
+p wrap_text Breaks a long string into ".." "..." sequences defined by max line-width

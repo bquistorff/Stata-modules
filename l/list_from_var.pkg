@@ -1,0 +1,6 @@
+d 'list_from_var': module
+d
+d   Creates a string list from a string variable (and if clause)
+d
+f list_from_var.ado
+

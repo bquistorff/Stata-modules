@@ -1,0 +1,9 @@
+d 'wrap_text': module
+d
+d   Simple utility to wrap a long line of text into blocks
+d delimited by double-quotes so that the whole string can
+d be passed to a Stata routine that interprets this as separate
+d lines (e.g. -twoway-)
+d
+f wrap_text.ado
+

@@ -1,0 +1,7 @@
+d 'nice_profile_report': module
+d
+d   Replaces -profiler report- and create a dta as output (rather than a text file)
+d Requires: save_cmd_output.ado
+d
+f nice_profile_report.ado
+

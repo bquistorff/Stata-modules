@@ -1,0 +1,4 @@
+v 3
+d N-directory
+
+p nice_profile_report Replaces -profiler report- and create a dta as output (rather than a text file). Requires: save_cmd_output.ado

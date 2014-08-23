@@ -1,0 +1,6 @@
+d 'matrix_post_lines': module
+d
+d   Creates the post init and post string lines that will come from a matrix
+d
+f matrix_post_lines.ado
+

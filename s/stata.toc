@@ -1,0 +1,4 @@
+v 3
+d S-directory
+
+p save_cmd_output Saves the output from a shell command to a file

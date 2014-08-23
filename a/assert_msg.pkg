@@ -1,0 +1,6 @@
+d 'assert_msg': module
+d
+d   An assert with a message when false
+d
+f assert_msg.ado
+

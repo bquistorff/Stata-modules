@@ -1,0 +1,4 @@
+v 3
+d A-directory
+
+p assert_msg An assert with a message when false

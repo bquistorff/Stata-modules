@@ -1,0 +1,6 @@
+d 'collapseandpreserve': module
+d
+d   This will collapse the dataset and preserve the variable and value labels. 
+d
+f collapseandpreserve.ado
+

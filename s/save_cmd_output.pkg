@@ -1,0 +1,6 @@
+d 'save_cmd_output': module
+d
+d   Saves the output from a shell command to a file
+d
+f save_cmd_output.ado
+

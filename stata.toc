@@ -1,0 +1,12 @@
+v 3
+d Some minor utilities by Brian Quistorff
+
+t a
+t c
+t e
+t l
+t m
+t n
+t p
+t s
+t w

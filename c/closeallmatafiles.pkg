@@ -1,0 +1,6 @@
+d 'closeallmatafiles': module
+d
+d   Closes all files that were open in mata. -clear all- doesn't close mata open files!
+d
+f closeallmatafiles.ado
+
