@@ -1,6 +1,7 @@
 *! Version 1.0
 *! Prints a simple progress bar and time estimates
 program print_dots
+    version 12
 	args curr end
 	local timernum 13
 	

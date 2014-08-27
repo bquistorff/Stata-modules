@@ -2,6 +2,7 @@
 *! Replaces -profiler report- and create a dta as output (rather than a text file)
 *! Requires: save_cmd_output.ado
 program nice_profile_report
+    version 12
 	syntax , outfile(string)
 	tempfile textoutput
 	save_cmd_output, outfile("`textoutput'") command(profiler report)

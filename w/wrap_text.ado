@@ -7,6 +7,7 @@
 *! twoway ..., note(`s(wrappedtext)')/note(`wrapped')
 * With simple testing 100 chars is about the width of a note in twoway at "normal sizes".
 program wrap_text, sclass
+    version 12
 	syntax , unwrappedtext(string)  [width(integer 100)]
     
 	local num_words : word count `unwrappedtext'

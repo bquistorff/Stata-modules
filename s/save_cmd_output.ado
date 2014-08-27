@@ -1,8 +1,8 @@
 *! Version 1.0
 *! Saves the output form a shell command
 *TODO: Anyway to fix-up line wrapping?
-cap program drop save_cmd_output
 program save_cmd_output
+    version 12
 	syntax, outfile(string) command(string)
 	
 	*First get the raw log output

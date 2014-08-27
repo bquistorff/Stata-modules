@@ -9,6 +9,7 @@ mata:
  * Do simultaneous charachter replacement
  */
 string scalar simultaneous_char_replace(string scalar input, string rowvector tomatch_chars, string rowvector toreplace_strs){
+    version 12
     string scalar output
     
     output = ""

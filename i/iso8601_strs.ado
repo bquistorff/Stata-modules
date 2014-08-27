@@ -12,6 +12,7 @@
 * Author: Brian Quistorff (bquistorff@gmail.com)
 
 program define iso8601_strs, sclass
+    version 12
 
 	local curr_date = "`c(current_date)'"
 	local curr_time = "`c(current_time)'"
