@@ -1,0 +1,7 @@
+d 'rng_advance': module
+d
+d   A simple way to advance the Stata RNG state by a fixed amount. 
+d Will also fill a variable with a sequence of such states
+d
+f rng_advance.ado
+

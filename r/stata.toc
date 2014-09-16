@@ -1,0 +1,4 @@
+v 3
+d R-directory
+
+p rng_advance A simple way to advance the Stata RNG state by a fixed amount. Will also fill a variable with a sequence of such states

@@ -2,7 +2,6 @@
 *! Creates axis ticks (major & minor) for log scales
 *! (Stata's auto ticks are bad)
 program log_axis_ticks, sclass
-    version 12
 	args min max
 
 	local logdiff = log10(`max'/`min')
@@ -76,13 +75,15 @@ program log_axis_ticks, sclass
 				local last = `next'
 			}
 			
-			local min_next = `min_mag_not_bigger'
 			if `step'>1{
-				local minor_lst "`minor_lst' `min_next'"
-				local min_next = 10*`min_next'
-				if `min_next'>= `max'{
-					continue, break
-				}
+                local min_next = `min_mag_not_bigger'
+                while 1{
+                    local minor_lst "`minor_lst' `min_next'"
+                    local min_next = 10*`min_next'
+                    if `min_next'>= `max'{
+                        continue, break
+                    }
+                }
 			}
 		}
 		
