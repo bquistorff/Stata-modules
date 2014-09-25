@@ -13,8 +13,11 @@ help for {cmd:sutex_env} {right:(Antoine Terracol)}
 {title:Description}
 
 {p}
-{cmd:sutex_env} generates LaTeX code for summary statistics tables. If {cmdab:file:(string)} is specified, the code is written to the specified file (if {cmdab:repl:ace} is not specified, then the code is appended to the existing file, if any). This is an extension of {cmd:sutex} that allows the option {cmdab:notableenv:}.
+{cmd:sutex_env} generates LaTeX code for summary statistics tables. This is an extension of {cmd:sutex} that allows the option {cmdab:notableenv:}.
 
+{p}
+If {cmdab:file:(string)} is specified, the code is written to the specified file (if {cmdab:repl:ace} is not specified, then the code is appended to the existing file, if any).
+ 
 {p}
 Otherwise, the code is displayed in the output window.
 
