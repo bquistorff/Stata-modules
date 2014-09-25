@@ -1,0 +1,103 @@
+{smcl}
+{.-}
+help for {cmd:sutex_env} {right:(Antoine Terracol)}
+{.-}
+{title:Generates LaTeX code for summary statistics tables.}
+
+{p 8 27}
+[by {it:varlist} : ] {cmd:sutex_env} [ {it:varlist} ] [ {it:if} ] [ {it:in} ] [ {it:weights} ], [{cmdab:dig:its(integer)}] [{cmdab:lab:els}] [{cmdab:par:}]
+		[{cmdab:nobs:}] [{cmdab:min:max}] [{cmdab:na:(string)}] [{cmdab:tit:le(string)}] [{cmdab:key:(string)}]
+       		  [{cmdab:long:table}] [{cmdab:pl:acement}] [{cmdab:noch:eck}] [{cmdab:notableenv:}] [{cmdab:file:(string)}] [{cmdab:append:}] [{cmdab:repl:ace}]
+
+
+{title:Description}
+
+{p}
+{cmd:sutex_env} generates LaTeX code for summary statistics tables. If {cmdab:file:(string)} is specified, the code is written to the specified file (if {cmdab:repl:ace} is not specified, then the code is appended to the existing file, if any). This is an extension of {cmd:sutex} that allows the option {cmdab:notableenv:}.
+
+{p}
+Otherwise, the code is displayed in the output window.
+
+{p}
+When {cmdab:long:table} is selected, and if you {it:\usepackage{longtable}} in the preamble of your TeX document, tables can span over several pages    
+
+
+{p}
+The [{cmdab:dig:its(integer)}] option defines the number of digits to be displayed (default is 3).
+
+{p}
+The [{cmdab:lab:els}] option allows to display variable labels (if they exist) instead of variable names.
+
+{p}
+The [{cmdab:par:}] option adds parentheses to Std. Dev.
+
+{p}
+The [{cmdab:nobs:}] option adds a column with the number of observations for each variable (automatically specified if variables do not have the same number of observations).
+
+{p}
+The [{cmdab:min:max}] option adds two columns with the minimum and maximum of each variable.
+
+{p}
+The [{cmdab:na:(string)}] option allows to define the content of cells where a numerical value has no sense (for example a Std. Dev. for only one observation).
+ ATTENTION : do not use the following characters # $ % & ~ _ ^ \ { } in that option.
+
+{p}
+The [{cmdab:tit:le(string)}] option defines the table title ({it:Summary statistics} is default).
+
+{p}
+The [{cmdab:key(string)}] option defines the table label ({it:sumstat} is default).
+
+{p}
+The [{cmdab:long:table}] option allows to create tables that span over several pages using the "supertabular" package (do not forget to {it:\usepackage{longtable}} in the preamble of your .tex document)
+
+{p}The [{cmdab:pl:acement}] option specifies the placement of the table in the .tex doc (default is {it:htbp}) {p_end}
+
+{p}
+The [{cmdab:nocheck}] option skips the LaTeX special characters search-and-replace
+routine. This option should be used in two cases :
+- either you are sure there are no LaTeX special characters within variable names or labels, and want to speed-up the command,
+- or you deliberately included LaTeX special characters and do not want {cmd:sutex_env} to translate them.
+
+{p}
+The [{cmdab:notableenv}] option omits generating the outside table environment (helpful if you are inputting this in a setting where this is already done).
+
+{p}
+The [{cmdab:file:(string)}] writes the LaTeX code in the specified ASCII file (if no extension is given, {it:.tex} is assumed), nothing is diplayed in the output window.
+
+{p}
+The [{cmdab:append:}] option (to be used in conjunction with {cmdab:file:(string)}) appends the code to the specified file.
+
+{p}
+The [{cmdab:repl:ace}] option (to be used in conjunction with {cmdab:file:(string)}) overwrites any existing file with the same name.
+
+
+{p}
+If the LaTeX code is displayed in the output window, one just has to copy/paste it into a LaTeX editor (in Scientific Word, it has to be pasted into a "TeX field")
+
+{p}
+If a file is written, {cmd:sutex_env} displays "file {it:filename} saved". The content of {it:filename} can be viewed by clicking on it.
+
+
+{title:Examples}
+
+{p 8 16}{inp:. sutex_env if foreign==0, labels digits(5)}{p_end}
+
+{p 8 16}{inp:. by foreign : sutex_env, labels minmax longtable key(ltab)}{p_end}
+
+{p 8 16}{inp:. sutex_env, labels file(C:/myfiles/mytables.tex) replace}{p_end}
+
+{p 8 16}{inp:. by foreign : sutex_env, labels file(C:/myfiles/mytables.tex) append}{p_end}
+
+{title:Also see}
+
+{p 0 21}
+On-line:  help for {help summarize}
+{p_end}
+{p 10 21}
+help for {help outtex}, {help maketex}, {help outreg}, {help outtable} if installed
+{p_end}
+
+{.-}
+
+Questions, comments and bug-reports can be sent to terracol@univ-paris1.fr
+{.-}
