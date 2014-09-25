@@ -9,7 +9,7 @@ Install
 To install to install 'package' whose name begins with letter 'p' you can do the following with Stata v13.
 
 ```
-. net install <package>, from(https://raw.githubusercontent.com/bquistorff/Stata-modules/<p>/master/) replace
+. net install <package>, from(https://raw.githubusercontent.com/bquistorff/Stata-modules/master/<p>/) replace
 ```
 
 For Stata 12 or below (that can't handle the https of github) download as zip, unzip, and then 
