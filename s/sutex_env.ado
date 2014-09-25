@@ -1,3 +1,5 @@
+*! Version 1.2
+*! Latex output of summary stats
 **************************************
 *Editted slightly by Brian Quistorff 11-09-2013
 * -allows filenames with spaces
