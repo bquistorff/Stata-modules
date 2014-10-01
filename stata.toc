@@ -5,6 +5,7 @@ d Some minor utilities by Brian Quistorff
 
 t a
 t c
+t d
 t e
 t i
 t l

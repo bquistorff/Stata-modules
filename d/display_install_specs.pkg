@@ -1,0 +1,7 @@
+d 'display_install_specs': module
+d
+d   Lists installation details necessarily for numerical 
+d replication
+d
+f display_install_specs.ado
+

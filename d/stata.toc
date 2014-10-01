@@ -1,0 +1,4 @@
+v 3
+d D-directory
+
+p display_install_specs Lists installation details necessarily for numerical replication
