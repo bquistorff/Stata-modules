@@ -1,0 +1,4 @@
+v 3
+d T-directory
+
+p tabl displaying value labels and numeric codes simultaneously
