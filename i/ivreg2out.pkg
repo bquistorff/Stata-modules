@@ -1,0 +1,4 @@
+v 3
+d ivreg2out.  Combine stage estimates of ivreg2 into single estimate
+
+f ivreg2out.ado
