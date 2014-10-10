@@ -2,3 +2,4 @@ v 3
 d P-directory
 
 p print_dots Prints a simple progress bar and time estimates
+p post_eb_eV Post your own matrices to e(b) and e(V)
