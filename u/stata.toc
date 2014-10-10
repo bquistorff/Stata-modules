@@ -1,0 +1,4 @@
+v 3
+d U-directory
+
+p usepackage_simple Stata module to download and install user packages necessary to run a do-file.
