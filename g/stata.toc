@@ -1,0 +1,4 @@
+v 3
+d G-directory
+
+p gen_robust_id Generates a unique id for each pair (like egen ... group()) but makes sure they don't have leading 0s
