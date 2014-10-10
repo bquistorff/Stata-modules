@@ -1,0 +1,6 @@
+d 'save12': module
+d
+d   In environments where stata12 and 13 are possible, always save in v12 format
+d
+f save12.ado
+
