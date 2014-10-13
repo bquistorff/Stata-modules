@@ -1,0 +1,6 @@
+d 'matrixsort': module
+d
+d   Sorts a Stata matrix by a column. Fixes problem in -matsort- where row labels with spaces are mangled
+d
+f matrixsort.ado
+

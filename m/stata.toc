@@ -2,3 +2,4 @@ v 3
 d M-directory
 
 p matrix_post_lines Creates the post init and post string lines that will come from a matrix
+p matrixsort Sorts a Stata matrix by a column. Fixes problem in -matsort- where row labels with spaces are mangled
