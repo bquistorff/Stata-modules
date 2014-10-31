@@ -1,12 +1,12 @@
 Stata-modules
 =============
 
-A collection of small Stata utilities. Minimal documentation for now. 
+A collection of small Stata modules utilities dealing with them. The modules include forks of existing modules (latabstat-simple, matrixsort, outtable-simple, sutex-env, usepackage_simple), ones pulled from the Stata list, and new ones.
 
 Install
 =======
 
-To install to install 'package' whose name begins with letter 'p' you can do the following with Stata v13.
+To install a module 'package' whose name begins with letter 'p' you can do the following with Stata v13.
 
 ```
 . net install <package>, from(https://raw.githubusercontent.com/bquistorff/Stata-modules/master/<p>/) replace
@@ -18,10 +18,12 @@ For Stata 12 or below (that can't handle the https of github) download as zip, u
 . net install <package>, from(full_local_path_to_files/<p>/) replace
 ```
 
+Bash scripts can just be downloaded.
+
 Why not SSC?
 =======
 
-While I'm not opposed to having code on BC's SSC for convenience, that archive has several limitations:
+While I'm not opposed to having modules on BC's SSC for convenience, that archive has several limitations:
 * It doesn't allow access to previous versions of files (which is essential for replication). 
 * It doesn't facilitate noting bugs or other comments (which reduces errors)
 * It doesn't facilitate collaborative editing such as submitting bug fixes or tracking forks (which speeds development).
