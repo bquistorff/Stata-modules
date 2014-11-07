@@ -2,7 +2,26 @@
 *! Creates axis ticks (major & minor) for log scales
 *! (Stata's auto ticks are bad)
 program log_axis_ticks, sclass
-	args min max
+	syntax , [range(numlist) vars(varlist numeric) label_scale(string)]
+	
+	* Get the range
+	if "`range'"!=""{
+		local min : word 1 of `range'
+		local max : word 2 of `range'
+	}
+	else {
+		local min = .
+		local max = .
+		foreach v in `vars'{
+			summ `v', meanonly
+			if `min'==. | `r(min)'<`min'{
+				local min = `r(min)'
+			}
+			if `max'==. | `r(max)'>`max'{
+				local max = `r(max)'
+			}
+		}
+	}
 
 	local logdiff = log10(`max'/`min')
 	
@@ -106,6 +125,15 @@ program log_axis_ticks, sclass
 		}
 	}
 	
-	sreturn local major_ticks = "`major_lst'"
+	if "`label_scale'"!="" {
+		local major_lst_orig `"`major_lst'"'
+		local major_lst ""
+		foreach mtick in `major_lst_orig'{
+			local major_lst `"`major_lst' `mtick' "`=`mtick'/`label_scale''""'
+		}
+		sreturn local major_lst_orig = "`major_lst_orig'"
+	}
+	
+	sreturn local major_ticks = `"`major_lst'"'
 	sreturn local minor_ticks = "`minor_lst'"
 end
