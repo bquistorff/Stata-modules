@@ -1,7 +1,7 @@
 Stata-modules
 =============
 
-A collection of small Stata modules utilities dealing with them. The modules include forks of existing modules (latabstat-simple, matrixsort, outtable-simple, sutex-env, usepackage_simple), ones pulled from the Stata list, and new ones.
+A collection of small Stata modules utilities dealing with them. The modules include forks of existing modules: latabstat-simple, matrixsort, outtable-simple, sutex-env, usepackage_simple, synth (allows returning precise weights and speeds up small runs). There are also ones pulled from the Stata list, and new ones.
 
 Install
 =======
