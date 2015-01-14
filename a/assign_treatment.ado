@@ -1,4 +1,4 @@
-*! version 1.0 Brian Quistorff
+*! version 1.1 Brian Quistorff
 *! Trying to do "reduction" with "full" looks like a much harder problem (and not much benefit).
 program assign_treatment
 	syntax varlist, generate(string) num_treatments(int) [handle_misfit(string) subcell_order_vars(string)]
@@ -8,8 +8,10 @@ program assign_treatment
 	gen `rand' = runiform()
 	egen `cell_id'    = group(`varlist')
 	egen `subcell_id' = group(`subcell_order_vars')
-	bys `cell_id'             : gen `cell_position'    = `rand'[1]
-	bys `cell_id' `subcell_id': gen `subcell_position' = `rand'[1]
+	sort `cell_id', stable
+	by `cell_id'             : gen `cell_position'    = `rand'[1]
+	sort `cell_id' `subcell_id', stable
+	by `cell_id' `subcell_id': gen `subcell_position' = `rand'[1]
 	sort `cell_position' `subcell_position' `rand'
 	by `cell_position': gen `misfit' = (_n > floor(_N/`num_treatments')*`num_treatments')
 	gen `generate' = mod(_n-1, `num_treatments')+1 
