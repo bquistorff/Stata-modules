@@ -1,0 +1,6 @@
+d 'reset_ADO': module
+d
+d   Resets the ADO to the standard ordering.
+d
+f reset_ADO.ado
+
