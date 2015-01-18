@@ -1,7 +1,7 @@
-d 'assert_msg': module
+d 'assign_treatment': module
 d
 d   Assign units to treatment with uneven cell sizes.
 d
-f assert_msg.ado
-f assert_msg.sthlp
+f assign_treatment.ado
+f assign_treatment.sthlp
 
