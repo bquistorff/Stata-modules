@@ -1,5 +1,6 @@
 v 3
 d A-directory
 
+p add_fake_coeff_to_e Adds fake entries to estimates for table formating.
 p assert_msg An assert with a message when false
 p assign_treatment Assign units to treatment with uneven cell sizes.

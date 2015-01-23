@@ -1,0 +1,6 @@
+d 'add_fake_coeff_to_e': module
+d
+d   An fake entries to estimates e(b) and e(V) for table formatting.
+d
+f add_fake_coeff_to_e.ado
+
