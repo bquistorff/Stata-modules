@@ -1,6 +1,6 @@
 d 'post_eb_eV': module
 d
-d   Post your own matrices to e(b) and e(V)
+d   Post your own matrices to e(b) and e(V). For tables
 d
 f post_eb_eV.ado
 
