@@ -1,0 +1,7 @@
+d 'trilog': module
+d
+d   Makes compressed scales (like log scales) when both positive and negative numbers exist.
+d  It makes a linear patch in the middle.
+d
+f trilog.ado
+

@@ -2,3 +2,4 @@ v 3
 d T-directory
 
 p tabl displaying value labels and numeric codes simultaneously
+p trilog Makes compressed scales (like log scales) when both positive and negative numbers exist.

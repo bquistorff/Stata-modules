@@ -1,4 +1,6 @@
 *! version 1.0
+*! Makes compressed scales (like log scales) when both positive and negative numbers exist.
+*!  It makes a linear patch in the middle.
 *! Usage:
 *!  trilog , source(orig_var) generate(new_var)
 *!  trilog , labels(-100 -10 -1 0 1 10 100)
