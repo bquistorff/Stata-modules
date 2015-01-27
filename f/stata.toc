@@ -1,4 +1,4 @@
 v 3
 d F-directory
 
-p fsample Similar to sample but for data in file, so big datasetsPPPP.
+p fsample Similar to sample but for data in file, so big datasetsPP.
