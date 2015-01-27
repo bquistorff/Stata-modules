@@ -1,6 +1,6 @@
 d 'reset_ADO': module
 d
-d   Resets the ADO to the standard ordering.
+d   Resets the ADO to the standard ordering. Helpful because S_ADO isn't reset by clearing.
 d
 f reset_ADO.ado
 

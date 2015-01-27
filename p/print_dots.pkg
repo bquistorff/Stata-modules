@@ -1,6 +1,6 @@
 d 'print_dots': module
 d
-d   Prints a simple progress bar and time estimates
+d   Prints a simple progress bar along with periodic time estimatse.
 d
 f print_dots.ado
 

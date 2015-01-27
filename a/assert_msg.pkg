@@ -1,6 +1,6 @@
 d 'assert_msg': module
 d
-d   An assert with a message, exits when cond false.
+d   An asserts (exits when condition is false) with a message.
 d
 f assert_msg.ado
 

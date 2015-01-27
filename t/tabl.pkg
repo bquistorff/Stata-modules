@@ -1,6 +1,6 @@
 d 'tabl': module
 d
-d   displaying value labels and numeric codes simultaneously
+d   displaying value labels and numeric codes simultaneously. From stata list
 d
 f tabl.ado
 

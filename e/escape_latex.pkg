@@ -1,6 +1,6 @@
 d 'escape_latex': module
 d
-d   Escapes Latex meta-chatacters
+d   Escapes Latex meta-chatacters for strings. Use for writing to tex files.
 d
 f escape_latex.ado
 

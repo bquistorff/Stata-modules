@@ -1,6 +1,6 @@
 d 'fsample': module
 d
-d   Similar to sample but for data in file (so big datasets). 
+d   Similar to sample but for data in file (so useful for very big datasets). 
 d
 f fsample.ado
 
