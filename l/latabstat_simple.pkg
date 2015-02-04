@@ -2,5 +2,7 @@ d 'latabstat_simple': module
 d
 d   modification of -latabstat- (see SSC) to remove the Source footnote and make a smaller tex fragment.
 d
+d Distribution-Date: 01feb2015
+d
 f latabstat_simple.ado
 

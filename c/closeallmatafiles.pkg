@@ -2,5 +2,7 @@ d 'closeallmatafiles': module
 d
 d   Closes all files that were open in mata. -clear all- doesn't close mata open files!
 d
+d Distribution-Date: 01feb2015
+d
 f closeallmatafiles.ado
 

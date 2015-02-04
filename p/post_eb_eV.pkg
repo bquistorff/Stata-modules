@@ -2,5 +2,7 @@ d 'post_eb_eV': module
 d
 d   Post your own matrices to e(b) and e(V). For tables
 d
+d Distribution-Date: 01feb2015
+d
 f post_eb_eV.ado
 

@@ -3,5 +3,7 @@ d
 d   Generates a unique id for each pair (like egen ... group()) 
 d but makes sure they don't have leading 0s
 d
+d Distribution-Date: 01feb2015
+d
 f gen_robust_id.ado
 

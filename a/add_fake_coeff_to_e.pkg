@@ -2,5 +2,7 @@ d 'add_fake_coeff_to_e': module
 d
 d   An fake entries to estimates e(b) and e(V) for table formatting.
 d
+d Distribution-Date: 01feb2015
+d
 f add_fake_coeff_to_e.ado
 

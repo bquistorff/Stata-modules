@@ -2,5 +2,7 @@ d 'tabl': module
 d
 d   displaying value labels and numeric codes simultaneously. From stata list
 d
+d Distribution-Date: 01feb2015
+d
 f tabl.ado
 

@@ -2,5 +2,7 @@ d 'log_axis_ticks': module
 d
 d   Creates axis ticks (major & minor) for log scales
 d
+d Distribution-Date: 01feb2015
+d
 f log_axis_ticks.ado
 

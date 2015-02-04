@@ -5,5 +5,7 @@ d delimited by double-quotes so that the whole string can
 d be passed to a Stata routine that interprets this as separate
 d lines (e.g. -twoway-)
 d
+d Distribution-Date: 01feb2015
+d
 f wrap_text.ado
 

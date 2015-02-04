@@ -2,5 +2,7 @@ d 'outtable_simple': module
 d
 d   A modified version of -outtable- v1.0.7 (see SSC) to remove the outer \table output so that it can be included in LyX
 d
+d Distribution-Date: 01feb2015
+d
 f outtable_simple.ado
 

@@ -2,6 +2,8 @@ d 'assign_treatment': module
 d
 d   Assign units to treatment with uneven cell sizes.
 d
+d Distribution-Date: 01feb2015
+d
 f assign_treatment.ado
 f assign_treatment.sthlp
 

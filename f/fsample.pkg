@@ -2,5 +2,7 @@ d 'fsample': module
 d
 d   Similar to sample but for data in file (so useful for very big datasets). 
 d
+d Distribution-Date: 01feb2015
+d
 f fsample.ado
 

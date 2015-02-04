@@ -3,5 +3,7 @@ d
 d   Replaces -profiler report- and create a dta as output (rather than a text file)
 d Requires: save_cmd_output.ado
 d
+d Distribution-Date: 01feb2015
+d
 f nice_profile_report.ado
 

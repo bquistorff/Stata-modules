@@ -3,5 +3,7 @@ d
 d   Stata module to download and install user packages necessary to run a do-file
 d include the net(loc) option if you want to install the package from non-SSC sources (the default)
 d
+d Distribution-Date: 01feb2015
+d
 f usepackage_simple.ado
 

@@ -2,6 +2,8 @@ d 'sutex_env': module
 d
 d   Extension of sutex (latex output of summary stats) that allows extra latex outputting option.
 d
+d Distribution-Date: 01feb2015
+d
 f sutex_env.ado
 f sutex_env.hlp
 

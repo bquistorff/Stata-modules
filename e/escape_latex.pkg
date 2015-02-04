@@ -2,5 +2,7 @@ d 'escape_latex': module
 d
 d   Escapes Latex meta-chatacters for strings. Use for writing to tex files.
 d
+d Distribution-Date: 01feb2015
+d
 f escape_latex.ado
 

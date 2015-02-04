@@ -2,5 +2,7 @@ d 'collapseandpreserve': module
 d
 d   This will collapse the dataset and preserve the variable and value labels. 
 d
+d Distribution-Date: 01feb2015
+d
 f collapseandpreserve.ado
 

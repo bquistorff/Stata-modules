@@ -1,4 +1,6 @@
 v 3
 d ivreg2out.  Combine stage estimates of ivreg2 into single estimate for tables.
-
+d
+d Distribution-Date: 01feb2015
+d
 f ivreg2out.ado

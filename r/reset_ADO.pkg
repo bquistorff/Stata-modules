@@ -2,5 +2,7 @@ d 'reset_ADO': module
 d
 d   Resets the ADO to the standard ordering. Helpful because S_ADO isn't reset by clearing.
 d
+d Distribution-Date: 01feb2015
+d
 f reset_ADO.ado
 
