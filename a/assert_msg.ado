@@ -1,7 +1,9 @@
 *! Version 1.0
 *! An assert with a message when false
 program assert_msg
-	version 12
+	version 11.0
+	*Just a guess at the version
+	
 	syntax anything [, message(string)]
 	
 	cap assert `anything', fast

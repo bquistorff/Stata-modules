@@ -1,7 +1,10 @@
 *Version 0.1 (2013-12-02) Brian Quistorff
 * Description: Similar to sample but for data in file (so big datasets). 
 program define fsample
-args f gsize ssize
+	version 11.0
+	*Just a guess at the version
+	
+	args f gsize ssize
 	qui describe using "`f'", short
 	local fsize `r(N)'
 	local ncompletegroups `=floor(`fsize'/`gsize')'

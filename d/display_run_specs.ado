@@ -5,6 +5,9 @@
 * Environment variables should be noted as well. 
 *  Some are consequential so list them in $envvars_show and the others in $envvars_hide
 program display_run_specs
+	version 11.0
+	*Just a guess at the version
+	
 	
 	local c_opts_str os osdtl machine_type byteorder flavor hostname pwd
 	foreach c_opt of local c_opts_str {

@@ -2,6 +2,9 @@
 *! Creates axis ticks (major & minor) for log scales
 *! (Stata's auto ticks are bad)
 program log_axis_ticks, sclass
+	version 11.0
+	*Just a guess at the version
+	
 	syntax , [range(numlist) vars(varlist numeric) label_scale(string)]
 	
 	* Get the range

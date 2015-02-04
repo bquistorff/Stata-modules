@@ -2,6 +2,9 @@
 *! Sorts a Stata matrix by a column. Fixes problem in -matsort- where row labels with spaces are mangled
 *! make sortcol negative if you want descending order
 program matrixsort
+	version 11.0
+	*Just a guess at the version
+	
 	args matname sortcol
 	
 	mata: sort_st_matrix("`matname'", `sortcol')

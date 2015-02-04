@@ -1,5 +1,8 @@
 *! returns the available scheme options
 program get_scheme_opts, sclass
+	version 11.0
+	*Just a guess at the version
+	
 	args num
 	
 	*Add more. (get from ado/base/s/scheme-*)

@@ -1,6 +1,9 @@
 *! version 1.1 Brian Quistorff
 *! Trying to do "reduction" with "full" looks like a much harder problem (and not much benefit).
 program assign_treatment
+	version 11.0
+	*Just a guess at the version
+	
 	syntax varlist, generate(string) num_treatments(int) [handle_misfit(string) subcell_order_vars(string)]
 	
 	* First-pass randomization. Implicitly does "interval" for handle_misfit.

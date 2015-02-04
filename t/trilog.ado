@@ -7,6 +7,9 @@
 *!  local new_labels `"`r(retlabel)'"'
 *!  twoway (line new_var x), ylabels(`new_labels')
 program trilog, rclass
+	version 11.0
+	*Just a guess at the version
+	
 	syntax , [source(string) generate(string) labels(string)]
 	if "`source'"!=""{
 		generate `generate' = `source'/exp(1)

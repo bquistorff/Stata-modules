@@ -1,6 +1,9 @@
 *Adds a fake variable. Useful for adding new rows to a table using esttab/estout
 *Needs erepost
 program add_fake_coeff_to_e, eclass
+	version 11.0
+	*Just a guess at the version
+	
 	args cname cval
 	
 	tempname eb eb2 eV eV2

@@ -1,8 +1,8 @@
 *! ivreg2out 0.9 roywada@hotmail.com
 * http://www.stata.com/statalist/archive/2009-09/msg00043.html
-*BQ: 2013-09-24 removed the N_Unique ereturn
+*BQ: 2013-09-24 removed the N_Unique ereturn 
+* (had a problem with my setup. I think my est's didn't have e(r))
 * Combines the two stage estimates into a single estimate
-cap prog drop ivreg2out
 prog define ivreg2out, eclass
 	version 8.0
 	qui {

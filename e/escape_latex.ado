@@ -31,6 +31,9 @@ string scalar simultaneous_char_replace(string scalar input, string rowvector to
 }
 end
 program define escape_latex, sclass
+	version 11.0
+	*Just a guess at the version
+	
 	syntax anything(equalok everything name=input) [, disable_curly]
     
     * These replacements use each other's characters so have to do simultanous replacement (not sequential)

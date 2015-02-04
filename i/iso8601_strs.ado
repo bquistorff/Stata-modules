@@ -1,5 +1,4 @@
 *! version 0.1  28jun2013
-* Program: iso8601_strs
 * Description: Generates strings corresponding to 
 *   ISO 8601 data and date-time formats. These may
 *   be useful for generating log-file filenames.
