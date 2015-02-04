@@ -20,11 +20,13 @@ For Stata 12 or below (that can't handle the https of github) download as zip, u
 
 Bash scripts can just be downloaded.
 
-Forks of SSC packages
+Forks
 ---------------------
-Same named (when overriding an installation for a package from a new source, -ado uninstall- the previous one): ivreg2out, matsave
+Forks of SSC packages (New named [original name]): latabstat_simple [latabstat], outtable_simple [outtable], sutex_env [sutex], usepackage_simple [usepackage], matsave_simple [matsave]
 
-New named (original name): latabstat_simple (latabstat), outtable_simple (outtable), sutex_env (sutex), usepackage_simple (usepackage)
+Some other packages are taken from the Stata mailing list. 
+
+Note that when overriding an installation for a package with the same name from a new source, -ado uninstall- the previous one
 
 Why not SSC?
 =======

@@ -1,7 +1,8 @@
 *! Originally from: version 1.1.7  24oct2004  by Marc-Andreas Muendler: muendler@ucsd.edu
-*! BQ: Refactored
+*! BQ: Make saving automatic (no dropall), remove manual -more-s,
+*!   put the full filename in path (not just dir) so can save to a name that is not the matrix name
 *! Requires save12
-program define matsave
+program define matsave_simple
 	version 7
 	args matname
 	syntax newvarname [, REPLACE Path(string) Type(string)]
