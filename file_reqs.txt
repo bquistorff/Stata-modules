@@ -1,0 +1,9 @@
+ado files should have:
+-version n.n (
+-Nice if also has initial *! lines (for -which-) with '*! version 3.5.1 03feb2012' or a description line.
+
+Package files:
+- Should have a 'd Distribution-Date: 01jul2012' line (for -adoupdate-).
+- Nice if have 'd KW: keyword phrase' lines. When on SSC this will get searchable by -search- and shows well on the repec package page.
+
+When serving from GitHub, all pkg and toc files should be at least 105 bytes or -net- throws r(1) errors.

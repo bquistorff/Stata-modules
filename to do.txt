@@ -1,0 +1,3 @@
+To do:
+-If others contribute, then put author lines in the pkg files (and maybe the ados)
+-figure out what to do with the ados that have no pkg files (should really be here?)
