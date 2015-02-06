@@ -2,3 +2,4 @@ v 3
 d E-directory
 
 p escape_latex Escapes Latex meta-chatacters for strings. Use for writing to tex files.
+p ereturn_do Passthrough command allowing one to use the -ereturn- cmds easily.

@@ -1,0 +1,7 @@
+d 'ereturn_do': module
+d
+d   Passthrough command allowing one to use the -ereturn- cmds easily.
+d
+d Distribution-Date: 06feb2015
+d
+f ereturn_do.ado
