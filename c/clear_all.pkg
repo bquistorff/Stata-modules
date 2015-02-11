@@ -1,0 +1,8 @@
+d 'clear_all': module
+d
+d   Really resets everything (-clear all- doesn't clear all)
+d
+d Distribution-Date: 11feb2015
+d
+f clear_all.ado
+
