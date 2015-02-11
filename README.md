@@ -22,7 +22,7 @@ Bash scripts can just be downloaded.
 
 Forks
 ---------------------
-Forks of SSC packages (New named [original name]): latabstat_simple [latabstat], outtable_simple [outtable], sutex_env [sutex], usepackage_simple [usepackage], matsave_simple [matsave]
+Forks of SSC packages (New named [original name]): latabstat_simple [latabstat], matsave_simple [matsave], outtable_simple [outtable], sutex_env [sutex], synth (in development), usepackage_simple [usepackage]
 
 Some other packages are taken from the Stata mailing list. 
 
