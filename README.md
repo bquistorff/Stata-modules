@@ -20,6 +20,8 @@ For Stata 12 or below (that can't handle the https of github) download as zip, u
 
 Bash scripts can just be downloaded.
 
+If you would like to get older version, then you should clone the repository and then use rev-list as noted [here](http://stackoverflow.com/questions/6990484/git-checkout-by-date).
+
 Forks
 ---------------------
 Forks of SSC packages (New named [original name]): latabstat_simple [latabstat], matsave_simple [matsave], outtable_simple [outtable], sutex_env [sutex], synth (in development), usepackage_simple [usepackage]
