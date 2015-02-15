@@ -1,0 +1,8 @@
+d 'ds_version': module
+d
+d   Shows the version of the Stata dataset whose filename is passed in.
+d
+d Distribution-Date: 12feb2015
+d
+f ds_version.ado
+

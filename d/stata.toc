@@ -3,3 +3,4 @@ d D-directory
 
 p display_run_specs Lists installation details necessarily for numerical replication
 p drop_if like -drop if- but appends the if condition to the # dropped msg
+p ds_version Shows the version of the Stata dataset whose filename is passed in.
