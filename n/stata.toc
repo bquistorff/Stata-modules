@@ -2,3 +2,4 @@ v 3
 d N-directory
 
 p nice_profile_report Replaces -profiler report- and create a dta as output (rather than a text file). Requires: save_cmd_output.ado
+p net_install Provides replacement utilities for working with modules where the source of installation files is a relative path

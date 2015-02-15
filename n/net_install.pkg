@@ -1,0 +1,15 @@
+d 'net_install': module
+d
+d   Provides replacement utilities for working with modules where the source of
+d installation files is a relative path (default -net- can't handle this).
+d have to do normalize_trk.sh after a adoupdate or net_install of a locally installed package
+d
+d Distribution-Date: 15feb2015
+d
+f ../a/adoupdate.ado
+f ../i/is_abs_path.ado
+f net_describe.ado
+f net_from.ado
+f net_get.ado
+f net_install.ado
+
