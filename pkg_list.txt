@@ -1,0 +1,35 @@
+add_fake_coeff_to_e - Adds fake entries to estimates for table formating.
+assert_msg - An assert with a message when false
+assign_treatment - Assign units to treatment with uneven cell sizes.
+closeallmatafiles - Closes all files that were open in mata. -clear all- doesn't close mata open files!
+collapseandpreserve - This will collapse the dataset and preserve the variable and value labels. 
+clear_all - Really resets everything (-clear all- doesn't clear all)
+display_run_specs - Lists installation details necessarily for numerical replication
+drop_if - like -droif- but appends the if condition to the # dropped msg
+ds_version - Shows the version of the Stata dataset whose filename is passed in.
+escape_latex - Escapes Latex meta-chatacters for strings. Use for writing to tex files.
+ereturn_do - Passthrough command allowing one to use the -ereturn- cmds easily.
+fsample - Similar to sample but for data in file (so useful for very big datasets). 
+gen_robust_id - Generates a unique id for each pair (like egen ... group()) but makes sure they don't have leading 0s
+iso8601_strs - A program to return ISO 8601 date/time strings
+ivreg2out - Combine stage estimates of ivreg2 into single estimate
+log_axis_ticks - Creates axis ticks (major & minor) for log scales
+list_from_var - Creates a string list from a string variable (and if clause)
+latabstat_simple - modification of -latabstat- (see SSC) to remove the Source footnote and make a smaller tex fragment.
+matrix_post_lines - Creates the post init and post string lines that will come from a matrix
+matrixsort - Sorts a Stata matrix by a column. Fixes problem in -matsort- where row labels with spaces are mangled
+nice_profile_report - Replaces -profiler report- and create a dta as output (rather than a text file). Requires: save_cmd_output.ado
+net_install - Provides replacement utilities for working with modules where the source of installation files is a relative path
+outtable_simple - A modified version of -outtable- v1.0.7 (see SSC) to remove the outer \table output so that it can be included in LyX
+print_dots - Prints a simple progress bar and time estimates
+post_eb_eV - Post your own matrices to e(b) and e(V)
+reset_ADO - Resets the ADO to the standard ordering. Helpful because S_ADO isn't reset by clearing.
+rng_advance - A simple way to advance the Stata RNG state by a fixed amount. Will also fill a variable with a sequence of such states
+save_cmd_output - Saves the output from a shell command to a file
+sutex_env - Extension of sutex (latex output of summary stats) that allows extra latex outputting option.
+save12 - In environments where stata12 and 13 are possible, always save in v12 format
+synth - A minor fork of the SSC -synth- that exposes internal matrices
+tabl - displaying value labels and numeric codes simultaneously
+trilog - Makes compressed scales (like log scales) when both positive and negative numbers exist.
+usepackage_simple - Stata module to download and install user packages necessary to run a do-file.
+wrap_text - Breaks a long string into ".." "..." sequences defined by max line-width
