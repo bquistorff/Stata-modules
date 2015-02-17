@@ -19,12 +19,16 @@ program bmerge
 		ASSERT(string) GENerate(name) FORCE KEEP(string) KEEPUSing(string) ///
 		noLabel NOGENerate noNOTEs REPLACE noREPort SORTED UPDATE]
 
-	rename (`varlist') (`using_match_vars')
+	local matchvars "`varlist'"
+	if "`using_match_vars'"!=""{
+		rename (`varlist') (`using_match_vars')
+		local matchvars "`using_match_vars'"
+	}
 	
-	merge `mtype' `token' `using_match_vars' using "`using'", assert(`assert') generate(`generate') ///
+	merge `mtype' `token' `matchvars' using "`using'", assert(`assert') generate(`generate') ///
 		`force' keepusing(`keepusing') `label' `notes' `replace' `report' `sorted' `update'
 	
-	rename (`using_match_vars') (`varlist')
+	if "`using_match_vars'"!="" rename (`using_match_vars') (`varlist')
 	
 	if "`generate'"=="" loc generate _merge
 	
