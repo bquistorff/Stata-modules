@@ -1,0 +1,9 @@
+d 'bmerge': module
+d
+d   A merge pass-through that allows merging when match variables are named differently, 
+d and always shows the full match stats
+d
+d Distribution-Date: 17feb2015
+d
+f bmerge.ado
+

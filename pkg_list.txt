@@ -1,6 +1,7 @@
 add_fake_coeff_to_e - Adds fake entries to estimates for table formating.
 assert_msg - An assert with a message when false
 assign_treatment - Assign units to treatment with uneven cell sizes.
+bmerge - A merge pass-through that allows merging when match variables are named differently, and always shows the full match stats
 closeallmatafiles - Closes all files that were open in mata. -clear all- doesn't close mata open files!
 collapseandpreserve - This will collapse the dataset and preserve the variable and value labels. 
 clear_all - Really resets everything (-clear all- doesn't clear all)
