@@ -1,0 +1,28 @@
+d 'synth_helper': module
+d
+d   Helper utilities that go with the local synth fork.
+d
+d Distribution-Date: 28feb2015
+d 
+d Build instructions:
+d :l/lperm_inference.mlib : p/perm_inference.mata
+d :	$$STATABATCH do cli_build_mlib.do "$@ $^"; tail cli_build_mlib.log; rm cli_build_mlib.log
+d
+f ../b/broad_eval_synth_model.ado
+f ../c/check_in_convex_hull.ado
+f ../c/compare_pred_errors.ado
+f ../c/complete_units.ado
+f ../e/eval_synth_model.ado
+f ../g/gen_perm_donors.ado
+f ../g/graph_PEs.ado
+f ../g/graph_tc.ado
+f ../g/graph_tc_ci.ado
+f ../i/identify_donors_placebo.ado
+f ../l/lperm_inference.mlib
+f ../o/output_pred_mat.ado
+f ../o/output_pval_table.ado
+f ../o/output_unit_matches.ado
+f ../p/parallel_clean_setclusters.ado
+f ../p/parallel_justout_helper.ado
+f ../p/perm_inference.mata
+f ../s/synth_consts.do
