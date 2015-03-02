@@ -1,7 +1,8 @@
 *! v0.1
-*! A merge pass-through function with 2 additions
+*! A merge pass-through function with 3 additions
 *! 1) Allows merging when key variables are named differently. (using_match_vars())
 *! 2) Shows the full match stats (even when using keep())
+*! 3) Maintains sort (using ", stable")
 program bmerge
 	version 12 //use version 12 instead of 11 because of better -rename-
 	
@@ -18,6 +19,9 @@ program bmerge
 	syntax [varlist(default=none)] using/ [, using_match_vars(string) ///
 		ASSERT(string) GENerate(name) FORCE KEEP(string) KEEPUSing(string) ///
 		noLabel NOGENerate noNOTEs REPLACE noREPort SORTED UPDATE]
+	*weird, aparently "nogenerate" and "generate" get set (unlike normal no-option locs)
+	qui describe, varlist
+	local svars `r(sortlist)'
 
 	local matchvars "`varlist'"
 	if "`using_match_vars'"!=""{
@@ -25,12 +29,13 @@ program bmerge
 		local matchvars "`using_match_vars'"
 	}
 	
-	merge `mtype' `token' `matchvars' using "`using'", assert(`assert') generate(`generate') ///
+	local gen_var _merge
+	if "`nogenerate'"!="nogenerate" & "`generate'"!="" local gen_var `generate'
+	
+	merge `mtype' `token' `matchvars' using "`using'", assert(`assert') generate(`gen_var') ///
 		`force' keepusing(`keepusing') `label' `notes' `replace' `report' `sorted' `update'
 	
 	if "`using_match_vars'"!="" rename (`using_match_vars') (`varlist')
-	
-	if "`generate'"=="" loc generate _merge
 	
 	if "`keep'"!=""{
 		foreach ktype in `keep' {
@@ -40,9 +45,10 @@ program bmerge
 			if "`ktype'"=="match_update" 	loc keep_list "`keep_list',4"
 			if "`ktype'"=="match_conflict" 	loc keep_list "`keep_list',5"
 		}
-		keep if inlist(`generate' `keep_list')
+		keep if inlist(`gen_var' `keep_list')
 	}
 	
+	if "`nogenerate'"=="nogenerate" drop `gen_var'
 	
-	if "`nogenerate'"!="" drop `generate'
+	if "`svars'"!="" sort `svars', stable
 end
