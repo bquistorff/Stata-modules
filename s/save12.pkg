@@ -1,8 +1,11 @@
 d 'save12': module
 d
 d   In environments where stata12 and 13 are possible, always save in v12 format
+d Also provides a wrapper to easily switch to a "testing" mode where different filenames
+d are saved/loaded.
 d
-d Distribution-Date: 01feb2015
+d Distribution-Date: 02mar2015
 d
 f save12.ado
+f ../u/use12.ado
 
