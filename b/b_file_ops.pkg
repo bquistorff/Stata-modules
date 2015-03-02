@@ -1,0 +1,13 @@
+d 'save12': module
+d
+d   Provides a wrapper to easily switch to a "testing" mode where different filenames
+d are saved/loaded. Also, option to try to save in stata 12 format (for interoperability
+d with other versions)
+d
+d Distribution-Date: 02mar2015
+d
+f bsave.ado
+f buse.ado
+f bmerge.ado
+f bappend.ado
+

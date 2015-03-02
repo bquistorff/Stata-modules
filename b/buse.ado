@@ -10,8 +10,8 @@ program use12
 		local anything `anything'.dta
 	}
 	
-	*Testing stuff. Track and silently edit
-	if strpos("$saved_files", "`anything'"){
+	*See if should use testing version
+	if strpos("$saved_dtas", "`anything'"){
 		local anything `=substr("`anything'",1,length("`anything'")-4)'${extra_f_suff}.dta
 	}
 	

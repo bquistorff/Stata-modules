@@ -17,7 +17,7 @@ program save12
 	}
 	
 	*Testing stuff. Track and silently edit
-	global saved_files "$saved_files `anything'"
+	global saved_dtas "$saved_dtas `anything'"
 	local anything `=substr("`anything'",1,length("`anything'")-4)'${extra_f_suff}.dta
 
 	if `c(stata_version)'>=13 {
