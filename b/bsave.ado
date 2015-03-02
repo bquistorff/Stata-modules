@@ -1,6 +1,6 @@
 *! version 0.0.4
-*! Will try to save in either dataset version 114 or 115 which
-*! is readable by Stata v11-13
+*! Can try to save in either dataset version 114 or 115 which
+*! is readable by Stata v11-13 (use $try_stata12)
 * version map: Stata (dataset): v11 (114) v12(115) v13 (117).
 * Stata can always read earlier dataset formats. Additionally, v11
 * can read v115 datasets.
@@ -20,12 +20,12 @@ program save12
 	global saved_dtas "$saved_dtas `anything'"
 	local anything `=substr("`anything'",1,length("`anything'")-4)'${extra_f_suff}.dta
 
-	if `c(stata_version)'>=13 {
+	if `c(stata_version)'>=13 & "$try_stata12"=="1" {
 		if `c(stata_version)'>=14 di "save12 untested for Stata v>=14"
 		saveold "`anything'", `replace'
 	}
 	else {
-		if `c(stata_version)'<11 di "save12 untested for Stata v<11"
+		if `c(stata_version)'<11 & "$try_stata12"=="1" di "save12 untested for Stata v<11"
 		save "`anything'", `replace'
 	}
 end
