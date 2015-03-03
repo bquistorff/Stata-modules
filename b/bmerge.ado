@@ -32,16 +32,6 @@ program bmerge
 	local gen_var _merge
 	if "`nogenerate'"!="nogenerate" & "`generate'"!="" local gen_var `generate'
 	
-	
-	
-	*See if should use testing version
-	if substr("`using'", length("`using'")-3,4)!=".dta"{
-		local using `using'.dta
-	}
-	if strpos("$saved_dtas", "`using'"){
-		local using `=substr("`using'",1,length("`using'")-4)'${extra_f_suff}.dta
-	}
-	
 	merge `mtype' `token' `matchvars' using "`using'", assert(`assert') generate(`gen_var') ///
 		`force' keepusing(`keepusing') `label' `notes' `replace' `report' `sorted' `update'
 	

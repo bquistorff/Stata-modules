@@ -1,4 +1,4 @@
-d 'save12': module
+d 'b_file_ops': module
 d
 d   Provides a wrapper to easily switch to a "testing" mode where different filenames
 d are saved/loaded. Also, option to try to save in stata 12 format (for interoperability
@@ -6,8 +6,5 @@ d with other versions)
 d
 d Distribution-Date: 02mar2015
 d
-f bsave.ado
-f buse.ado
+f ../s/save12.ado
 f bmerge.ado
-f bappend.ado
-

@@ -5,21 +5,9 @@
 * Stata can always read earlier dataset formats. Additionally, v11
 * can read v115 datasets.
 * Note: Won't work possibly for stata versions <12 or >13
-* If you are in "testing" mode where $extra_f_suff (extra filename suffix)
-*  is not "" then save and load will silently add that to the basefilename 
-*  (for use12 it will only add it to files that have previously been saved with save12).
 program save12
 	syntax anything [, replace]
-	
-	*normalize the filename
-	if substr("`anything'", length("`anything'")-3,4)!=".dta"{
-		local anything `anything'.dta
-	}
-	
-	*Testing stuff. Track and silently edit
-	global saved_dtas "$saved_dtas `anything'"
-	local anything `=substr("`anything'",1,length("`anything'")-4)'${extra_f_suff}.dta
-
+		
 	if `c(stata_version)'>=13 & "$try_stata12"=="1" {
 		if `c(stata_version)'>=14 di "save12 untested for Stata v>=14"
 		saveold "`anything'", `replace'
