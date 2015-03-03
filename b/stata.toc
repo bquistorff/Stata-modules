@@ -1,4 +1,4 @@
 v 3
 d A-directory
 
-p bmerge A merge pass-through that allows merging when match variables are named differently, and always shows the full match stats
+p b_file_ops Provides a wrapper to easily switch to a "testing" mode where different filenames are saved/loaded
