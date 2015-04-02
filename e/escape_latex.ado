@@ -1,4 +1,4 @@
-*! version 1.0
+*! version 1.1
 *! Escapes Latex meta-chatacters
 *! Watch the backslashes as Stata is a bit uncommon in how it deals with them.
 *! For the caret, it requires the textcomp package
@@ -30,11 +30,11 @@ string scalar simultaneous_char_replace(string scalar input, string rowvector to
     return(output)
 }
 end
-program define escape_latex, sclass
+program define escape_latex
 	version 11.0
 	*Just a guess at the version
 	
-	syntax anything(equalok everything name=input) [, disable_curly]
+	syntax anything(equalok everything name=input) , local(string) [disable_curly]
     
     * These replacements use each other's characters so have to do simultanous replacement (not sequential)
     mata: st_local("input", simultaneous_char_replace(`"`input'"', ("\","{","}"), ("\textbackslash{}","\{","\}")))
@@ -58,5 +58,5 @@ program define escape_latex, sclass
         local input = subinstr(`"`input'"',"|", "\textasciigrave{}", .)
     }
     
-	sreturn local input `"`input'"'
+	c_local local `"`input'"'
 end
