@@ -1,8 +1,9 @@
 d 'assert_msg': module
 d
-d   An asserts (exits when condition is false) with a message.
+d   An asserts (exits when condition is false) with a message. Plus a quick count assert.
 d
-d Distribution-Date: 01feb2015
+d Distribution-Date: 19mar2015
 d
 f assert_msg.ado
+f assert_count.ado
 
