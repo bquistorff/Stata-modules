@@ -4,7 +4,7 @@ d   Helper utilities that go with the local synth fork.
 d
 d Distribution-Date: 28feb2015
 d
-d Requires: synth, matsave_simple, b_file_ops, matrix_post_lines, assert_msg, list_from_var, wrap_text, outreg
+d Requires: synth, matsave_simple, b_file_ops, matrix_post_lines, assert_msg, wrap_text, outreg
 d Recommends: parallel, matrixsort
 d 
 d Build instructions:

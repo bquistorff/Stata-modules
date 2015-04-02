@@ -25,10 +25,9 @@ program check_in_convex_hull
 		local xla "xlabel(`xlabels')"
 	}
 	
-	list_from_var `gph_tvar' if `pvar'==`trunit'
+	qui levelsof `gph_tvar' if `pvar'==`trunit', local(tvals)
 	summ `gph_tvar' if `pvar'==`trunit', meanonly
 	local tvar_min = `r(min)'
-	local tvals "`s(olist)'"
 	local gph_min_t : word `=`first_pre'-`tvar_min'+1' of `tvals'
 	local gph_max_t : word `=`last_pre'-`tvar_min'+1' of `tvals'
 	
@@ -48,8 +47,7 @@ program check_in_convex_hull
 	}
 	
 	local grph_pre_cmds = ""
-	list_from_var `pvar' if `tvar'==`first_pre'
-	local units "`s(olist)'"
+	qui levelsof `pvar' if `tvar'==`first_pre', local(units)
 	local nunits : word count `units'
 	foreach unit in `units' {
 		local grph_pre_cmds "`grph_pre_cmds' (line `varlist' `gph_tvar' if `pvar'==`unit' & `gph_tvar'<=`gph_max_t' &  `gph_tvar'>=`gph_min_t', lcolor(gs10) lwidth(medthin) lpattern(solid) )"

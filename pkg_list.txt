@@ -1,7 +1,7 @@
 add_fake_coeff_to_e - Adds fake entries to estimates for table formating.
 assert_msg - An assert with a message when false
 assign_treatment - Assign units to treatment with uneven cell sizes.
-bmerge - A merge pass-through that allows merging when match variables are named differently, and always shows the full match stats
+b_file_ops - Provides a wrapper to easily switch to a "testing" mode where different filenames are saved/loaded
 closeallmatafiles - Closes all files that were open in mata. -clear all- doesn't close mata open files!
 collapseandpreserve - This will collapse the dataset and preserve the variable and value labels. 
 clear_all - Really resets everything (-clear all- doesn't clear all)
@@ -15,7 +15,6 @@ gen_robust_id - Generates a unique id for each pair (like egen ... group()) but 
 iso8601_strs - A program to return ISO 8601 date/time strings
 ivreg2out - Combine stage estimates of ivreg2 into single estimate
 log_axis_ticks - Creates axis ticks (major & minor) for log scales
-list_from_var - Creates a string list from a string variable (and if clause)
 latabstat_simple - modification of -latabstat- (see SSC) to remove the Source footnote and make a smaller tex fragment.
 matrix_post_lines - Creates the post init and post string lines that will come from a matrix
 matrixsort - Sorts a Stata matrix by a column. Fixes problem in -matsort- where row labels with spaces are mangled
@@ -26,10 +25,12 @@ print_dots - Prints a simple progress bar and time estimates
 post_eb_eV - Post your own matrices to e(b) and e(V)
 reset_ADO - Resets the ADO to the standard ordering. Helpful because S_ADO isn't reset by clearing.
 rng_advance - A simple way to advance the Stata RNG state by a fixed amount. Will also fill a variable with a sequence of such states
-save_cmd_output - Saves the output from a shell command to a file
-sutex_env - Extension of sutex (latex output of summary stats) that allows extra latex outputting option.
 save12 - In environments where stata12 and 13 are possible, always save in v12 format
+save_cmd_output - Saves the output from a shell command to a file
+set_key - Stores and retrieves the unique key for a dataset
+sutex_env - Extension of sutex (latex output of summary stats) that allows extra latex outputting option.
 synth - A minor fork of the SSC -synth- that exposes internal matrices
+synth_helper - Helper utilities that go with the local synth fork.
 tabl - displaying value labels and numeric codes simultaneously
 trilog - Makes compressed scales (like log scales) when both positive and negative numbers exist.
 usepackage_simple - Stata module to download and install user packages necessary to run a do-file.

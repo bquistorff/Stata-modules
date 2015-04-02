@@ -1,8 +1,0 @@
-d 'list_from_var': module
-d
-d   Creates a string list from a string variable (and if clause)
-d
-d Distribution-Date: 01feb2015
-d
-f list_from_var.ado
-

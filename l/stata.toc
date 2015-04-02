@@ -2,5 +2,4 @@ v 3
 d L-directory
 
 p log_axis_ticks Creates axis ticks (major & minor) for log scales
-p list_from_var Creates a string list from a string variable (and if clause)
 p latabstat_simple modification of -latabstat- (see SSC) to remove the Source footnote and make a smaller tex fragment.

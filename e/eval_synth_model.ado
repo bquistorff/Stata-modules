@@ -64,8 +64,7 @@ program eval_synth_model, rclass
 	if r(N)<r(max)-r(min)+1{
 		sort `pvar' `tvar'
 		
-		list_from_var `tvar' if `pvar'==`random_unit'
-		local times = "`s(olist)'"
+		qui levelsof `tvar' if `pvar'==`random_unit', local(times)
 		local num_times : word count `times'
 		tempname per_year
 		egen period = group(`tvar')

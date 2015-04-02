@@ -45,8 +45,7 @@ program broad_eval_synth_model, rclass
 		* Likely called from cross-validation, so pick a donor at random
 		local random_unit = `pvar'[1]
 	}
-	list_from_var `tvar' if `pvar'==`random_unit' & `depvar'!=.
-	local years_tot = "`s(olist)'"
+	qui levelsof `tvar' if `pvar'==`random_unit' & `depvar'!=., local(years_tot)
 	local num_years : word count `years_tot'
 	
 	*Get the last pret year
