@@ -1,9 +1,10 @@
 *! v0.1
-*! A merge pass-through function with 3 additions
+*! A merge pass-through function with additions:
 *! 1) Allows merging when key variables are named differently. (using_match_vars())
 *! 2) Shows the full match stats (even when using keep())
 *! 3) Maintains sort (using ", stable")
-program bmerge
+*! 4) return in r() the tab of _merge
+program bmerge, rclass
 	version 12 //use version 12 instead of 11 because of better -rename-
 	
 	* This parsing was ripped from -merge-
@@ -36,6 +37,22 @@ program bmerge
 		`force' keepusing(`keepusing') `label' `notes' `replace' `report' `sorted' `update'
 	
 	if "`using_match_vars'"!="" rename (`using_match_vars') (`varlist')
+	
+	loc keep_keyword_order = "master using match match_update match_conflict"
+	
+	*Output return values
+	* First zero-out
+	foreach ktype in `keep_keyword_order'{
+		return scalar `ktype' = 0
+	}
+	tempname cell_mat row_mat
+	qui tab `gen_var', matcell(`cell_mat') matrow(`row_mat')
+	forval row_i =1/`=rowsof(`row_mat')'{
+		local ktype_ind = `row_mat'[`row_i',1]
+		local ktype : word `ktype_ind' of `keep_keyword_order'
+		local ktype_count = `cell_mat'[`row_i',1]
+		return scalar `ktype' = `ktype_count'
+	}
 	
 	if "`keep'"!=""{
 		foreach ktype in `keep' {
