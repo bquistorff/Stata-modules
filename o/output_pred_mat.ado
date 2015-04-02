@@ -16,8 +16,8 @@ program output_pred_mat
 			local year : word `i' of `year_replace_period_list'
 			local rnames : subinstr local rnames "(`i')" "(`year')", all
 		}
-		abbrev_all , str_list(`rnames')
-		mat rownames `mat' = `s(abbreved)'
+		abbrev_all , str_list(`rnames') out_loc(rnames_new)
+		mat rownames `mat' = `rnames_new'
 	}
 	
 	*replace var name with var label
@@ -36,8 +36,8 @@ program output_pred_mat
 			local rnames : subinstr local rnames "`rname'" `""`vname_lab'`year_lab'""', all
 		}
 	}
-	abbrev_all , str_list(`rnames')
-	mat rownames `mat' = `s(abbreved)'
+	abbrev_all , str_list(`rnames') out_loc(rnames_new)
+	mat rownames `mat' = `rnames_new'
 	if "`sort'"!="nosort"{
 		matrixsort `mat' -1
 	}

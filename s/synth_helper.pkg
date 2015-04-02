@@ -4,14 +4,16 @@ d   Helper utilities that go with the local synth fork.
 d
 d Distribution-Date: 28feb2015
 d
-d Requires: synth, matsave_simple, b_file_ops, matrix_post_lines, assert_msg, list_from_var, wrap_text
+d Requires: synth, matsave_simple, b_file_ops, matrix_post_lines, assert_msg, list_from_var, wrap_text, outreg
 d Recommends: parallel, matrixsort
 d 
 d Build instructions:
 d :l/lperm_inference.mlib : p/perm_inference.mata
 d :	$$STATABATCH do cli_build_mlib.do "$@ $^"; tail cli_build_mlib.log; rm cli_build_mlib.log
 d
+f ../a/abbrev_all.ado
 f ../b/broad_eval_synth_model.ado
+f ../b/build_graphing_mats.ado
 f ../c/check_in_convex_hull.ado
 f ../c/compare_pred_errors.ado
 f ../c/complete_units.ado
