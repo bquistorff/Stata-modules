@@ -1,6 +1,7 @@
 *! v0.2
-*! like -drop if- but appends the if condition to the # dropped msg
-*! Helpful if used inside a loop or program where you wouldn't see the command echoed.
+*! like -drop if- but:
+*! 1) appends the if condition to the # dropped msg (nice for loops/programs where commands aren't echoed)
+*! 2) returns r(n_dropped)
 program drop_if, rclass
 	version 10
 	*version is a guess
