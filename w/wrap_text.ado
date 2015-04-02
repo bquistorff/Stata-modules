@@ -1,14 +1,13 @@
-*! version 1.0
+*! version 1.1
 *! Auto wraps a long line to broken up ones (that graph commands turn into different lines)
-*! Usage: 
-*! wrap_text , unwrappedtext("`longtext'")
-*! local wrapped `"`s(wrappedtext)'"'
 *! Wrapped has the "" quotes
-*! twoway ..., note(`s(wrappedtext)')/note(`wrapped')
+*! Usage: 
+*! wrap_text , unwrappedtext(`longtext') wrapped_out_loc(wrapped)
+*! twoway ..., note(`wrapped')
 * With simple testing 100 chars is about the width of a note in twoway at "normal sizes".
-program wrap_text, sclass
-    version 12
-	syntax , unwrappedtext(string)  [width(integer 100)]
+program wrap_text
+	version 12
+	syntax , unwrappedtext(string) wrapped_out_loc(string)  [width(integer 100)]
     
 	local num_words : word count `unwrappedtext'
 	forval i = 1/`num_words' {
@@ -18,6 +17,6 @@ program wrap_text, sclass
 		}
 		local wrappedtext `"`wrappedtext' "`line'""'
 	}
-    
-	sreturn local wrappedtext `"`wrappedtext'"'
+  
+	c_local `wrapped_out_loc' `"`wrappedtext'"'
 end
