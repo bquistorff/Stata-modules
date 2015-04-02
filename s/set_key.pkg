@@ -1,0 +1,8 @@
+d 'set_key': module
+d
+d   Stores and retrieves the unique key for a dataset
+d
+d Distribution-Date: 01apr2015
+d
+f set_key.ado
+f ../g/get_key.ado
