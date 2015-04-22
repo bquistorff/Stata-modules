@@ -2,6 +2,7 @@
 *! version 0.0.7-bq Brian Quistorff 2014-02 
 *! 				output the unrounded weights plus some other convenience vars. Don't leave mats lying around
 *!              make a bit faster by speeding up averaging, removing some checks, and not calling tsset redudantly
+*! To do: fix so that the Ybal doesn't include pretreament (Zbal) when the not putting in resultsperiod and mspeperiod.
 *!
 *
 program synth , eclass
