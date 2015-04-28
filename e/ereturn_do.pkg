@@ -2,6 +2,6 @@ d 'ereturn_do': module
 d
 d   Passthrough command allowing one to use the -ereturn- cmds easily.
 d
-d Distribution-Date: 06apr2015
+d Distribution-Date: 29apr2015
 d
 f ereturn_do.ado

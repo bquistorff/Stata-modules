@@ -1,4 +1,4 @@
-*! version 1.1
+*! version 1.2
 *! Passthrough command allowing one to use the -ereturn- cmds easily.
 * Usage: ereturn_do local l1 yes
 * Usage: ereturn_do matrix y = y, copy
@@ -16,5 +16,6 @@ program ereturn_do, eclass
 	version 11.0
 	* Version requirement is conservative.
 	syntax anything(equalok everything) [, *]
-	ereturn `anything' , `options'
+	if "`options'"!="" loc options `", `options'"'
+	ereturn `anything' `options'
 end
