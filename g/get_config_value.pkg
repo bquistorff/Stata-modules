@@ -1,0 +1,8 @@
+d 'get_config_value': module
+d
+d   Allows you to store preferences separate from code
+d
+d Distribution-Date: 01apr2015
+d
+f get_config_value.ado
+
