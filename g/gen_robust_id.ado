@@ -1,4 +1,4 @@
-*! version 1.0
+*! version 1.0 Brian Quistorff <bquistorff@gmail.com>
 *! Generates a unique id for each pair (like egen ... group())
 *! but makes sure they don't have leading 0s
 program gen_robust_id

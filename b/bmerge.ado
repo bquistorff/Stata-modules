@@ -1,4 +1,4 @@
-*! v0.1
+*! v0.1 Brian Quistorff <bquistorff@gmail.com>
 *! A merge pass-through function with additions:
 *! 1) Allows merging when key variables are named differently. (using_match_vars())
 *! 2) Shows the full match stats (even when using keep())

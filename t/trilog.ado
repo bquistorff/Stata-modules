@@ -1,4 +1,4 @@
-*! version 1.0
+*! version 1.0 Brian Quistorff <bquistorff@gmail.com>
 *! Makes compressed scales (like log scales) when both positive and negative numbers exist.
 *!  It makes a linear patch in the middle.
 *! Usage:

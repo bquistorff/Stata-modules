@@ -4,7 +4,12 @@ d   like -drop if- but appends the if condition to the # dropped msg.
 d Helpful if used inside a loop or program where you wouldn't see the 
 d command echoed.
 d
+d Version 0.2
+d
 d Distribution-Date: 11feb2015
+d
+d Author: Brian Quistorff
+d Support: email bquistorff@gmail.com
 d
 f drop_if.ado
 

@@ -3,7 +3,12 @@ d
 d   Makes compressed scales (like log scales) when both positive and negative numbers exist.
 d  It makes a linear patch in the middle.
 d
+d Version 1.0
+d
 d Distribution-Date: 01feb2015
+d
+d Author: Brian Quistorff
+d Support: email bquistorff@gmail.com
 d
 f trilog.ado
 

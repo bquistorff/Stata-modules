@@ -1,9 +1,14 @@
 ado files should have:
--version n.n (
--Nice if also has initial *! lines (for -which-) with '*! version 3.5.1 03feb2012' or a description line.
+-version n.n
+-Optional: initial *! lines (for -which-) with '*! version <v> <author>' plus maybe a description line. Include author here incase ado separated from pkg.
 
 Package files:
-- Should have a 'd Distribution-Date: 01jul2012' line (for -adoupdate-).
-- Nice if have 'd KW: keyword phrase' lines. When on SSC this will get searchable by -search- and shows well on the repec package page.
+- Should: 'd Distribution-Date: 01jul2012' line (for -adoupdate-).
+- Should: 'd Requires: Stata version <v> and <packages> from <source, e.g. SSC> (possibly version)'
+- Optional: 'd Recommends: <packages>'
+- Optional: 'd KW: keyword phrase' lines. When on SSC this will get searchable by -search- and shows well on the repec package page.
+- Optional: 'd Author: <name>, <institution>'
+- Optional: 'd Support: email <email>'
+- Optional: 'd Version <v>'. In case ado's are separated from pkg then link them via version (rather than the less informative date).
 
 When serving from GitHub, all pkg and toc files should be at least 105 bytes or -net- throws r(1) errors.

@@ -1,3 +1,4 @@
+*! v1.0 Brian Quistorff <bquistorff@gmail.com>
 *! Post your own matrices to e(b) and e(V)
 prog define post_eb_eV, eclass
 	version 8.0

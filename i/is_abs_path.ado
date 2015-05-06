@@ -1,3 +1,4 @@
+*! v0.1 Brian Quistorff <bquistorff@gmail.com>
 *! reports if the string is a
 program is_abs_path, rclass
 	args place

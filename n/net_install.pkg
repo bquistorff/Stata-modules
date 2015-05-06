@@ -3,7 +3,12 @@ d
 d   Provides replacement utilities for working with modules where the source of
 d installation files is a relative path (default -net- can't handle this).
 d
+d Version 0.1 (except adoupdate 1.1.1)
+d
 d Distribution-Date: 15feb2015
+d
+d Author: Brian Quistorff
+d Support: email bquistorff@gmail.com
 d
 f ../a/adoupdate.ado
 f ../i/is_abs_path.ado

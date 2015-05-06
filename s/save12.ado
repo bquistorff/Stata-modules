@@ -1,4 +1,4 @@
-*! version 0.0.5
+*! version 0.0.5 Brian Quistorff <bquistorff@gmail.com>
 *! Can try to save in either dataset version 114 or 115 which
 *! is readable by Stata v11-13 (use $try_stata12)
 * version map: Stata (dataset): v11 (114) v12(115) v13 (117).

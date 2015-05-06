@@ -2,6 +2,11 @@ d 'ereturn_do': module
 d
 d   Passthrough command allowing one to use the -ereturn- cmds easily.
 d
+d Version 1.2
+d
 d Distribution-Date: 29apr2015
+d
+d Author: Brian Quistorff
+d Support: email bquistorff@gmail.com
 d
 f ereturn_do.ado

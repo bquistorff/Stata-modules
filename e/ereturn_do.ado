@@ -1,4 +1,4 @@
-*! version 1.2
+*! version 1.2 Brian Quistorff <bquistorff@gmail.com>
 *! Passthrough command allowing one to use the -ereturn- cmds easily.
 * Usage: ereturn_do local l1 yes
 * Usage: ereturn_do matrix y = y, copy

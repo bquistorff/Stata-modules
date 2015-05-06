@@ -1,4 +1,4 @@
-*! Version 1.0
+*! Version 1.0 Brian Quistorff <bquistorff@gmail.com>
 *! Replaces -profiler report- and create a dta as output (rather than a text file)
 *! Requires: save_cmd_output.ado
 program nice_profile_report

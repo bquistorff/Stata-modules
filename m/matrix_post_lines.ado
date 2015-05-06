@@ -1,4 +1,4 @@
-*! Version 1.0
+*! Version 1.0 Brian Quistorff <bquistorff@gmail.com>
 *! Creates the post init and post string lines that will come from a matrix
 program matrix_post_lines, sclass
     version 12

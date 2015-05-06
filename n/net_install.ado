@@ -1,3 +1,4 @@
+*! v0.1 Brian Quistorff <bquistorff@gmail.com>
 *! pass-through for -net install- that allows local relative path
 program net_install
 	syntax namelist(name=pkgname max=1) [, all replace force from(string)]

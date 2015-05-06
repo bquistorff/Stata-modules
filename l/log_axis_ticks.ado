@@ -1,4 +1,4 @@
-*! version 1.0
+*! version 1.0 Brian Quistorff <bquistorff@gmail.com>
 *! Creates axis ticks (major & minor) for log scales
 *! (Stata's auto ticks are bad)
 program log_axis_ticks, sclass

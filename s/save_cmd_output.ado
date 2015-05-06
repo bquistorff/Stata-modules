@@ -1,4 +1,4 @@
-*! Version 1.0
+*! Version 1.0 Brian Quistorff <bquistorff@gmail.com>
 *! Saves the output form a shell command
 *TODO: Anyway to fix-up line wrapping?
 program save_cmd_output

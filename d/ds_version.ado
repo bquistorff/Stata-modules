@@ -1,4 +1,4 @@
-*! v0.1
+*! v0.1 Brian Quistorff <bquistorff@gmail.com>
 *! Shows the version of the Stata dataset whose filename is passed in.
 program ds_version, rclass
 	args fname

@@ -1,5 +1,6 @@
-*Adds a fake variable. Useful for adding new rows to a table using esttab/estout
-*Needs erepost
+*! v1.0 Brian Quistorff <bquistorff@gmail.com>
+*! Adds a fake variable. Useful for adding new rows to a table using esttab/estout
+*Requires: Needs erepost
 program add_fake_coeff_to_e, eclass
 	version 11.0
 	*Just a guess at the version

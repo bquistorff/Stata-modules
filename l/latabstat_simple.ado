@@ -1,4 +1,5 @@
-*! 1.2 Brian Quistorff 26-09-2013 modification of -latabstat- (see SSC) to remove the Source footnote and make a smaller tex fragment.
+*! 1.2 Brian Quistorff <bquistorff@gmail.com>
+* 26-09-2013 modification of -latabstat- (see SSC) to remove the Source footnote and make a smaller tex fragment.
 program define latabstat_simple, rclass byable(recall) sort
 	version 6
 

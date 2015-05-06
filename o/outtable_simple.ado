@@ -1,3 +1,4 @@
+*! v1.0.8 Brian Quistorff <bquistorff@gmail.com>
 *! A modified version of -outtable- v1.0.7 (see SSC) to remove the outer \table output so that it can be included in LyX
 program define outtable_simple,rclass
 version 8.0

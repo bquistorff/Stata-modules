@@ -1,4 +1,4 @@
-*! version 1.1.1  13feb2015 - use net_install to allow relative local paths
+*! version 1.1.1  13feb2015 - use net_install to allow relative local paths. Brian Quistorff <bquistorff@gmail.com>
 *! version 1.1.0  09jun2011
 program adoupdate, rclass
 	version 9

@@ -1,4 +1,4 @@
-*Version 0.1 (2013-12-02) Brian Quistorff
+*Version 0.1 Brian Quistorff <bquistorff@gmail.com>
 * Description: Similar to sample but for data in file (so big datasets). 
 program define fsample
 	version 11.0

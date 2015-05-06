@@ -1,3 +1,4 @@
+*! v1.0 Brian Quistorff <bquistorff@gmail.com>
 *! If you like to store your config values in a csv file
 *! (with headers "key" and "value") then this can retrieve those
 *! if testing=1 will check for key-testing first

@@ -2,7 +2,12 @@ d 'matrix_post_lines': module
 d
 d   Creates the post init and post string lines that will come from a matrix
 d
+d Version 1.0
+d
 d Distribution-Date: 01feb2015
+d
+d Author: Brian Quistorff
+d Support: email bquistorff@gmail.com
 d
 f matrix_post_lines.ado
 

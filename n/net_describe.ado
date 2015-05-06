@@ -1,3 +1,4 @@
+*! v0.1 Brian Quistorff <bquistorff@gmail.com>
 *! pass-through for -net describe- that allows local relative path
 program net_describe
 	syntax namelist(name=pkgname max=1) [, from(string)]

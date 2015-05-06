@@ -1,4 +1,4 @@
-*! version 1.0
+*! version 1.0 Brian Quistorff <bquistorff@gmail.com>
 *! Sorts a Stata matrix by a column. Fixes problem in -matsort- where row labels with spaces are mangled
 *! make sortcol negative if you want descending order
 program matrixsort

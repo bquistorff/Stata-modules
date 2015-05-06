@@ -1,4 +1,4 @@
-*! Version 1.0
+*! Version 1.0 Brian Quistorff <bquistorff@gmail.com>
 *! This will collapse the dataset and preserve the variable and value labels. 
 *! The syntax for using this is just like with the collapse command.
 *! There is one additional optional option: show stat. If you add this option to the command (collapseandperserve ... ,by(...) omitstatfromvarlabel

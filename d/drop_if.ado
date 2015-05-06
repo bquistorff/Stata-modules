@@ -1,4 +1,4 @@
-*! v0.2
+*! v0.2 Brian Quistorff <bquistorff@gmail.com>
 *! like -drop if- but:
 *! 1) appends the if condition to the # dropped msg (nice for loops/programs where commands aren't echoed)
 *! 2) returns r(n_dropped)

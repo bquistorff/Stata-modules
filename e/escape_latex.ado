@@ -1,4 +1,4 @@
-*! version 1.1
+*! version 1.1 Brian Quistorff <bquistorff@gmail.com>
 *! Escapes Latex meta-chatacters
 *! Watch the backslashes as Stata is a bit uncommon in how it deals with them.
 *! For the caret, it requires the textcomp package

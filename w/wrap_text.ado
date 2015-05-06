@@ -1,4 +1,4 @@
-*! version 1.1
+*! version 1.1 Brian Quistorff <bquistorff@gmail.com>
 *! Auto wraps a long line to broken up ones (that graph commands turn into different lines)
 *! Wrapped has the "" quotes
 *! Usage: 

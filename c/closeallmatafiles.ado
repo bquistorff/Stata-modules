@@ -1,4 +1,4 @@
-*! Version 1.0
+*! Version 1.0 Brian Quistorff <bquistorff@gmail.com>
 *! Closes all files that were open in mata
 *! -clear all- doesn't close mata open files!
 * From http://www.stata.com/statalist/archive/2006-10/msg00794.html

@@ -1,4 +1,4 @@
-*! version 1.1
+*! version 1.1 Brian Quistorff <bquistorff@gmail.com>
 *! A simple way to advance the Stata RNG state by a fixed amount
 *! Will also fill a variable with a sequence of such states
 *! (first obs gets current state, user capture state after function for continuing).

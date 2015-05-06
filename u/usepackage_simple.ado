@@ -1,3 +1,4 @@
+*! version 1.0 Brian Quistorff <bquistorff@gmail.com>
 *!  usepackage_simple.ado -- Stata module to download and install user packages necessary to run a do-file
 *!                                    include the net(loc) option if you want to install the package from non-SSC sources (the default)
 *! A simplified version of usepackage.ado

@@ -1,4 +1,4 @@
-*! version 1.1 Brian Quistorff
+*! version 1.1 Brian Quistorff <bquistorff@gmail.com>
 *! Trying to do "reduction" with "full" looks like a much harder problem (and not much benefit).
 program assign_treatment
 	version 11.0

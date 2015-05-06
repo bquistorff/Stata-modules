@@ -1,4 +1,4 @@
-*! version 1.0
+*! version 1.0 Brian Quistorff <bquistorff@gmail.com>
 *! For numerical replication need to list operating system, application version, and processor type
 * Ref: http://www.stata.com/support/faqs/windows/results-in-different-versions/
 * Note that log open/close timestamps don't happen for the batch-mode logs

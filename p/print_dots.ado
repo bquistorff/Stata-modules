@@ -1,4 +1,4 @@
-*! Version 1.0
+*! Version 1.0 Brian Quistorff <bquistorff@gmail.com>
 *! Prints a simple progress bar and time estimates
 program print_dots
     version 12
