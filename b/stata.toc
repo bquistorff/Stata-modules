@@ -2,3 +2,4 @@ v 3
 d A-directory
 
 p b_file_ops Provides a wrapper to easily switch to a "testing" mode where different filenames are saved/loaded
+p b_var_ops Some replacements for variable operations

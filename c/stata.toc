@@ -4,3 +4,4 @@ d C-directory
 p closeallmatafiles Closes all files that were open in mata. -clear all- doesn't close mata open files!
 p collapseandpreserve This will collapse the dataset and preserve the variable and value labels. 
 p clear_all Really resets everything (-clear all- doesn't clear all)
+p char_ops Some utilities for handling characteristics.

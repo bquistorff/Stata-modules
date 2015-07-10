@@ -24,7 +24,8 @@ If you would like to get older version, then you should clone the repository and
 
 Forks
 ---------------------
-Forks of SSC packages (New named [original name]): adoupdate (adoupdate from BASE), latabstat_simple [latabstat], matsave_simple [matsave], outtable_simple [outtable], sutex_env [sutex], synth (in development), usepackage_simple [usepackage]
+Forks of SSC packages (New named [original name]): latabstat_simple [latabstat], matsave_simple [matsave], outtable_simple [outtable], sutex_env [sutex], synth (in development), usepackage_simple [usepackage], bchardel [chardel]
+Forks of base functions/packages: adoupdate (adoupdate), b_file_ops (several), b_var_ops (several), 
 
 Some other packages are taken from the Stata mailing list. 
 
