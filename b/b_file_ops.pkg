@@ -2,7 +2,7 @@ d 'b_file_ops': module
 d
 d   Some replacements for file operations
 d
-d Version 0.0.8 (save12), 0.1 (bmerge), 0.1 (interimfile)
+d Version 0.0.8 (save12), 0.1 (bmerge), 0.1 (interimfile), 0.1 (change_line)
 d
 d Distribution-Date: 02jul2015
 d
@@ -12,3 +12,4 @@ d
 f ../s/save12.ado
 f bmerge.ado
 f ../i/interimfile.ado
+f ../c/change_line.ado
