@@ -2,7 +2,7 @@ d 'b_file_ops': module
 d
 d   Some replacements for file operations
 d
-d Version 0.0.8 (save12) 0.1 (bmerge)
+d Version 0.0.8 (save12), 0.1 (bmerge), 0.1 (interimfile)
 d
 d Distribution-Date: 02jul2015
 d
