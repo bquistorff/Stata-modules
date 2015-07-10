@@ -1,0 +1,13 @@
+d 'b_file_ops': module
+d
+d   Some replacements for variable operations
+d
+d Version 1.0 (bcount) 0.1 (bdrop)
+d
+d Distribution-Date: 02jul2015
+d
+d Author: Brian Quistorff
+d Support: email bquistorff@gmail.com
+d
+f bcount.ado
+f bdrop.ado
