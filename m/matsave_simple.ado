@@ -1,3 +1,4 @@
+*! Version 1.2 Brian Quistorff
 *! Originally from: version 1.1.7  24oct2004  by Marc-Andreas Muendler: muendler@ucsd.edu
 *! BQ: Make saving automatic (no dropall), remove manual -more-s,
 *!   put the full filename in path (not just dir) so can save to a name that is not the matrix name
