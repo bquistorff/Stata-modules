@@ -1,4 +1,4 @@
-*! v0.1 Brian Quistorff <bquistorff@gmail.com>
+*! v0.2 Brian Quistorff <bquistorff@gmail.com>
 *! A replacement for -tempfile- that provides more options for non-local outputs
 *! 1) Creates auto-named globally-scoped files in tmpdir (ie persistent files the user is in charge of deleting)
 *! 2) Can assign the file names to global macros
@@ -28,7 +28,10 @@ program interimfile
 	
 	if "`namelist'"!=""{
 		local macro_assign = cond("`globals'"!="","global","c_local")
-		if "${INTERIMFILE_FILE_NUM}"=="" global INTERIMFILE_FILE_NUM = -1
+		if "${INTERIMFILE_FILE_NUM}"==""{
+			interimfile_delete, win(`win') i_pre(`i_pre') tmproot(`tmproot') rm_instance_interims
+			global INTERIMFILE_FILE_NUM = -1
+		}
 		local namelist_num : list sizeof namelist
 		forval i=1/`namelist_num'{
 			global INTERIMFILE_FILE_NUM = ${INTERIMFILE_FILE_NUM}+1
@@ -42,20 +45,7 @@ program interimfile
 	}
 	
 	if "`deleting'"!=""{
-		local f_prefix  = cond(`win',"ST_","St")
-		local any_inst  = cond(`win',"??","?????")
-		local any_seqno = cond(`win',"??????.tmp",".??????")
-		if "`rm_instance_interims'"!="" local pattern = "`i_pre'`f_prefix'${INTERIMFILE_INST_ID}`any_seqno'"
-		if "`rm_all_interims'"     !="" local pattern = "`i_pre'`f_prefix'`any_inst'`any_seqno'"
-		if "`rm_all_tempfiles'"    !="" local pattern =        "`f_prefix'`any_inst'`any_seqno'"
-		local files_to_delete : dir "`tmproot'" files "`pattern'", respectcase
-		foreach file_to_delete of local files_to_delete{
-			rm "`tmproot'`file_to_delete'"
-		}
-		
-		if "`rm_instance_interims'`rm_all_interims'"!=""{
-			macro drop INTERIMFILE_INST_locs INTERIMFILE_FILE_NUM
-		}
+		interimfile_delete, win(`win') i_pre(`i_pre') tmproot(`tmproot') `rm_instance_interims' `rm_all_interims' `rm_all_tempfiles'
 	}
 	
 	if "`recover_locals'"!=""{
@@ -67,6 +57,27 @@ program interimfile
 		}
 	}
 
+end
+
+program interimfile_delete
+	syntax, win(string) i_pre(string) tmproot(string) [rm_instance_interims rm_all_interims rm_all_tempfiles]
+	
+	local f_prefix  = cond(`win',"ST_","St")
+	local any_inst  = cond(`win',"??","?????")
+	local any_seqno = cond(`win',"??????.tmp",".??????")
+	
+	if "`rm_instance_interims'"!="" local pattern = "`i_pre'`f_prefix'${INTERIMFILE_INST_ID}`any_seqno'"
+	if "`rm_all_interims'"     !="" local pattern = "`i_pre'`f_prefix'`any_inst'`any_seqno'"
+	if "`rm_all_tempfiles'"    !="" local pattern =        "`f_prefix'`any_inst'`any_seqno'"
+	
+	local files_to_delete : dir "`tmproot'" files "`pattern'", respectcase
+	foreach file_to_delete of local files_to_delete{
+		rm "`tmproot'`file_to_delete'"
+	}
+	
+	if "`rm_instance_interims'`rm_all_interims'"!=""{
+		macro drop INTERIMFILE_INST_locs INTERIMFILE_FILE_NUM
+	}
 end
 
 program interimfile_INST_ID
