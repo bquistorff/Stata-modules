@@ -18,7 +18,7 @@ program latex_multiline_cell
 	syntax anything(equalok everything), loc_out(string)
 	
 	*local out `"\begin{tabular}[x]{@{}c@{}}`anything'\end{tabular}"' //t=vcentering (t,b,c); hcenter: l@ or r@
-	*local out `"\pbox{20cm}{`anything'}"'
+	*local out `"\pbox{\textwidth}{`anything'}"'
 	local out `"\makecell{`anything'}"'
 	c_local `loc_out' `"`out'"'
 end
