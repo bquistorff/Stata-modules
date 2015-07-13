@@ -3,3 +3,4 @@ d L-directory
 
 p log_axis_ticks Creates axis ticks (major & minor) for log scales
 p latabstat_simple modification of -latabstat- (see SSC) to remove the Source footnote and make a smaller tex fragment.
+p latex_multiline_cell Making multiline cells in Latex tables

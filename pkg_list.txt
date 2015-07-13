@@ -19,6 +19,7 @@ iso8601_strs - A program to return ISO 8601 date/time strings
 ivreg2out - Combine stage estimates of ivreg2 into single estimate
 log_axis_ticks - Creates axis ticks (major & minor) for log scales
 latabstat_simple - modification of -latabstat- (see SSC) to remove the Source footnote and make a smaller tex fragment.
+latex_multiline_cell - Making multiline cells in Latex tables
 matrix_post_lines - Creates the post init and post string lines that will come from a matrix
 matrixsort - Sorts a Stata matrix by a column. Fixes problem in -matsort- where row labels with spaces are mangled
 matsave_simple - Fork of -matsave-v 3
