@@ -1,11 +1,14 @@
-*! v1.0 Brian Quistorff <bquistorff@gmail.com>
+*! v1.1 Brian Quistorff <bquistorff@gmail.com>
 *! If you like to store your config values in a csv file
 *! (with headers "key" and "value") then this can retrieve those
 *! if testing=1 will check for key-testing first
+*! binding quotes will be removed (Stata style)
+*! if you want to encode:"yes no","wow wow"
+*! Then you should write:`""yes no","wow wow""'
 program get_config_value
 	syntax namelist(max=1 name=key) [, local(string) global(string) filepath(string) default(string)]
 	
-	if "`filepath'"=="" local filepath "code/config.project.csv"
+	if "`filepath'"=="" local filepath "${main_root}code/config.project.csv"
 	preserve
 	*qui insheet using "`filepath'", comma names clear
 	*import is better with handling double-quotes
@@ -23,6 +26,9 @@ program get_config_value
 	qui keep if key=="`key'"
 	if _N>0{
 		local val = value[1]
+		* If double quotes are just binding, then remove (like you need to enclose a ",")
+		* Don't use -import delimited, stripquotes(default)- because that converts other quotes
+		if (length(`"`val'"')>1 & `:word count `val''==1) local val `val'
 		di `"get_config_value: `key'=`val'"'
 	}
 	else{
