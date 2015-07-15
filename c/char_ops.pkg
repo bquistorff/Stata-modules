@@ -10,4 +10,4 @@ d Author: Brian Quistorff
 d Support: email bquistorff@gmail.com
 d
 f ../b/bchardel.ado
-f clear_reshape_char.ado
+f clear_reshape_chars.ado
