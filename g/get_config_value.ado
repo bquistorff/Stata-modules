@@ -1,6 +1,7 @@
-*! v1.1 Brian Quistorff <bquistorff@gmail.com>
+*! v1.2 Brian Quistorff <bquistorff@gmail.com>
 *! If you like to store your config values in a csv file
 *! (with headers "key" and "value") then this can retrieve those
+*! Will default to local of the name `key'
 *! if testing=1 will check for key-testing first
 *! binding quotes will be removed (Stata style)
 *! if you want to encode:"yes no","wow wow"
@@ -37,6 +38,9 @@ program get_config_value
 	}
 	restore
 	
-	if "`local'" !="" c_local `local' `"`val'"'
 	if "`global'"!="" global `global' `"`val'"'
+	else{
+		if "`local'"=="" local local `key'
+		c_local `local' `"`val'"'
+	}
 end
