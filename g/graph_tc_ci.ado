@@ -1,6 +1,7 @@
 *! Graphs Treatment and Control with Confidence Intervals
 *! Required globals: dir_base
 program graph_tc_ci
+	version 11.0 //just a guess here
 	syntax , file_suff(string) title(string) ///
 			tper_spec(int) num_reps(int) tc_outcome(string) cis(string)  ///
 			[start(int 1) ci_num(string) tval_labels(string) tc_gph_opts(string) ///

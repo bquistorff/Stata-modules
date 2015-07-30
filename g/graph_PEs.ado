@@ -1,6 +1,7 @@
 *! Graphs the prediction errors
 *! Required globals: dir_base
 program graph_PEs
+	version 11.0 //just a guess here
 	syntax , start(int) file_suff(string) title(string) notes(string) ///
 			tper_spec(int) y_diff(string) y_diffs(string) ///
 			[ytitle(string) tval_labels(string) xlabels(string) main_label(string)]

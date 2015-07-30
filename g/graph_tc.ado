@@ -2,6 +2,7 @@
 *! Required globals: dir_base
 * To do: Need to convert the xlab code to like it is in graph_tc_ci
 program graph_tc
+	version 11.0 //just a guess here
 	syntax , start(int) file_suff(string) title(string) notes(string) ///
 				tper_spec(int) ytitle(string) tc_outcome(string) ///
 				[tval_labels(string)  tc_gph_opts(string) xlabels(string) main_label(string)]

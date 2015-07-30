@@ -15,6 +15,7 @@
 *  http://tex.stackexchange.com/questions/38924/
 
 program latex_multiline_cell
+	version 11.0 //just a guess here
 	syntax anything(equalok everything), loc_out(string)
 	
 	*local out `"\begin{tabular}[x]{@{}c@{}}`anything'\end{tabular}"' //t=vcentering (t,b,c); hcenter: l@ or r@

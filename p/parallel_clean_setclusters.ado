@@ -1,6 +1,7 @@
 *! cleans up from old parallel and sets the number of clusters (has default for automatic #)
 *! Globals required: numclusters
 program parallel_clean_setclusters
+	version 11.0 //just a guess here
 	syntax [anything] [, noclean]
 
 	if "`anything'"==""{

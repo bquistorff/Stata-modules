@@ -1,5 +1,6 @@
 *! Outputs a tex p-value table
 program output_pval_table
+	version 11.0 //just a guess here
 	syntax , note(string) file_base(string) matrix(string)
 	
 	local orig_linesize = "`c(linesize)'"
@@ -19,7 +20,4 @@ program output_pval_table
 	qui erase "${dir_base}/tab/tex/`file_base'_temp.tex"
 	qui erase "${dir_base}/tab/tex/`file_base'_temp2.tex"
 	
-	if "${track_files}"=="1" {
-		writeout_tracked_file "`finalfile'"
-	}
 end

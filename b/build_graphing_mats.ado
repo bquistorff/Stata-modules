@@ -1,6 +1,7 @@
 *! Builds the matrices needed by the graphing programs
 *! Works if the unit is one of the donors a permuation estimation was done on.
 program build_graphing_mats, rclass
+	version 11.0 //just a guess here
 	syntax anything, depvar(string) startper(int) perms_file(string)
 	
 	qui tsset, noquery

@@ -4,6 +4,7 @@
 * Required globals: fargs, dir_base
 * Suboptions: fargs = predictors(string)
 program gen_perm_donors
+	version 11.0 //just a guess here
 	syntax , donor_mat(string) depvar(string) infile(string) ///
 			start(int) tper(int) end(int) outfile(string) ///
 			[nested permweightsfile(string) logfile(string) donor_limit_for_match_cmd(string)]

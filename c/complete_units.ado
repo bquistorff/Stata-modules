@@ -2,6 +2,7 @@
 *! Marks obs with which are complete
 *! Can handle normal variables and time subscripted variables (e.g. pop(1980))
 program complete_units
+	version 11.0 //just a guess here
 	syntax anything, generate(string)
 	
 	

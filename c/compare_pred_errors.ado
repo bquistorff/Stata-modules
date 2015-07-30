@@ -1,5 +1,6 @@
 *! Compares the prediction errors from the normal setup with a placebo test one period before
 program compare_pred_errors
+	version 11.0 //just a guess here
 	syntax , depvar(string) tr_unit_codes(string) file_suff(string) perms(int) ge_suff(string) ///
 		early_predictors(string) late_predictors(string) precise_tyear(int) ///
 		first_treatmentyear(int) last_pre_year(int) tper(int) [plac_late_start(string) ///

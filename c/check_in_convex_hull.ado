@@ -2,6 +2,7 @@
 *! Also graphs the raw data a bit
 * To do: maybe eventually use the Gary King program
 program check_in_convex_hull
+	version 11.0 //just a guess here
 	syntax varname, first_pre(int) last_pre(int) trunit(int) file_suff(string) ///
 		[gph_tvar(string)  main_label(string) end(string) xlabels(string) tper_spec(string) ]
 	qui tsset, noquery

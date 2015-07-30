@@ -4,6 +4,7 @@
 *! parallel clean, all force
 *! Right now if something goes wrong, tempfiles are left around in temp folder (slightly bad).
 program parallel_justout_helper
+	version 12.0 //just a guess here
 	*set trace on
 	syntax , donor_mat(string) cmd_base(string) cmd_options(string) outfile(string) [permweightsfile(string)]
 	

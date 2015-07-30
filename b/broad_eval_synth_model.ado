@@ -11,6 +11,7 @@
 *  -TODO: Should I generalize the transformation graphs (dmln->ln, ga->ln)?
 *  -TODO: Error gracefully when there was an optimization error when estimating on a keeper
 program broad_eval_synth_model, rclass
+	version 11.0 //just a guess here
 	syntax varname, tr_unit_codes(numlist) tr_unit_titles(string) precise_tyear(int) perms(int) ///
 		[predictors(string) cust_predictors_note(string) ///
 		ge_mode(int 0) ge_custom_cmd(string) ///

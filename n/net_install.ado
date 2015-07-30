@@ -1,6 +1,7 @@
 *! v0.1 Brian Quistorff <bquistorff@gmail.com>
 *! pass-through for -net install- that allows local relative path
 program net_install
+	version 11.0 //just a guess here
 	syntax namelist(name=pkgname max=1) [, all replace force from(string)]
 	is_abs_path "`from'"
 	scalar iap = r(is_abs_path)

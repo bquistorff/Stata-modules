@@ -2,6 +2,7 @@
 * Reshape leaves a bunch of cars around so that it can be undone.
 *  in interactive mode this is nice, but otherwise they are messy.
 program clear_reshape_chars
+	version 11.0 //just a guess here
 	char _dta[ReS_str]
 	char _dta[ReS_j]
 	char _dta[ReS_ver]

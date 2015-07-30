@@ -7,6 +7,7 @@
 *! if you want to encode:"yes no","wow wow"
 *! Then you should write:`""yes no","wow wow""'
 program get_config_value
+	version 11.0 //just a guess here
 	syntax namelist(max=1 name=key) [, local(string) global(string) filepath(string) default(string)]
 	
 	if "`filepath'"=="" local filepath "${main_root}code/config.project.csv"

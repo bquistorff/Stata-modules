@@ -1,3 +1,5 @@
 To do:
 -If others contribute, then put author lines in the pkg files (and maybe the ados)
 -figure out what to do with the ados that have no pkg files (should really be here?)
+-Figure out unit tests. See gen_test_sript.sh. Should I have a general one at test.do? have separate do files per package? or embedded commands in pkg file? See if anyone online has done unit tests
+-Get rid of grepr '${dir' .

@@ -1,6 +1,7 @@
 *! Output (in dta and tex formats) a matrix of some quality of the predictors
 * Required globals: dir_base
 program output_pred_mat
+	version 11.0 //just a guess here
 	syntax , file_suff(string) mat(string) mattype(string) [year_replace_period_list(string) nosort]
 	
 	*Output to a dta file
@@ -43,7 +44,4 @@ program output_pred_mat
 	}
 	qui frmttable using "${dir_base}/tab/tex/`mattype'_`file_suff'.tex", replace statmat(`mat') tex fragment sdec(3)
 	
-	if "${track_files}"=="1" {
-		writeout_tracked_file  "${dir_base}/tab/tex/`mattype'_`file_suff'.tex"
-	}
 end

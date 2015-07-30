@@ -8,7 +8,7 @@
 * Written by Shafique Jamal (shafique.jamal@gmail.com).
 
 program define collapseandpreserve
-
+	version 11.0 //just a guess here
     syntax anything(id="variable and values" name=arguments equalok) [fweight  aweight  pweight  iweight], by(string asis) [cw fast Omitstatfromvarlabel]
     version 9.1
     

@@ -1,6 +1,7 @@
 *! v0.2 Brian Quistorff <bquistorff@gmail.com>
 *! Shows the version of the Stata dataset whose filename is passed in.
 program ds_version, rclass
+	version 11.0 //just a guess here
 	args fname
 	file open fhandle using `fname', read binary
 	file read  fhandle %1s firstbytechar

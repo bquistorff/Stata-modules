@@ -1,6 +1,7 @@
 *! Outputs matrix (in dta and tex) of unit level matches
 *! Requires globals: dir_base
 program output_unit_matches
+	version 11.0 //just a guess here
 	syntax , numb(int) file_suff(string) weights_unr(string) weights(string) [match_file(string)]
 	tempfile initdata
 	qui save `initdata'
@@ -49,10 +50,6 @@ program output_unit_matches
 		
 	qui erase "${dir_base}/tab/tex/top_matches_`file_suff'_temp1.tex"
 	qui erase "${dir_base}/tab/tex/top_matches_`file_suff'_temp2.tex"
-	
-	if "${track_files}"=="1" {
-		writeout_tracked_file  "${dir_base}/tab/tex/top_matches_`file_suff'.tex"
-	}
-	
+		
 	use `initdata', clear
 end

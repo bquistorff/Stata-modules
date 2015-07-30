@@ -13,6 +13,7 @@
 * This should work on unix (though not tested thoroughly) but I'm not sure of the tempfile naming conventions on other platforms
 
 program interimfile
+	version 11.0 //just a guess here
 	syntax [namelist] [, globals rm_instance_interims rm_all_interims rm_all_tempfiles recover_locals]
 	
 	local deleting "`rm_instance_interims'`rm_all_interims'`rm_all_tempfiles'"

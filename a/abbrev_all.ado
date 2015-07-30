@@ -1,6 +1,7 @@
 *! version 1.1
 *! helpful if you want to put variable names in matrix row/colnames
 program abbrev_all
+	version 11.0 //just a guess here
 	syntax , str_list(string asis) out_loc(string) [length(int 32)]
 
 	forval i=1/`:word count `str_list''{

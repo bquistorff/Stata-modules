@@ -1,6 +1,7 @@
 *! Version 1.2
 *! Originally from: version 1.1.9  02feb2005  by Marc-Andreas Muendler: muendler@ucsd.edu
 program define matload_simple
+	version 11.0 //just a guess here
 	syntax anything [, Path(string) ROWname(string) OVERwrite]
 	
 	global err_mssg = ""

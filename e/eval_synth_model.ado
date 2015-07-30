@@ -4,6 +4,7 @@
 *Required globals: dir_base
 * Needs the data to be in a strongly balanced panel
 program eval_synth_model, rclass
+	version 11.0 //just a guess here
 	syntax , depvar(varname) predictors(string) ttime(int) perms(int) ///
 		[file_suff(string) tr_unit_codes(numlist integer) tr_unit_titles(string) tc_gph_opts(string) notes(string) ///
 		obs_weight_char_ds(string) justall(int 0) alpha(string) full_xlabels(string) donor_limit_for_match_cmd(string) ///

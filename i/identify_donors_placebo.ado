@@ -1,5 +1,6 @@
 *! Identifies uncontaminated donors with a temporal placebo test
 program identify_donors_placebo
+	version 11.0 //just a guess here
 	syntax , depvar(varname) predictors(string) tr_unit_codes(numlist integer) ///
 		early_predictors(string) precise_tyear(int) last_pre_year(int) tper(int) ///
 		file_suff(string) perms(int) first_treatmentyear(int) ///
