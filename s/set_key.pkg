@@ -2,9 +2,9 @@ d 'set_key': module
 d
 d   Stores and retrieves the unique key for a dataset
 d
-d Version 1.1
+d Version 1.2
 d
-d Distribution-Date: 01jul2015
+d Distribution-Date: 31jul2015
 d
 d Author: Brian Quistorff
 d Support: email bquistorff@gmail.com
