@@ -1,5 +1,6 @@
 *! Version 1.0 Brian Quistorff <bquistorff@gmail.com>
 *! An assert with a message when false
+*! Similar to -_assert- except have a pause
 program assert_msg
 	version 11.0
 	*Just a guess at the version
