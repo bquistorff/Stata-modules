@@ -1,0 +1,13 @@
+d 'save_fig': module
+d
+d   Programs to help save graphs and derivatives.
+d
+d Version 1.0
+d
+d Distribution-Date: 31jul2015
+d
+d Author: Brian Quistorff
+d Support: email bquistorff@gmail.com
+d
+f save_fig.ado
+f ../g/gph2fmt.ado
