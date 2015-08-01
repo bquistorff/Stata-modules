@@ -1,4 +1,4 @@
-*! v1.0 bquistorff@gmail.com
+*! v1.1 bquistorff@gmail.com
 *! saving text versions of title & notes (including wrapping for gph output) as well as the gph_file.
 program save_fig
 	version 12.0 //just a guess
@@ -8,9 +8,11 @@ program save_fig
 	gettoken colon 0 : remainder, parse(":")
 
 	/* If had to load from already written file (but then can' unwrap caption well)
+	tempname toexport
 	graph use "`gph_file'", name(`toexport')
 	qui graph describe
 	local 0 `"`r(command)'"'
+	* Remember to -drop drop `toexport'-
 	*/
 	syntax anything(equalok everything name=gph_cmd) [, title(string) note(string asis) *]
 
@@ -22,9 +24,15 @@ program save_fig
 	
 	if "`caption_file'"!="" & length(`"`note'"')>0{
 		file open fhandle using "`caption_file'", write text replace
-		if substr(`"`note'"',1,1)==""{
-			forval i=1/`: word count `note''{
-				file write fhandle `"`: word `i' of `note''"'
+		if substr(`"`note'"',1,1)==`"""' | substr(`"`note'"',1,2)==`" ""'{
+			local w_count : list sizeof note
+			if `w_count'==1 file write fhandle `note'
+			else{
+				forval i=1/`w_count'{
+					local line : word `i' of `note'
+					if `i'>1 file write fhandle _n
+					file write fhandle "`line'"
+				}
 			}
 		}
 		else{
