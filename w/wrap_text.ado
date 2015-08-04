@@ -8,15 +8,15 @@
 program wrap_text
 	version 12
 	syntax , unwrappedtext(string asis) wrapped_out_loc(string)  [width(integer 100)]
-  di `"input: `unwrappedtext'"'
+  *di `"input: `unwrappedtext'"'
 	
 	*get rid of outer quotes of only one set
 	local unwrappedtext = trim(`"`unwrappedtext'"')
 	if substr(`"`unwrappedtext'"',1,1)!=`"""' local unwrappedtext `""`unwrappedtext'""'
-  di `"std: `unwrappedtext'"'
+  *di `"std: `unwrappedtext'"'
 	*if first char is not ", then wrap
 	foreach oline in `unwrappedtext'{
-		di `"line: `oline'"'
+		*di `"line: `oline'"'
 		local num_words : word count `oline'
 		if `num_words'==0 local wrappedtext `"`wrappedtext'`space'"`oline'""' //pass whitespace through
 		forval i = 1/`num_words' {
@@ -29,6 +29,6 @@ program wrap_text
 		}
 	}
   
-	di `"output: `wrappedtext'"'
+	*di `"output: `wrappedtext'"'
 	c_local `wrapped_out_loc' `"`wrappedtext'"'
 end
