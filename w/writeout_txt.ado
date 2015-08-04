@@ -3,8 +3,9 @@
 program writeout_txt
 	version 11 //guess
 	syntax anything(name=towrite equalok everything), filename(string)
-	local filepath `"`filename'"'
-	file open fhandle using `"`filepath'"', write text replace
-	file write fhandle `"`towrite'"'
-	file close fhandle
+
+	tempname fhandle
+	file open `fhandle' using `"`filename'"', write text replace
+	file write `fhandle' `"`towrite'"'
+	file close `fhandle'
 end

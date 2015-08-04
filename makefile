@@ -10,10 +10,17 @@ include pkg_build_rules.mk
 stata.trk : $(pkg_files)
 	./gen_stata.trk.sh
 
-.PHONY : basic_checks ados_witout_version pkgs_without_distr pkgs_not_in_toc
+.PHONY : basic_checks ados_witout_version pkgs_without_distr pkgs_not_in_toc ados_missing_tempname
 ados_witout_version :
 	@echo Should use version unless you work with c(stata_version) (like save12)
 	grep -L -P '^\s*version' */*.ado
+
+#Ideally check for other named things like graph names.
+ados_missing_tempname :
+	@echo Just check that greps return no results, errors OK
+	-grep "file open [^\`]" */*.ado
+	-grep "^\s\+\(qui \)\?scalar [^\`]" */*.ado | grep -v "scalar define \`"
+	-grep "^\s\+mat\(rix\)\? [^\`\$$]" */*.ado | grep -v "\(row\|col\)\(n\(ames\?\)\?\|eq\)" | grep -v " li\(st\)\?" | grep -v " drop" | grep -v " input [\`\$$]"
 
 pkgs_without_distr :
 	grep -L "Distribution-Date" */*.pkg
@@ -25,4 +32,4 @@ pkgs_not_in_toc :
 	diff temp.txt temp2.txt
 	-rm temp.txt temp2.txt
 
-basic_checks : ados_witout_version pkgs_without_distr pkgs_not_in_toc
+basic_checks : ados_witout_version pkgs_without_distr pkgs_not_in_toc ados_missing_tempname

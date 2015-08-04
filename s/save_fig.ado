@@ -16,29 +16,30 @@ program save_fig
 	*/
 	syntax anything(equalok everything name=gph_cmd) [, title(string) note(string asis) *]
 
+	tempname fhandle
 	if "`title_file'"!="" & length(`"`title'"')>0{
-		file open fhandle using "`title_file'", write text replace
-		file write fhandle "`title'"
-		file close fhandle
+		file open `fhandle' using "`title_file'", write text replace
+		file write `fhandle' "`title'"
+		file close `fhandle'
 	}
 	
 	if "`caption_file'"!="" & length(`"`note'"')>0{
-		file open fhandle using "`caption_file'", write text replace
+		file open `fhandle' using "`caption_file'", write text replace
 		if substr(`"`note'"',1,1)==`"""' | substr(`"`note'"',1,2)==`" ""'{
 			local w_count : list sizeof note
-			if `w_count'==1 file write fhandle `note'
+			if `w_count'==1 file write `fhandle' `note'
 			else{
 				forval i=1/`w_count'{
 					local line : word `i' of `note'
-					if `i'>1 file write fhandle _n
-					file write fhandle "`line'"
+					if `i'>1 file write `fhandle' _n
+					file write `fhandle' "`line'"
 				}
 			}
 		}
 		else{
-			file write fhandle `"`note'"'
+			file write `fhandle' `"`note'"'
 		}
-		file close fhandle
+		file close `fhandle'
 	}
 	
 	if "`width'"!=""{
