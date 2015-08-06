@@ -4,7 +4,7 @@ program save_fig
 	version 12.0 //just a guess
 	*Strip off and deal with my suboptions
 	gettoken 0 remainder : 0, parse(":")
-	syntax , title_file(string) caption_file(string) gph_file(string) [width(string)]
+	syntax , gph_file(string) [title_file(string) caption_file(string) caption_tex_file(string) width(string)]
 	gettoken colon 0 : remainder, parse(":")
 
 	/* If had to load from already written file (but then can' unwrap caption well)
@@ -23,6 +23,8 @@ program save_fig
 		file close `fhandle'
 	}
 	
+	if "`caption_tex_file'"!="" & "`caption_file'"=="" tempfile caption_file
+	
 	if "`caption_file'"!="" & length(`"`note'"')>0{
 		file open `fhandle' using "`caption_file'", write text replace
 		if substr(`"`note'"',1,1)==`"""' | substr(`"`note'"',1,2)==`" ""'{
@@ -40,6 +42,8 @@ program save_fig
 			file write `fhandle' `"`note'"'
 		}
 		file close `fhandle'
+		
+		if "`caption_tex_file'"!="" escape_latex_file, txt_infile("`caption_file'") tex_outfile("`caption_tex_file'")
 	}
 	
 	if "`width'"!=""{

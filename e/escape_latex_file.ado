@@ -7,7 +7,7 @@ program escape_latex_file
 	file read `in_handle' line
 	while r(eof)==0 {
 		escape_latex "`line'", local(line_out)
-		if "`notfirst'"=="1" file write `out_handle' _n
+		if "`notfirst'"=="1" file write `out_handle' _n(2)
 		file write `out_handle' "`line_out'"
 		
 		local notfirst = "1"

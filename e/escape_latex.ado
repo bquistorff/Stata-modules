@@ -35,6 +35,8 @@ program define escape_latex
 	*Just a guess at the version
 	
 	syntax anything(equalok everything name=input) , local(string) [disable_curly]
+	
+	if substr(`"`input'"',1,1)==`"""' local input `input'
     
     * These replacements use each other's characters so have to do simultanous replacement (not sequential)
     mata: st_local("input", simultaneous_char_replace(`"`input'"', ("\","{","}"), ("\textbackslash{}","\{","\}")))
@@ -58,5 +60,5 @@ program define escape_latex
         local input = subinstr(`"`input'"',"|", "\textasciigrave{}", .)
     }
     
-	c_local local `"`input'"'
+	c_local `local' `"`input'"'
 end
