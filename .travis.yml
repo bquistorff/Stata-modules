@@ -1,0 +1,12 @@
+before_install:
+- openssl aes-256-cbc -K $encrypted_de877759f709_key -iv $encrypted_de877759f709_iv
+  -in password.txt.enc -out password.txt -d
+install:
+- wget https://purrrl-production.s3.amazonaws.com/51/1439777326/stat_dep.tar.xz.gpg
+- gpg --passphrase-file password.txt -o stat_dep.tar.xz --decrypt stat_dep.tar.xz.gpg
+- xz -d stat_dep.tar.xz
+- tar xf stat_dep.tar
+- export STATABATCH="stata -b"
+- export PATH="$PWD/stata12/:.:$PATH"
+script:
+- cd src && make build
