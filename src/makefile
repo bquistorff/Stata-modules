@@ -7,7 +7,7 @@
 build: lperm_inference.mlib
 
 lperm_inference.mlib : perm_inference.mata
-	statab.sh cli_build_mlib.do "$@ $^"
+	statab.sh do cli_build_mlib.do "$@ $^"
 	
 install:
 	cp l*.mlib ../l
