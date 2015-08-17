@@ -3,6 +3,8 @@ Stata-modules
 
 A collection of small Stata modules utilities dealing with them. The modules include forks of existing modules (from SSC and the mailing list), reimplementations of existing modules, and stuff I've made for myself.
 
+[![Build Status](https://travis-ci.org/bquistorff/Stata-modules.svg?branch=master)](https://travis-ci.org/bquistorff/Stata-modules)
+
 Install
 =======
 
