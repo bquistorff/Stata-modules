@@ -11,10 +11,6 @@ d Recommends: parallel, matrixsort
 d
 d Author: Brian Quistorff
 d Support: email bquistorff@gmail.com
-d 
-d Build instructions:
-d :l/lperm_inference.mlib : p/perm_inference.mata
-d :	$$STATABATCH do cli_build_mlib.do "$@ $^"; tail cli_build_mlib.log; rm cli_build_mlib.log
 d
 f ../a/abbrev_all.ado
 f ../b/broad_eval_synth_model.ado

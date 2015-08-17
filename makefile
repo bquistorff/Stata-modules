@@ -3,10 +3,6 @@
 
 pkg_files := $(wildcard */*.pkg)
 
-pkg_build_rules.mk : $(pkg_files)
-	cat */*.pkg | grep "^d :" | sed "s/^d ://g" > pkg_build_rules.mk
-include pkg_build_rules.mk
-
 stata.trk : $(pkg_files)
 	./gen_stata.trk.sh
 
