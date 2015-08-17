@@ -2,7 +2,7 @@
 # Right now that is just compiling mlibs
 # but could in the future be compiling plugins.
 
-.PHONY : build install
+.PHONY : build install clean
 
 build: lperm_inference.mlib
 
@@ -11,3 +11,6 @@ lperm_inference.mlib : perm_inference.mata
 	
 install:
 	cp l*.mlib ../l
+
+clean:
+	rm -f *.mlib
