@@ -239,7 +239,7 @@ program eval_synth_model, rclass
 	qui save "`just_donors_file'", replace
 	
 	qui count if `tvar'==`start'
-	local nunits =  `r(N)'
+	local nunits =  r(N)
 	
 	tempname donor_order donors_touse y_diffs y_diffs_t p_vals outmat
 	tempvar rand

@@ -1,9 +1,19 @@
-*! Version 1.0 Brian Quistorff <bquistorff@gmail.com>
+*! Version 1.1
 *! Prints a simple progress bar and time estimates
+*! If you don't want to keep track of curr (e.g. in a foreach loop)
+*! Then just pass in one parameter being the end.
 program print_dots
     version 12
 	args curr end
 	local timernum 13
+	
+	*See if passed in both
+	if "`end'"==""{
+		local end `curr'
+		if "$PRINTDOTS_CURR"=="" global PRINTDOTS_CURR 0
+		global PRINTDOTS_CURR = $PRINTDOTS_CURR+1
+		local curr $PRINTDOTS_CURR
+	}
 	
 	if `curr'==1 {
 		timer off `timernum'
@@ -11,7 +21,8 @@ program print_dots
 		timer on `timernum'
 		exit 0
 	}
-	if `curr'<5 {
+	local start_point = min(5, `end')
+	if `curr'<`start_point' {
 		timer off `timernum'
 		qui timer list  `timernum'
 		local used `r(t`timernum')'
@@ -24,7 +35,7 @@ program print_dots
 		}
 		exit 0
 	}
-	if `curr'==5 {
+	if `curr'==`start_point' {
 		timer off `timernum'
 		qui timer list  `timernum'
 		local used `r(t`timernum')'
@@ -41,7 +52,9 @@ program print_dots
 			di "----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5" _continue
 		}
 		di " Total: `end'"
-		di "....." _continue
+		forval i=1/`start_point'{
+			di "." _continue
+		}
 		exit 0
 	}
 	

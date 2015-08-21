@@ -31,8 +31,7 @@ program define matload_simple
 			local rc = _rc
 			global err_mssg = "_rowname not found"
 		}
-		qui count
-		if `r(N)'==0 {
+		if _N==0 {
 			local rc = _rc
 			global err_mssg = "Data set empty or not Stata format"
 		}
@@ -46,8 +45,7 @@ program define matload_simple
 		else {
 			rename `rowname' _rowname
 		}
-		qui count
-		if `r(N)'==0 {
+		if _N==0 {
 			local rc = _rc
 			global err_mssg = "Data set empty or not Stata format"
 		}

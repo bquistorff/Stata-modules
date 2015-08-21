@@ -20,7 +20,7 @@ program identify_donors_placebo
 	}
 
 	count if codigo==codigo[1]
-	local nyears = `r(N)'
+	local nyears = r(N)
 	
     tempfile initdata
     qui save `initdata'

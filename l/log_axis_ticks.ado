@@ -17,11 +17,11 @@ program log_axis_ticks, sclass
 		local max = .
 		foreach v in `vars'{
 			summ `v', meanonly
-			if `min'==. | `r(min)'<`min'{
-				local min = `r(min)'
+			if `min'==. | r(min)<`min'{
+				local min = r(min)
 			}
-			if `max'==. | `r(max)'>`max'{
-				local max = `r(max)'
+			if `max'==. | r(max)>`max'{
+				local max = r(max)
 			}
 		}
 	}

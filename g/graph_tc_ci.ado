@@ -19,7 +19,7 @@ program graph_tc_ci
 	
 	if "`connect_ci_to_pre_t'"!=""{
 		qui count if LowCI==.
-		local last_per_pre_t = `r(N)'
+		local last_per_pre_t = r(N)
 		qui replace LowCI = Synthetic in `last_per_pre_t'
 		qui replace HighCI = Synthetic in `last_per_pre_t'
 	}

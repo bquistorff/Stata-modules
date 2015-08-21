@@ -28,18 +28,18 @@ program check_in_convex_hull
 	
 	qui levelsof `gph_tvar' if `pvar'==`trunit', local(tvals)
 	summ `gph_tvar' if `pvar'==`trunit', meanonly
-	local tvar_min = `r(min)'
+	local tvar_min = r(min)
 	local gph_min_t : word `=`first_pre'-`tvar_min'+1' of `tvals'
 	local gph_max_t : word `=`last_pre'-`tvar_min'+1' of `tvals'
 	
 	di "Checking if we're in the convex hull"
 	forval tval =`first_pre'/ `last_pre'{
 		qui summ `varlist' if `pvar'==`trunit' & `tvar'==`tval'
-		local tr_lvl = "`r(mean)'"
+		local tr_lvl = r(mean)
 		
 		qui summ `varlist' if `pvar'!=`trunit' & `tvar'==`tval'
-		local dp_min = "`r(min)'"
-		local dp_max = "`r(max)'"
+		local dp_min = r(min)
+		local dp_max = r(max)
 		
 		local inrange = (`tr_lvl' >= `dp_min' & `tr_lvl' <= `dp_max')
 		autofmt, input(`tr_lvl' `dp_min' `dp_max') dec(3)

@@ -6,7 +6,7 @@ program define fsample
 	
 	args f gsize ssize
 	qui describe using "`f'", short
-	local fsize `r(N)'
+	local fsize r(N)
 	local ncompletegroups `=floor(`fsize'/`gsize')'
 	tempfile acc_sample
 	clear
