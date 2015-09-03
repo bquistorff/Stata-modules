@@ -6,7 +6,7 @@ A collection of small Stata modules utilities dealing with them. The modules inc
 [![Build Status](https://travis-ci.org/bquistorff/Stata-modules.svg?branch=master)](https://travis-ci.org/bquistorff/Stata-modules)
 
 Install
-=======
+---------------------
 
 To install a module 'package' whose name begins with letter 'p' you can do the following with Stata v13.
 
@@ -34,7 +34,7 @@ Some other packages are taken from the Stata mailing list.
 Note that when overriding an installation for a package with the same name from a new source, -ado uninstall- the previous one
 
 Why not SSC?
-=======
+---------------------
 
 While I'm not opposed to having modules on BC's SSC for convenience, that archive has several limitations:
 * It doesn't allow access to previous versions of files (which is essential for replication). 
@@ -43,5 +43,5 @@ While I'm not opposed to having modules on BC's SSC for convenience, that archiv
 
 
 Author
-=======
+---------------------
 Brian Quistorff - quistorff (at) econ.umd.edu. I welcome comments (or pull-requests).

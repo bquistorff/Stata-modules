@@ -2,7 +2,7 @@
 *! version 1.0.0
 S https://raw.github.com/bquistorff/Stata-modules/master/a
 N add_fake_coeff_to_e.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 0
 d 'add_fake_coeff_to_e': module
 d   An fake entries to estimates e(b) and e(V) for table formatting.
@@ -15,7 +15,7 @@ f a/add_fake_coeff_to_e.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/a
 N assert_msg.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 1
 d 'assert_msg': module
 d   An asserts (exits when condition is false) with a message. Plus a quick count assert.
@@ -28,7 +28,7 @@ f a/assert_count.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/a
 N assign_treatment.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 2
 d 'assign_treatment': module
 d   Assign units to treatment with uneven cell sizes.
@@ -41,22 +41,23 @@ f a/assign_treatment.sthlp
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/b
 N b_file_ops.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 3
 d 'b_file_ops': module
 d   Some replacements for file operations
-d Version 0.0.8 (save12), 0.1 (bmerge), 0.2 (interimfile), 0.1 (change_line)
-d Distribution-Date: 12jul2015
+d Version 0.0.8 (save12), 0.1 (bmerge), 0.2 (interimfile), 0.1 (change_line), 0.2 (writeout_txt)
+d Distribution-Date: 10aug2015
 d Author: Brian Quistorff
 d Support: email bquistorff@gmail.com
 f s/save12.ado
 f b/bmerge.ado
 f i/interimfile.ado
 f c/change_line.ado
+f w/writeout_txt.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/b
 N b_var_ops.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 4
 d 'b_var_ops': module
 d   Some replacements for variable operations
@@ -69,7 +70,7 @@ f b/bdrop.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/c
 N char_ops.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 5
 d 'char_ops': module
 d   Some utilities for handling characteristics.
@@ -82,7 +83,7 @@ f c/clear_reshape_chars.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/c
 N clear_all.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 6
 d 'clear_all': module
 d   Really resets everything (-clear all- doesn't clear all)
@@ -94,7 +95,7 @@ f c/clear_all.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/c
 N closeallmatafiles.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 7
 d 'closeallmatafiles': module
 d   Closes all files that were open in mata. -clear all- doesn't close mata open files!
@@ -106,7 +107,7 @@ f c/closeallmatafiles.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/c
 N collapseandpreserve.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 8
 d 'collapseandpreserve': module
 d   This will collapse the dataset and preserve the variable and value labels.
@@ -118,46 +119,46 @@ f c/collapseandpreserve.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/d
 N display_run_specs.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 9
 d 'display_run_specs': module
 d   Lists installation details necessarily for numerical 
 d replication
-d Version 1.0
-d Distribution-Date: 01feb2015
+d Version 1.1
+d Distribution-Date: 30aug2015
 d Author: Brian Quistorff
 d Support: email bquistorff@gmail.com
 f d/display_run_specs.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/d
 N drop_if.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 10
 d 'drop_if': module
 d   like -drop if- but appends the if condition to the # dropped msg.
 d Helpful if used inside a loop or program where you wouldn't see the 
 d command echoed.
-d Version 0.2
-d Distribution-Date: 11feb2015
+d Version 0.3
+d Distribution-Date: 11aug2015
 d Author: Brian Quistorff
 d Support: email bquistorff@gmail.com
 f d/drop_if.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/d
 N ds_version.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 11
 d 'ds_version': module
 d   Shows the version of the Stata dataset whose filename is passed in.
-d Version 0.2
-d Distribution-Date: 12jul2015
+d Version 0.3
+d Distribution-Date: 31jul2015
 d Author: Brian Quistorff
 d Support: email bquistorff@gmail.com
 f d/ds_version.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/e
 N ereturn_do.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 12
 d 'ereturn_do': module
 d   Passthrough command allowing one to use the -ereturn- cmds easily.
@@ -169,19 +170,20 @@ f e/ereturn_do.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/e
 N escape_latex.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 13
 d 'escape_latex': module
 d   Escapes Latex meta-chatacters for strings. Use for writing to tex files.
 d Version 1.1
-d Distribution-Date: 01feb2015
+d Distribution-Date: 01aug2015
 d Author: Brian Quistorff
 d Support: email bquistorff@gmail.com
 f e/escape_latex.ado
+f e/escape_latex_file.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/f
 N fsample.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 14
 d 'fsample': module
 d   Similar to sample but for data in file (so useful for very big datasets). 
@@ -193,7 +195,7 @@ f f/fsample.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/g
 N gen_robust_id.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 15
 d 'gen_robust_id': module
 d   Generates a unique id for each pair (like egen ... group()) 
@@ -206,19 +208,19 @@ f g/gen_robust_id.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/g
 N get_config_value.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 16
 d 'get_config_value': module
 d   Allows you to store preferences separate from code
 d Version 1.2
-d Distribution-Date: 30jul2015
+d Distribution-Date: 11aug2015
 d Author: Brian Quistorff
 d Support: email bquistorff@gmail.com
 f g/get_config_value.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/i
 N iso8601_strs.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 17
 d iso8601_strs.  A program to return ISO 8601 date/time strings.
 d Program by Brian Quistorff
@@ -231,7 +233,7 @@ f i/iso8601_strs.sthlp
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/i
 N ivreg2out.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 18
 d ivreg2out.  Combine stage estimates of ivreg2 into single estimate for tables.
 d Distribution-Date: 01feb2015
@@ -241,7 +243,7 @@ f i/ivreg2out.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/l
 N latabstat_simple.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 19
 d 'latabstat_simple': module
 d   modification of -latabstat- (see SSC) to remove the Source footnote and make a smaller tex fragment.
@@ -253,19 +255,20 @@ f l/latabstat_simple.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/l
 N latex_multiline_cell.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 20
 d 'latex_multiline_cell': module
 d   simple wrapper for making multiline cells in Latex tables (and saying alternatives). Will require a \usepackage depending on method.
-d Version 1.2
+d Versions: latex_multiline_cell 1.2, latex_multiline_var_label 1.0
 d Distribution-Date: 01jul2015
 d Author: Brian Quistorff
 d Support: email bquistorff@gmail.com
 f l/latex_multiline_cell.ado
+f l/latex_multiline_var_label.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/l
 N log_axis_ticks.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 21
 d 'log_axis_ticks': module
 d   Creates axis ticks (major & minor) for log scales
@@ -277,7 +280,7 @@ f l/log_axis_ticks.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/m
 N matrix_post_lines.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 22
 d 'matrix_post_lines': module
 d   Creates the post init and post string lines that will come from a matrix
@@ -289,7 +292,7 @@ f m/matrix_post_lines.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/m
 N matrixsort.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 23
 d 'matrixsort': module
 d   Sorts a Stata matrix by a column. Fixes problem in -matsort- where row labels with spaces are mangled
@@ -301,7 +304,7 @@ f m/matrixsort.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/m
 N matsave_simple.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 24
 d 'matsave_simple': module
 d   Fork of -matsave-
@@ -314,7 +317,7 @@ f m/matload_simple.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/n
 N net_install.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 25
 d 'net_install': module
 d   Provides replacement utilities for working with modules where the source of
@@ -332,7 +335,7 @@ f n/net_install.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/n
 N nice_profile_report.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 26
 d 'nice_profile_report': module
 d   Replaces -profiler report- and create a dta as output (rather than a text file)
@@ -345,7 +348,7 @@ f n/nice_profile_report.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/o
 N outtable_simple.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 27
 d 'outtable_simple': module
 d   A modified version of -outtable- v1.0.7 (see SSC) to remove the outer \table output so that it can be included in LyX
@@ -357,7 +360,7 @@ f o/outtable_simple.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/p
 N post_eb_eV.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 28
 d 'post_eb_eV': module
 d   Post your own matrices to e(b) and e(V). For tables
@@ -369,19 +372,19 @@ f p/post_eb_eV.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/p
 N print_dots.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 29
 d 'print_dots': module
 d   Prints a simple progress bar along with periodic time estimates.
-d Version 1.0
-d Distribution-Date: 01feb2015
+d Version 1.1
+d Distribution-Date: 01aug2015
 d Author: Brian Quistorff
 d Support: email bquistorff@gmail.com
 f p/print_dots.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/r
 N reset_ADO.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 30
 d 'reset_ADO': module
 d   Resets the ADO to the standard ordering. Helpful because S_ADO isn't reset by clearing.
@@ -393,7 +396,7 @@ f r/reset_ADO.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/r
 N rng_advance.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 31
 d 'rng_advance': module
 d   A simple way to advance the Stata RNG state by a fixed amount. 
@@ -406,7 +409,7 @@ f r/rng_advance.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/s
 N save_cmd_output.pkg
-D 30 Jul 15
+D 31 Aug 15
 U 32
 d 'save_cmd_output': module
 d   Saves the output from a shell command to a file
@@ -417,13 +420,26 @@ d Support: email bquistorff@gmail.com
 f s/save_cmd_output.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/s
-N set_key.pkg
-D 30 Jul 15
+N save_fig.pkg
+D 31 Aug 15
 U 33
+d 'save_fig': module
+d   Programs to help save graphs and derivatives.
+d Versions: 1.1
+d Distribution-Date: 01aug2015
+d Author: Brian Quistorff
+d Support: email bquistorff@gmail.com
+f s/save_fig.ado
+f g/gph2fmt.ado
+e
+S https://raw.github.com/bquistorff/Stata-modules/master/s
+N set_key.pkg
+D 31 Aug 15
+U 34
 d 'set_key': module
 d   Stores and retrieves the unique key for a dataset
-d Version 1.1
-d Distribution-Date: 01jul2015
+d Version 1.2
+d Distribution-Date: 31jul2015
 d Author: Brian Quistorff
 d Support: email bquistorff@gmail.com
 f s/set_key.ado
@@ -431,8 +447,8 @@ f g/get_key.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/s
 N sutex_env.pkg
-D 30 Jul 15
-U 34
+D 31 Aug 15
+U 35
 d 'sutex_env': module
 d   Extension of sutex (latex output of summary stats) that allows extra latex outputting option.
 d Version 1.2
@@ -444,8 +460,8 @@ f s/sutex_env.hlp
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/s
 N synth.pkg
-D 30 Jul 15
-U 35
+D 31 Aug 15
+U 36
 d 'SYNTH': module to implement Synthetic Control Methods for Comparative Case Studies
 d  synth implements the synthetic control method for causal
 d inference in comparative case studies as described in "Synthetic
@@ -472,8 +488,8 @@ f s/smoking.dta
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/s
 N synth_helper.pkg
-D 30 Jul 15
-U 36
+D 31 Aug 15
+U 37
 d 'synth_helper': module
 d   Helper utilities that go with the local synth fork.
 d Distribution-Date: 28feb2015
@@ -482,10 +498,6 @@ d Requires: synth, matsave_simple, b_file_ops, matrix_post_lines, assert_msg, wr
 d Recommends: parallel, matrixsort
 d Author: Brian Quistorff
 d Support: email bquistorff@gmail.com
-d 
-d Build instructions:
-d :l/lperm_inference.mlib : p/perm_inference.mata
-d :	$$STATABATCH do cli_build_mlib.do "$@ $^"; tail cli_build_mlib.log; rm cli_build_mlib.log
 f a/abbrev_all.ado
 f b/broad_eval_synth_model.ado
 f b/build_graphing_mats.ado
@@ -509,8 +521,8 @@ f s/synth_consts.do
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/t
 N tabl.pkg
-D 30 Jul 15
-U 37
+D 31 Aug 15
+U 38
 d 'tabl': module
 d   displaying value labels and numeric codes simultaneously. From stata list
 d Version 1.1.0
@@ -521,8 +533,8 @@ f t/tabl.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/t
 N trilog.pkg
-D 30 Jul 15
-U 38
+D 31 Aug 15
+U 39
 d 'trilog': module
 d   Makes compressed scales (like log scales) when both positive and negative numbers exist.
 d  It makes a linear patch in the middle.
@@ -534,8 +546,8 @@ f t/trilog.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/u
 N usepackage_simple.pkg
-D 30 Jul 15
-U 39
+D 31 Aug 15
+U 40
 d 'usepackage_simple': module
 d   Stata module to download and install user packages necessary to run a do-file
 d include the net(loc) option if you want to install the package from non-SSC sources (the default)
@@ -547,8 +559,8 @@ f u/usepackage_simple.ado
 e
 S https://raw.github.com/bquistorff/Stata-modules/master/w
 N wrap_text.pkg
-D 30 Jul 15
-U 40
+D 31 Aug 15
+U 41
 d 'wrap_text': module
 d   Simple utility to wrap a long line of text into blocks
 d delimited by double-quotes so that the whole string can

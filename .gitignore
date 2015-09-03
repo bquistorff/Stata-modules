@@ -1,0 +1,7 @@
+src/*.mlib
+src/*/*.mlib
+src/*/*.win*
+src/*/*.linux*
+src/*/*.mac
+
+tests/*/*.log
