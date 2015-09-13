@@ -20,7 +20,7 @@ synth2opt.lin64: synth2opt.cpp
 synth2opt.lin32: synth2opt.cpp
 	g++ -fPIC -DSYSTEM=OPUNIX -m32 -c -O3 pr_loqo.c
 	g++ -fPIC -DSYSTEM=OPUNIX -m32 -c -O3 synth2opt.cpp
-	g++ -fPIC -DSYSTEM=OPUNIX --m32 c -O3 stplugin.c
+	g++ -fPIC -DSYSTEM=OPUNIX -m32 c -O3 stplugin.c
 	g++ -fPIC -m32 -shared -O3 pr_loqo.o stplugin.o synth2opt.o -o synth2opt.lin32
 
 #For win* builds, putting all on one resulted in unresolved symbol from pr_loqo when imported

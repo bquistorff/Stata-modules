@@ -3,5 +3,8 @@ src/*/*.mlib
 src/*/*.win*
 src/*/*.linux*
 src/*/*.mac
+src/*/*.o
 
 tests/*/*.log
+tests/*.log
+tests/*/ado/*
