@@ -8,20 +8,20 @@
 ifeq ($(OS),Windows_NT)
 all : synth2opt.win64 synth2opt.win32
 else
-all : synth2opt.lin64 synth2opt.lin32
+all : synth2opt.linux64 synth2opt.linux32
 endif
 
-synth2opt.lin64: synth2opt.cpp
+synth2opt.linux64: synth2opt.cpp
 	g++ -fPIC -DSYSTEM=OPUNIX -c -O3 pr_loqo.c
 	g++ -fPIC -DSYSTEM=OPUNIX -c -O3 synth2opt.cpp
 	g++ -fPIC -DSYSTEM=OPUNIX -c -O3 stplugin.c
-	g++ -fPIC -shared -O3 pr_loqo.o stplugin.o synth2opt.o -o synth2opt.lin64
+	g++ -fPIC -shared -O3 pr_loqo.o stplugin.o synth2opt.o -o synth2opt.linux64
 	
-synth2opt.lin32: synth2opt.cpp
+synth2opt.linux32: synth2opt.cpp
 	g++ -fPIC -DSYSTEM=OPUNIX -m32 -c -O3 pr_loqo.c
 	g++ -fPIC -DSYSTEM=OPUNIX -m32 -c -O3 synth2opt.cpp
-	g++ -fPIC -DSYSTEM=OPUNIX -m32 c -O3 stplugin.c
-	g++ -fPIC -m32 -shared -O3 pr_loqo.o stplugin.o synth2opt.o -o synth2opt.lin32
+	g++ -fPIC -DSYSTEM=OPUNIX -m32 -c -O3 stplugin.c
+	g++ -fPIC -m32 -shared -O3 pr_loqo.o stplugin.o synth2opt.o -o synth2opt.linux32
 
 #For win* builds, putting all on one resulted in unresolved symbol from pr_loqo when imported
 synth2opt.win64: synth2opt.cpp
@@ -43,4 +43,4 @@ clean:
 
 install:
 	-cp synth2opt.win* ../../s/
-	-cp synth2opt.lin* ../../s/
+	-cp synth2opt.linux* ../../s/
