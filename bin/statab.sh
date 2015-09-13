@@ -68,6 +68,6 @@ then
     fi
 fi
 
-rm "$log"
+#rm "$log"
 
 exit $rc
