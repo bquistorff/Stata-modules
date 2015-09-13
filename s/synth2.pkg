@@ -1,0 +1,33 @@
+d 'SYNTH': module to implement Synthetic Control Methods for Comparative Case Studies
+d
+d  synth implements the synthetic control method for causal
+d inference in comparative case studies as described in "Synthetic
+d Control Methods for Comparative Case Studies of Aggregate
+d Interventions:  Estimating the Effect of California's Tobacco
+d Control Programm.  Journal of the American Statistical
+d Association. 105(490): 493-505. 2010. 
+d
+d KW: synthetic control
+d KW: causal inference
+d KW: comparative case studies
+d
+d Requires: Stata version 9.2
+d
+d Distribution-Date: 20140128
+d
+d Author: Alberto Abadie, Kennedy School of Government, Harvard University
+d Support: email jhainm@@MIT.EDU
+d
+d Author: Alexis Diamond, IFC
+d Support: email 
+d
+d Author: Jens Hainmueller, Department of Political Science, MIT
+d Support: email 
+d
+f synth2.ado
+f synth2_ll.ado
+f synth2.sthlp
+f ../l/lsynth2_mata_subr.mlib
+f smoking2.dta
+g WIN synth2opt.win32 synth2opt.plugin
+g WIN64A synth2opt.win64 synth2opt.plugin   

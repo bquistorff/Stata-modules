@@ -1,5 +1,5 @@
 sysdir set PERSONAL "../../"
-sysdir set PLUS "../../"
+global S_ADO "PERSONAL;BASE;."
 clear_all, closealllogs
 log using "test.log", replace name(test)
 
@@ -88,6 +88,7 @@ reshape long diff, i(id) j(t)
 ksmirnov diff , by(t)
 local pval = r(p_cor)
 di "P-value of test of H0 that the distributions are equal: `pval'"
+assert `pval'>0.1
 
 /* Old testing code for mata utils
 impossible = (1,1 \ 2,2 \ 3,1 \ 4,2 \ 5,1)
