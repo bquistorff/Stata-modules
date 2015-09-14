@@ -11,6 +11,7 @@ clear all
 sysdir set PERSONAL "`c(pwd)'/ado"
 sysdir set PLUS "`c(pwd)'/ado"
 global S_ADO "PERSONAL;BASE"
+set more off
 
 cap confirm file ado/s/synth.ado
 if _rc!=0{
@@ -46,7 +47,7 @@ assert wsol[1,1]+1.5<0.001 & wsol[2,1]+2<0.001 & wsol[3,1]-3<0.001
 }
 
 *Test basic equality between synth and synth2
-if 0{
+if 1{
 sysuse smoking, clear
 drop if lnincome==.
 tsset state year
@@ -63,7 +64,7 @@ mata: assert(colsum(st_matrix("diff"))[1,2]<0.01)
 
 
 *Test correction of error that synth can give
-if 0{
+if 1{
 *The below command with -synth- on Windows gives all . for weights.
 * The optimizer matches on football airport and then dies
 

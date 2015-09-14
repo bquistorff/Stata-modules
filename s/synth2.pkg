@@ -33,3 +33,4 @@ g WIN synth2opt.win32 synth2opt.plugin
 g WIN64A synth2opt.win64 synth2opt.plugin   
 g LINUX synth2opt.linux32 synth2opt.plugin
 g LINUX64 synth2opt.linux64 synth2opt.plugin
+g MACINTEL64 synth2opt.mac synth2opt.plugin

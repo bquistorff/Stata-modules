@@ -8,7 +8,12 @@
 ifeq ($(OS),Windows_NT)
 all : synth2opt.win64 synth2opt.win32
 else
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+all : synth2opt.mac
+else
 all : synth2opt.linux64 synth2opt.linux32
+endif
 endif
 
 synth2opt.linux64: synth2opt.cpp
@@ -38,9 +43,17 @@ synth2opt.win32: synth2opt.cpp
 	i686-w64-mingw32-g++ -c -O3 stplugin.c
 	i686-w64-mingw32-g++ -static -shared -O3 pr_loqo.o stplugin.o synth2opt.o -o synth2opt.win32
 
+
+synth2opt.mac : synth2opt.cpp
+	g++ -DSYSTEM=APPLEMAC -c -O3 pr_loqo.c
+	g++ -DSYSTEM=APPLEMAC -c -O3 synth2opt.cpp
+	g++ -DSYSTEM=APPLEMAC -c -O3 stplugin.c
+	g++ -DSYSTEM=APPLEMAC -shared -O3 pr_loqo.o stplugin.o synth2opt.o -o synth2opt.mac
+
 clean:
-	-rm -f synth2opt.win* synth2opt.lin* *.o
+	-rm -f synth2opt.win* synth2opt.lin* synth2opt.mac *.o
 
 install:
 	-cp synth2opt.win* ../../s/
 	-cp synth2opt.linux* ../../s/
+	-cp synth2opt.mac ../../s/
