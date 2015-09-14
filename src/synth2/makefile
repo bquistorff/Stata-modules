@@ -45,10 +45,10 @@ synth2opt.win32: synth2opt.cpp
 
 
 synth2opt.mac : synth2opt.cpp
-	g++ -DSYSTEM=APPLEMAC -c -O3 pr_loqo.c
-	g++ -DSYSTEM=APPLEMAC -c -O3 synth2opt.cpp
-	g++ -DSYSTEM=APPLEMAC -c -O3 stplugin.c
-	g++ -DSYSTEM=APPLEMAC -shared -O3 pr_loqo.o stplugin.o synth2opt.o -o synth2opt.mac
+	clang++ -DSYSTEM=APPLEMAC -c -O3 pr_loqo.c
+	clang++ -DSYSTEM=APPLEMAC -c -O3 synth2opt.cpp
+	clang++ -DSYSTEM=APPLEMAC -c -O3 stplugin.c
+	clang++ -DSYSTEM=APPLEMAC -shared -O3 pr_loqo.o stplugin.o synth2opt.o -o synth2opt.mac
 
 clean:
 	-rm -f synth2opt.win* synth2opt.lin* synth2opt.mac *.o
