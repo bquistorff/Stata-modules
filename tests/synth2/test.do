@@ -16,10 +16,23 @@ set more off
 cap confirm file ado/s/synth.ado
 if _rc!=0{
 	mkdir ado
+	
 	net set ado PLUS
 	net set other PLUS
-	net install synth2, from(`c(pwd)'/../../s) all
+	local lcl_repo "`c(pwd)'/../.."
 	ssc install synth, all
+	net install synth2, from(`lcl_repo'/s) all
+	
+	net install b_file_ops, from(`lcl_repo'/b) all
+	find_in_file using ado/s/synth.ado , regexp("qui plugin call synthopt") local(pluginline)
+	change_line  using ado/s/synth.ado , ln(`pluginline')      insert(" timer on  1")
+	change_line  using ado/s/synth.ado , ln(`=`pluginline'+2') insert(" timer off 1")
+	find_in_file using ado/s/synth2.ado, regexp("cap plugin call synth2opt") local(pluginline)
+	change_line  using ado/s/synth2.ado, ln(`pluginline')      insert(" timer on  1")
+	change_line  using ado/s/synth2.ado, ln(`=`pluginline'+2') insert(" timer off 1")
+		
+	
+	
 }
 else{
 	*adoupdate synth synth2, update //TODO: re-enable when done with testing
@@ -31,7 +44,7 @@ local init_seed 1234567890
 set seed `init_seed' //though I don't think I'm randomizing
 
 * Test basic plugin behavior. Remember H has to be symmetric
-if 1{
+if 0{
 scalar n = 3
 scalar m = 2
 mat c = (1 \ 0 \ 0)
@@ -47,7 +60,7 @@ assert wsol[1,1]+1.5<0.001 & wsol[2,1]+2<0.001 & wsol[3,1]-3<0.001
 }
 
 *Test basic equality between synth and synth2
-if 1{
+if 0{
 sysuse smoking, clear
 drop if lnincome==.
 tsset state year
@@ -64,7 +77,7 @@ mata: assert(colsum(st_matrix("diff"))[1,2]<0.01)
 
 
 *Test correction of error that synth can give
-if 1{
+if 0{
 *The below command with -synth- on Windows gives all . for weights.
 * The optimizer matches on football airport and then dies
 
@@ -85,7 +98,7 @@ assert x[1,2]!=.
 }
 
 *Speed test synth vs synth2
-if 0{
+if 1{
 sysuse smoking, clear
 drop if lnincome==.
 label values state
@@ -111,18 +124,22 @@ tsset new_id year
 
 local N=1
 *even took out some averaging becausing synth is probably slower at that.
-local synth_command "cigsale beer(1988) lnincome(1984) retprice(1984) age15to24(1984) cigsale(1984), trunit(3) trperiod(1989)"
-timer on 1
+local synth_command "cigsale beer(1988) lnincome(1984) retprice(1984) age15to24(1984) cigsale(1984) cigsale(1985) cigsale(1986) cigsale(1987) cigsale(1988), trunit(3) trperiod(1989)"
+timer on 2
 forval i=1/`N'{
 	qui synth2 `synth_command'
 }
-timer off 1
+timer off 2
+di "timer1 is plugin, timer2 is total"
+timer list
+timer clear
 timer on 2
 forval i=1/`N'{
 	qui synth `synth_command'
 }
 timer off 2
 timer list
+timer clear
 }
 
 clear all //needed to copy over the plugin file (release the file lock)
