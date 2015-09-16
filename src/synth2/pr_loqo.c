@@ -486,13 +486,13 @@ int pr_loqo(int n, int m, double c[], double h_x[], double a[], double b[],
 
 		if (counter > counter_max) status = ITERATION_LIMIT;
 		if (sigfig  > sigfig_max)  status = OPTIMAL_SOLUTION;
-		if (primal_inf > 10e100 | !std::isfinite(primal_inf))   status = PRIMAL_INFEASIBLE;
-		if (dual_inf > 10e100 | !std::isfinite(dual_inf))     status = DUAL_INFEASIBLE;
-		if ((primal_inf > 10e100 & dual_inf > 10e100) | 
-		     (!std::isfinite(primal_inf) & !std::isfinite(dual_inf))) 
+		if ((primal_inf > 10e100) | (!std::isfinite(primal_inf)))   status = PRIMAL_INFEASIBLE;
+		if ((dual_inf > 10e100) | (!std::isfinite(dual_inf)))     status = DUAL_INFEASIBLE;
+		if (((primal_inf > 10e100) | (!std::isfinite(primal_inf))) & 
+		     ((dual_inf > 10e100) | (!std::isfinite(dual_inf)))) 
 			status = PRIMAL_AND_DUAL_INFEASIBLE;
-		if (ABS(primal_obj) > 10e100 | !std::isfinite(primal_obj)) status = PRIMAL_UNBOUNDED;
-		if (ABS(dual_obj) > 10e100 | !std::isfinite(dual_obj)) status = DUAL_UNBOUNDED;
+		if ((ABS(primal_obj) > 10e100) | (!std::isfinite(primal_obj))) status = PRIMAL_UNBOUNDED;
+		if ((ABS(dual_obj) > 10e100) | (!std::isfinite(dual_obj))) status = DUAL_UNBOUNDED;
 
 		/* write some nice routine to enforce the time limit if you
 	_really_ want, however it's quite useless as you can compute

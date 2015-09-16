@@ -114,15 +114,12 @@ STDLL stata_call(int argc, char *argv[]) {
 	switch(opt_ret_val) {
 		//case STILL_RUNNING: SF_display_const("STILL_RUNNING\n"); break;
 		case OPTIMAL_SOLUTION: SF_display_const("OPTIMAL_SOLUTION\n"); break;
-		case SUBOPTIMAL_SOLUTION: SF_display_const("SUBOPTIMAL_SOLUTION\n"); break;
 		case ITERATION_LIMIT: SF_display_const("ITERATION_LIMIT\n"); break;
 		case PRIMAL_INFEASIBLE: SF_display_const("PRIMAL_INFEASIBLE\n"); break;
 		case DUAL_INFEASIBLE: SF_display_const("DUAL_INFEASIBLE\n"); break;
 		case PRIMAL_AND_DUAL_INFEASIBLE: SF_display_const("PRIMAL_AND_DUAL_INFEASIBLE\n"); break;
-		case INCONSISTENT: SF_display_const("INCONSISTENT\n"); break;
 		case PRIMAL_UNBOUNDED: SF_display_const("PRIMAL_UNBOUNDED\n"); break;
 		case DUAL_UNBOUNDED: SF_display_const("DUAL_UNBOUNDED\n"); break;
-		case TIME_LIMIT: SF_display_const("TIME_LIMIT\n"); break;
 		case VAR_ELIMINATED: SF_display_const("VAR_ELIMINATED\n"); break;
 	}
 	snprintf(buffer,buff_size, "%i", opt_ret_val);

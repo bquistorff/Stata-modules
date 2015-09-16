@@ -36,15 +36,15 @@
 
 #define STILL_RUNNING               0
 #define OPTIMAL_SOLUTION            1
-#define SUBOPTIMAL_SOLUTION         2
+//#define SUBOPTIMAL_SOLUTION         2
 #define ITERATION_LIMIT             3
 #define PRIMAL_INFEASIBLE           4
 #define DUAL_INFEASIBLE             5
 #define PRIMAL_AND_DUAL_INFEASIBLE  6
-#define INCONSISTENT                7
+//#define INCONSISTENT                7
 #define PRIMAL_UNBOUNDED            8
 #define DUAL_UNBOUNDED              9
-#define TIME_LIMIT                  10
+//#define TIME_LIMIT                  10
 #define VAR_ELIMINATED              20
 
 /* 
@@ -92,7 +92,7 @@ int pr_loqo(int n, int m, double c[], double h_x[], double a[], double b[],
 	    double margin, double bound, int restart);
 
 /* 
- * compile with
+ * compile with (Oracle compiler)
  cc -O4 -c pr_loqo.c
  cc -xO4 -fast -xarch=v8plus -xchip=ultra -xparallel -c pr_loqo.c
  mex pr_loqo_c.c pr_loqo.o
