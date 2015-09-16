@@ -1,8 +1,7 @@
 *Version 0.1 Brian Quistorff <bquistorff@gmail.com>
 * Description: Similar to sample but for data in file (so big datasets). 
 program define fsample
-	version 11.0
-	*Just a guess at the version
+	version 11.0 //Just a guess at the version
 	
 	args f gsize ssize
 	qui describe using "`f'", short

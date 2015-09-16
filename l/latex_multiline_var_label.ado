@@ -14,7 +14,7 @@ program latex_multiline_var_label
 		local inside `"`inside'`line'"'
 	}
 	latex_multiline_cell `inside', loc_out(inside_broken)
-	if "`n_rows'"==" loc n_rows `n_lines'
+	if "`n_rows'"=="" loc n_rows `n_lines'
 	local full `"\multirow{`n_lines'}{*}{`inside_broken'}"'
 	
 	if "`var2label'"!="" label variable `var2label' `"`full'"'

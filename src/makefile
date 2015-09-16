@@ -1,6 +1,7 @@
 # Makefile to build anything needed for modules
-# Right now that is just compiling mlibs
-# but could in the future be compiling plugins.
+# It compiles mlibs in the base folder allows for more complicated stuff in sub-folders
+# Note: You probably want to compile mlibs in an older version of Stata so 
+#  they are more portable.
 
 DIRS = synth2
 

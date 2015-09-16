@@ -1,9 +1,10 @@
 program escape_latex_file
+	version 11 //just a guess
 	syntax, txt_infile(string) tex_outfile(string)
 	
 	tempname out_handle in_handle
 	file open `out_handle' using "`tex_outfile'", write text replace
-	file open  `in_handle' using "`txt_infile'" , read text
+	file open `in_handle' using "`txt_infile'" , read text
 	file read `in_handle' line
 	while r(eof)==0 {
 		escape_latex "`line'", local(line_out)
