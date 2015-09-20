@@ -45,7 +45,7 @@
 #define PRIMAL_UNBOUNDED            8
 #define DUAL_UNBOUNDED              9
 //#define TIME_LIMIT                  10
-#define VAR_ELIMINATED              20
+#define CHOLDC_FAILED              20
 
 /* 
  * solve the quadratic programming problem

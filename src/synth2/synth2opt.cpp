@@ -2,6 +2,7 @@
 #include <cassert>
 #include <stdio.h>
 #include <cmath>
+#include <cstring>
 //#define SD_FASTMODE
 #include "stplugin.h"
 #include "pr_loqo.h"
@@ -9,8 +10,6 @@
 //see http://www.stata.com/manuals13/perror.pdf
 #define ST_ERR_INVALID_SYNTAX 197
 #define ST_ERR_CONFORMABILITY 503
-
-//try: fastmode
 
 //NOTE: H must be symmetric.
 //NOTE: Pass in A (m.n) (not a, which is n.m according to pr_loqo.h).
@@ -89,7 +88,7 @@ STDLL stata_call(int argc, char *argv[]) {
 	double margin     = atof(argv[7]);
 	int counter_max   = atoi(argv[8]);
 	double sigfig_max = atof(argv[9]);
-	char *wsol  = argv[10];
+	char *wsol_name  = argv[10];
 	int verb	=(argc>11?atoi(argv[11]):FLOOD);
 	int restart	=(argc>12?atoi(argv[12]):0);
 	char * opt_ret_val_mac_name =(argc>13?argv[13]:NULL);
@@ -98,6 +97,10 @@ STDLL stata_call(int argc, char *argv[]) {
 	int m = b.nRows;
 	Matrix primal = Matrix(3*n,1);
 	Matrix answer = Matrix(n,1,primal.data); //subset
+	if(restart){
+		Matrix wsol = Matrix(wsol_name);
+		memcpy(primal.data, wsol.data,n*sizeof(double));
+	}
 	Matrix dual = Matrix(m + 2*n,1);
 	
 	const int buff_size = 20;
@@ -120,12 +123,12 @@ STDLL stata_call(int argc, char *argv[]) {
 		case PRIMAL_AND_DUAL_INFEASIBLE: SF_display_const("PRIMAL_AND_DUAL_INFEASIBLE\n"); break;
 		case PRIMAL_UNBOUNDED: SF_display_const("PRIMAL_UNBOUNDED\n"); break;
 		case DUAL_UNBOUNDED: SF_display_const("DUAL_UNBOUNDED\n"); break;
-		case VAR_ELIMINATED: SF_display_const("VAR_ELIMINATED\n"); break;
+		case CHOLDC_FAILED: SF_display_const("CHOLDC_FAILED\n"); break;
 	}
 	snprintf(buffer,buff_size, "%i", opt_ret_val);
 	if(opt_ret_val_mac_name) st_ret = SF_macro_save_const(opt_ret_val_mac_name, buffer); 
 	
-	answer.st_store(wsol);
+	answer.st_store(wsol_name);
 	}
 	catch(ST_retcode ret){
 		return(ret);

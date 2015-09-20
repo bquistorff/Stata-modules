@@ -34,6 +34,8 @@
 #define PREDICTOR 1
 #define CORRECTOR 2
 
+/* Note: #IND/#QNAN/#QNB=NaN, 1.#J/#INF=Inf
+
 /*****************************************************************
 replace this by any other function that will exit gracefully
 in a larger system
@@ -81,7 +83,7 @@ int choldc(double a[], int n, double p[])
 			a[n*j + i] = sum/p[i];
 		}
 	}
-	if(ret) nrerror("choldc failed, matrix not positive definite (usually means var elinated)");
+	if(ret) nrerror("choldc failed, matrix not positive definite");
 	return ret;
 }
 
@@ -189,7 +191,8 @@ int solve_reduced(int n, int m, double h_x[], double h_y[],
 				for (k=0; k<n; k++) 
 					h_y[m*i + j] += t_a[n*j + k] * t_a[n*i + k];
 		
-		choldc(h_y, m, p_y);	/* and cholesky decomposition */
+		ch_ret = choldc(h_y, m, p_y);	/* and cholesky decomposition */
+		if(ch_ret) ret=ch_ret;
 	}
 
 	chol_forward(h_x, n, p_x, c_x, t_c);
@@ -312,6 +315,7 @@ int pr_loqo(int n, int m, double c[], double h_x[], double a[], double b[],
 	int status = STILL_RUNNING;
 
 	int i,j,k;
+	int sr_ret = 0;
 
 	char disp_buffer[BUFFER_SIZE];
 
@@ -356,6 +360,7 @@ int pr_loqo(int n, int m, double c[], double h_x[], double a[], double b[],
 	b_plus_1 = 1;
 	c_plus_1 = 0;
 	for (i=0; i<n; i++) c_plus_1 += c[i];
+	c_plus_1 = (c_plus_1==0?1:c_plus_1);
 
 	/* get diagonal terms */
 	for (i=0; i<n; i++) diag_h_x[i] = h_x[(n+1)*i]; 
@@ -399,8 +404,9 @@ int pr_loqo(int n, int m, double c[], double h_x[], double a[], double b[],
 			c_y[i] = b[i];
 		
 		/* and solve the system [-H_x A'; A H_y] [x, y] = [c_x; c_y] */
-		solve_reduced(n, m, h_x, h_y, a, x, y, c_x, c_y, workspace,
-		PREDICTOR);
+		sr_ret = solve_reduced(n, m, h_x, h_y, a, x, y, c_x, c_y, workspace,
+			PREDICTOR);
+		if (sr_ret) status=CHOLDC_FAILED;
 		
 		/* initialize the other variables */
 		for (i=0; i<n; i++) {
@@ -411,8 +417,9 @@ int pr_loqo(int n, int m, double c[], double h_x[], double a[], double b[],
 		}
 	}
 
-	for (i=0, mu=0; i<n; i++)
+	for (i=0, mu=0; i<n; i++){
 		mu += z[i] * g[i] + s[i] * t[i];
+	}
 	mu = mu / (2*n);
 
 	/* the main loop */
@@ -422,7 +429,6 @@ int pr_loqo(int n, int m, double c[], double h_x[], double a[], double b[],
 		SF_display_const("-------------------------------------------------------");
 		SF_display_const("---------------------------\n");
 	}
-	int sr_ret = 0;
 	while (status == STILL_RUNNING) {
 		SF_poll(); 
 		if(SW_stopflag) throw (int)SW_stopflag;
@@ -478,7 +484,7 @@ int pr_loqo(int n, int m, double c[], double h_x[], double a[], double b[],
 			dual_obj += b[i] * y[i];
 
 		sigfig = log10(ABS(primal_obj) + 1) -
-		log10(ABS(primal_obj - dual_obj));
+			log10(ABS(primal_obj - dual_obj));
 		sigfig = max(sigfig, 0);
 		
 		/* the diagnostics - after we computed our results we will
@@ -486,13 +492,13 @@ int pr_loqo(int n, int m, double c[], double h_x[], double a[], double b[],
 
 		if (counter > counter_max) status = ITERATION_LIMIT;
 		if (sigfig  > sigfig_max)  status = OPTIMAL_SOLUTION;
-		if ((primal_inf > 10e100) | (!std::isfinite(primal_inf)))   status = PRIMAL_INFEASIBLE;
-		if ((dual_inf > 10e100) | (!std::isfinite(dual_inf)))     status = DUAL_INFEASIBLE;
-		if (((primal_inf > 10e100) | (!std::isfinite(primal_inf))) & 
-		     ((dual_inf > 10e100) | (!std::isfinite(dual_inf)))) 
+		if ((primal_inf > 10e100) /*| (!std::isnan(primal_inf))*/)   status = PRIMAL_INFEASIBLE;
+		if ((dual_inf > 10e100) /*| (!std::isnan(dual_inf))*/)     status = DUAL_INFEASIBLE;
+		if (((primal_inf > 10e100) /*| (!std::isnan(primal_inf))*/) & 
+		     ((dual_inf > 10e100) /*| (!std::isnan(dual_inf))*/)) 
 			status = PRIMAL_AND_DUAL_INFEASIBLE;
-		if ((ABS(primal_obj) > 10e100) | (!std::isfinite(primal_obj))) status = PRIMAL_UNBOUNDED;
-		if ((ABS(dual_obj) > 10e100) | (!std::isfinite(dual_obj))) status = DUAL_UNBOUNDED;
+		if ((ABS(primal_obj) > 10e100) /*| (!std::isnan(primal_obj))*/) status = PRIMAL_UNBOUNDED;
+		if ((ABS(dual_obj) > 10e100) /*| (!std::isnan(dual_obj))*/) status = DUAL_UNBOUNDED;
 
 		/* write some nice routine to enforce the time limit if you
 	_really_ want, however it's quite useless as you can compute
@@ -501,7 +507,7 @@ int pr_loqo(int n, int m, double c[], double h_x[], double a[], double b[],
 	backsubstitutions */
 
 		/* generate report */
-		if ((verb >= FLOOD) | ((verb == STATUS) & (status != 0))){
+		if ((verb >= FLOOD) | ((verb == STATUS) & (status != STILL_RUNNING))){
 			snprintf(disp_buffer,BUFFER_SIZE,"%7i | %.2e | %.2e | %.2e | %.2e | %6.3f | %.4f | %.2e\n",
 			counter, primal_inf, dual_inf, primal_obj, dual_obj, sigfig, alfa, mu);
 			SF_display(disp_buffer);
@@ -509,7 +515,7 @@ int pr_loqo(int n, int m, double c[], double h_x[], double a[], double b[],
 
 		counter++;
 
-		if (status == 0) {		/* we may keep on going, otherwise
+		if (status == STILL_RUNNING) {		/* we may keep on going, otherwise
 				it'll cost one loop extra plus a
 				messed up main diagonal of h_x */
 			/* intermediate variables (the ones with hat) */
@@ -535,7 +541,7 @@ int pr_loqo(int n, int m, double c[], double h_x[], double a[], double b[],
 			/* and do it */
 			sr_ret = solve_reduced(n, m, h_x, h_y, a, delta_x, delta_y, c_x, c_y, workspace, PREDICTOR);
 			if(sr_ret){
-				status=VAR_ELIMINATED;
+				status=CHOLDC_FAILED;
 				break;
 			}
 			
@@ -567,7 +573,7 @@ int pr_loqo(int n, int m, double c[], double h_x[], double a[], double b[],
 			
 			/* and do it */
 			solve_reduced(n, m, h_x, h_y, a, delta_x, delta_y, c_x, c_y, workspace,
-			CORRECTOR);
+				CORRECTOR);
 			
 			for (i=0; i<n; i++) {
 				/* backsubstitution */
@@ -605,7 +611,7 @@ int pr_loqo(int n, int m, double c[], double h_x[], double a[], double b[],
 				y[i] += alfa * delta_y[i];
 		}
 	}
-	if ((status == 1) && (verb >= STATUS)) {
+	if ((status == OPTIMAL_SOLUTION) && (verb >= STATUS)) {
 		SF_display_const("----------------------------------------------------------------------------------\n");
 		SF_display_const("optimization converged\n");
 	}

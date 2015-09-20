@@ -3,11 +3,18 @@
 * 	-output the unrounded weights plus some other convenience vars. 
 *   -Don't leave mats lying around
 *   -make a bit faster by speeding up averaging, removing some checks, and not calling tsset redudantly
+*   -allow for spread optimization
+*   -Fix problem where if all donors with positive weights have same value for predictor that it would error
 * To do: 
-*  -fix so that the Ybal doesn't include pretreament (Zbal) when the not putting in resultsperiod and mspeperiod.
-*  -If unitsnames included then it loops through all levels of pvar, make that faster.
-*  -Fix up the V matrix when dropping vars?
+*  -If unitsnames included then it loops through all levels of pvar. make that faster.
+*  -Allow option for computing spread opt first (with reg V as fall-back)
+*  -Could also resolve indeterminancy by assigning weight to fewest units. 
+*     Thought I could just set H*=-1, but opt notes that "choldc failed" so seems like it's not convex
 *
+* Note: Confusingly, this code uses Z for pre-treatment dependent var and Y for all dependent vars
+*      while the 2010 JASA paper uses Z for non-outcome predictors.
+* Note: normalize just scales (linearly, not affine) so that std dev is 0.
+* If you do spread, you probably should put all y in predictors
 program synth2 , eclass
 	version 9.2
 	preserve
@@ -41,21 +48,25 @@ program synth2 , eclass
 		nested ///
 		allopt ///
 		skipchecks ///
+		spread spread_limit(real 0)	///
 		* ///
 		]
 
 
 	/* Define Tempvars and speperate Dvar and Predcitors */
-	tempvar Xco Xcotemp Xtr Xtrtemp Zco Ztr Yco Ytr subsample misscheck conlabel
+	tempvar subsample
+	tempname Xco Xcotemp Xtr Xtrtemp Zco Ztr Yco Ytr Yco_post Ytr_post Xco_nodep Xtr_nodep  Xtr_norm Xco_norm
+	
+	*From pr_loqo.h
+	local OPTIMAL_SOLUTION 1
+	local CHOLDC_FAILED 20
 
 	/* Check User Inputs  ************************* */
 
 	qui levelsof `pvar',local(levp)
 	
-	loc checkinput: list trunit in levp
-	_assert `checkinput' != 0, msg("treated unit not found in panelvar - check tr()") rc(198)
-
-
+	_assert `: list trunit in levp' != 0, msg("treated unit not found in panelvar - check tr()") rc(198)
+	
 	/* if the panel vars has labels grab it */
 	local clab: value label `pvar'
 	/* if unitname specified, grab the label here */
@@ -98,6 +109,7 @@ program synth2 , eclass
 
 	/* by default minmum of time var up to intervention (exclusive) is pre-treatment period */
 	qui levelsof `tvar' if `tvar' < `trperiod' , local(preperiod)
+	qui levelsof `tvar' if `tvar' >=`trperiod' , local(postperiod)
 
 	/* now if not supplied fill in xperiod (time period over which all predictors are averaged) */
 	if "`xperiod'" == "" {
@@ -115,17 +127,17 @@ program synth2 , eclass
 		local mspeperiod "`r(numlist)'"
 	}
 	else {
-		loc checkinput: list mspeperiod in levt
-		_assert `checkinput'!=0, msg("at least one time period specified in mspeperiod() not found in timevar") rc(198)
+		_assert `: list mspeperiod in levt'!=0, msg("at least one time period specified in mspeperiod() not found in timevar") rc(198)
 	}
 
 	if "`resultsperiod'" == "" {
 		numlist "`levt'" , min(1) integer sort
 		local resultsperiod "`r(numlist)'"
+		local mspeperiod_post : list postperiod & resultsperiod
 	}
 	else {
-		loc checkinput: list resultsperiod in levt
-		_assert `checkinput'!=0, msg("at least one time period specified in resultsperiod() not found in timevar") rc(198)
+		_assert `: list resultsperiod in levt'!=0, msg("at least one time period specified in resultsperiod() not found in timevar") rc(198)
+		local mspeperiod_post "`postperiod'"
 	}
 
 	/* get depvars */
@@ -142,12 +154,13 @@ program synth2 , eclass
 	agdvar `Ytr' , cvar(`dvar') timeno(`resultsperiod') unitno(`trunit') sub(`subsample') ///
 		tlabel("results period - check resultsperiod()") ///
 		ulabel("treated unit") trorco("treated") pvar(`pvar') tvar(`tvar') `skipchecks'
+
+	agdvar `Ytr_post' , cvar(`dvar') timeno(`mspeperiod_post') unitno(`trunit') sub(`subsample') ///
+		tlabel("post period - check resultsperiod()") ///
+		ulabel("treated unit") trorco("treated") pvar(`pvar') tvar(`tvar') `skipchecks'
 		
 		
-	global bslack : tempvar
-	mat $bslack = 1
 	local displ_amount 2 //2=FLOOD, 1=STATUS, 0=QUIET
-	local restart 0 //This produces almost the same result as stock synth
 	
 	*Get control unit markers
 	_assert "`counit'"=="" | "`counit_ind'"=="", msg("Can't specify both counit_ind and counit") rc(198)
@@ -204,16 +217,18 @@ program synth2 , eclass
 
 		/* *************************** */
 		/* begin variable construction   */
-		cap mat drop `Xtr' `Xco'
+		cap mat drop `Xtr' `Xco' `Xco_nodep' `Xtr_nodep'
 		local predictors_left `predictors'
 		local predictors_used ""
+		local predictor_num = 0
+		local customV_used ""
 		while "`predictors_left'" != "" {
 			gettoken p predictors_left: predictors_left , bind
+			local predictor_num = `predictor_num'+1
 
 			/* check if there is a paranthesis in token */
 			local whereq = strpos("`p'", "(")
-			if `whereq' == 0 {
-				/* if not, token is just a varname */
+			if `whereq' == 0 { /* just a varname */
 				capture confirm numeric var `p'
 				_assert !_rc, msg("`p' does not exist as a (numeric) variable in dataset") rc(198)
 
@@ -223,8 +238,8 @@ program synth2 , eclass
 				/* set empty label for regular time period */
 				local xtimelab ""
 
-			} /* if yes, token is varname plus time, so try to disentagngle the two */
-			else {
+			} 
+			else { /* token is varname plus time, so try to disentagngle the two */
 				/* get var */
 				local var = substr("`p'",1,`whereq'-1)
 				qui capture confirm numeric var `var'
@@ -308,6 +323,15 @@ program synth2 , eclass
 
 			mat `Xtr' = nullmat(`Xtr'),`Xtrtemp'
 			mat `Xco' = nullmat(`Xco'),`Xcotemp'
+			if "`var'"!="`dvar'"{
+				mat `Xtr_nodep' = nullmat(`Xtr'),`Xtrtemp'
+				mat `Xco_nodep' = nullmat(`Xco'),`Xcotemp'
+			}
+			
+			if "`customV'"!=""{
+				local this_weight : word `predictor_num' of `customV'
+				local customV_used "`customV_used' `this_weight'"
+			}
 		} /* close while loop through predictor string, varibale construction is done */
 		local predictors_dropped : list predictors - predictors_used
 		if "`predictors_dropped'"!="" di "Dropping predictors with no donor variation: `predictors_dropped'"
@@ -317,6 +341,10 @@ program synth2 , eclass
 		/* Get control dep matrix for controls ************************************************* */
 		agdvar `Yco' , cvar(`dvar') timeno(`resultsperiod') unitno(`counit') sub(`subsample') ///
 			tlabel("results period - check resultsperiod()") ///
+			ulabel("control units") trorco("control") pvar(`pvar') tvar(`tvar') unit_ind(`counit_ind') `skipchecks'
+			
+		agdvar `Yco_post' , cvar(`dvar') timeno(`mspeperiod_post') unitno(`counit') sub(`subsample') ///
+			tlabel("post period - check resultsperiod()") ///
 			ulabel("control units") trorco("control") pvar(`pvar') tvar(`tvar') unit_ind(`counit_ind') `skipchecks'
 			
 		agdvar `Zco' , cvar(`dvar') timeno(`mspeperiod') unitno(`counit') sub(`subsample') ///
@@ -330,6 +358,12 @@ program synth2 , eclass
 		/* transpose for optimization */
 		mat `Xtr' = (`Xtr')'
 		mat `Xco' = (`Xco')'
+		
+		cap confirm matrix `Xco_nodep'
+		if !_rc {
+			mat `Xtr_nodep' = (`Xtr_nodep')'
+			mat `Xco_nodep' = (`Xco_nodep')'
+		}
 
 
 		di as txt "{hline}" _newline "Data Setup successful"  _newline "{hline}"
@@ -359,28 +393,28 @@ program synth2 , eclass
 		/* Dataprep finished. Starting optimisation */
 		tempname sval V
 
-		/* save vars for output */
-		mat `Xtrtemp' = `Xtr'
-		mat `Xcotemp' = `Xco'
-
 		/* normalize the vars */
 		mata: normalize("`Xtr'","`Xco'")
-		mat `Xtr' = xtrmat
-		mat `Xco' = xcomat
+		mat `Xtr_norm' = xtrmat
+		mat `Xco_norm' = xcomat
+		mat rowname `Xtr_norm' = `: rownames `Xtr''
+		mat colname `Xtr_norm' = `: colnames `Xtr''
+		mat rowname `Xco_norm' = `: rownames `Xco''
+		mat colname `Xco_norm' = `: colnames `Xco''
+		
 		/* Set up V matrix */
-		if "`customV'" == "" {
-			/* If no custom V is provided go get Regression based V weights */
-			mata: regsval("`Xtr'","`Xco'","`Ztr'","`Zco'")
+		if "`customV_used'" == "" {
+			/* go get Regression based V weights */
+			mata: regsval("`Xtr_norm'","`Xco_norm'","`Ztr'","`Zco'")
 			mat `V' = vmat
-
 		}
 		else {
 			di as txt "Using user supplied custom V-weights" _newline "{hline}"
 
-			local checkinput : list sizeof customV
-			_assert `checkinput'==rowsof(`Xtr'), msg("wrong number of custom V weights; please specify one V-weight for each predictor") rc(198)
+			local checkinput : list sizeof customV_used
+			_assert `checkinput'==rowsof(`Xtr_norm'), msg("wrong number of custom V weights; please specify one V-weight for each predictor") rc(198)
 
-			mat input `sval' = (`customV')
+			mat input `sval' = (`customV_used')
 			mata: normweights("`sval'")
 			mat `V' = matout
 		}
@@ -425,12 +459,12 @@ program synth2 , eclass
 
 			/* refine input matrices for ml optimization as globals so that lossfunction can find them */
 			/* maybe there is a better way to do this */
-			global Xco : tempvar
-			global Xtr : tempvar
+			global Xco_norm : tempvar
+			global Xtr_norm : tempvar
 			global Zco : tempvar
 			global Ztr : tempvar
-			mat $Xco = `Xco'
-			mat $Xtr = `Xtr'
+			mat $Xco_norm = `Xco_norm'
+			mat $Xtr_norm = `Xtr_norm'
 			mat $Zco = `Zco'
 			mat $Ztr = `Ztr'
 
@@ -503,9 +537,10 @@ program synth2 , eclass
 		/* now go get W, conditional on V (could be Vstar, regression V, or customV) */
 
 		/* Set up quadratic programming */
-		tempname H c A l u wsol wsol_unr
-		mat `H' =  (`Xco')' * `V' * `Xco'
-		mat `c' = (-1 * ((`Xtr')' * `V' * `Xco'))'
+		tempname H c A l u wsol wsol_unr b
+		mat `b' = 1
+		mat `H' =  (`Xco_norm')' * `V' * `Xco_norm'
+		mat `c' = (-1 * ((`Xtr_norm')' * `V' * `Xco_norm'))'
 		assert `cono'==rowsof(`c')
 		mat `A' = J(1,`cono',1)
 		mat `l' = J(`cono',1,0)
@@ -513,9 +548,56 @@ program synth2 , eclass
 		matrix `wsol' = J(`cono',1,.)
 
 		/* do quadratic programming step  */
-		cap plugin call synth2opt , `c' `H'  `A' $bslack `l' `u' `bound' `margin' `maxiter' `sigf' `wsol' `displ_amount' `restart' _ret_code
+		cap plugin call synth2opt , `c' `H'  `A' `b' `l' `u' `bound' `margin' `maxiter' `sigf' `wsol' `displ_amount' 0 _ret_code
 		if _rc>0 exit _rc
-
+		
+		*check if close enough to do new solve
+		if "`spread'"!="" & `ret_code'!=`CHOLDC_FAILED'{
+			tempname Ztr_norm Zco_norm Xtr_nodep_norm Xco_nodep_norm spread_diff spread_diff_m_mat
+			mata: normalize("`Ztr'","`Zco'")
+			mat `Ztr_norm' = xtrmat
+			mat `Zco_norm' = xcomat
+			mat `A' = `Zco_norm'
+			mat `b' = `Ztr_norm'
+			cap confirm matrix `Xco_nodep'
+			if !_rc {
+				mata: normalize("`Xtr_nodep'","`Xco_nodep'")
+				mat `Xtr_nodep_norm' = xtrmat
+				mat `Xco_nodep_norm' = xcomat
+				mat `A' = `A' \ `Xco_nodep_norm'
+				mat `b' = `b' \ `Xtr_nodep_norm'				
+			}
+			local m_n = rowsof(`A')
+			mat `spread_diff' = `A'*`wsol'-`b'
+			//don't divide by b in the next line because already scaled so std-dev=1
+			mata: st_matrix("`spread_diff'",abs(st_matrix("`spread_diff'")))
+			mat `spread_diff_m_mat' = `spread_diff'*J(1,`m_n',1)/`m_n'
+			local spread_diff_m = `spread_diff_m_mat'[1,1]
+			if `spread_limit'<=0 local spread_limit = 0.01
+			di as txt "Mean difference between unit and SC for dependent variable and other predictors (for normalized data): `spread_diff_m'"
+			if `spread_diff_m'<`spread_limit' {
+				di as txt "Discrepancy less than limit (`spread_limit'). Attempting to resolve indeterminacy by maximum spread"
+				tempname wsol_second wsol_first
+				mat `wsol_second' = J(`cono',1,.)
+				local re_displ_amount 2
+				local restart 0
+				mat `c' = J(`cono',1,0)
+				mat `H' = I(`cono')
+				mat `A' = J(1,`cono',1) \ `A'
+				mat `b' = 1             \ `b'
+				cap plugin call synth2opt , `c' `H'  `A' `b' `l' `u' `bound' `margin' `maxiter' `sigf' `wsol_second' `re_displ_amount' `restart' _ret_code
+				if _rc>0 exit _rc
+				if `ret_code'==`OPTIMAL_SOLUTION'{
+					mat `wsol_first' = `wsol'
+					mat `wsol' = `wsol_second'
+					di "Successfully optimized to maximize spread"
+				}
+				else{
+					di "Unsuccessful at optimizing to maximize spread (`ret_code'). Using previous results."
+				}
+			}
+		}
+		
 		/* round */
 		mat `wsol_unr' = `wsol'
 		mata: roundmat("`wsol'")
@@ -527,7 +609,7 @@ program synth2 , eclass
 		mat `wsolout' =  `counitno' , `wsol'
 		mat `wsolout_unr' =  `counitno' , `wsol_unr'
 		
-		if(`ret_code'!=20) continue, break
+		if(`ret_code'!=`CHOLDC_FAILED' | "`re_displ_amount'"!="") continue, break
 		
 		di "Optimization dropped a variable. Restarting with donors with correct value. That var will get dropped."
 		*save the unit #s of those that have 0 weight
@@ -559,24 +641,15 @@ program synth2 , eclass
 	mat colname `wsolout_unr' = "_Co_Number" "_W_Weight"
 	
 	qui svmat   `wsolout' , names(col)
-	tempname Xbal Zbal Ybal loss Xsynth Ysynth Zsynth gap Xtr_norm Xco_norm
-
-	/* play back original X */
-	mat `Xtr_norm' = `Xtr'
-	mat `Xco_norm' = `Xco'
-	mat rowname `Xtr_norm' = `: rownames `Xtrtemp''
-	mat colname `Xtr_norm' = `: colnames `Xtrtemp''
-	mat rowname `Xco_norm' = `: rownames `Xcotemp''
-	mat colname `Xco_norm' = `: colnames `Xcotemp''
-	mat `Xtr' = `Xtrtemp'
-	mat `Xco' = `Xcotemp'
+	tempname Xbal Zbal Ybal loss loss_post Xsynth Ysynth Zsynth Ysynth_post gap gap_post gap_pre
 
 	/* Compute loss and transform to RMSPE */
 	mat `Zsynth' = `Zco' * `wsol_final'
 	mat `Zbal' = `Ztr' ,  `Zsynth'
 	mat colname `Zbal' = "Treated" "Synthetic"
 
-	mat `loss' = (`Ztr' - `Zsynth')' * ( `Ztr' - `Zsynth' )
+	mat `gap_pre' = `Ztr' - `Zsynth'
+	mat `loss' = (`gap_pre')' * ( `gap_pre' )
 	mat `loss' = `loss' / rowsof(`Ztr')
 	mata: roottaker("`loss'")
 	mat rowname `loss' = "RMSPE"
@@ -610,8 +683,17 @@ program synth2 , eclass
 	mat `Ysynth' = `Yco' * `wsol_final'
 	mat `Ybal' = `Ytr' ,  `Ysynth'
 	mat colname `Ybal' = "Treated" "Synthetic"
-
 	mat `gap'    = `Ytr' - `Ysynth'
+	
+	*Just the post period
+	mat `Ysynth_post' = `Yco_post'*`wsol_final'
+	mat `gap_post' = `Ytr_post' -`Ysynth_post'
+	
+
+	mat `loss_post' = (`gap_post')' * ( `gap_post' )
+	mat `loss_post' = `loss_post' / rowsof(`gap_post')
+	mata: roottaker("`loss_post'")
+	mat rowname `loss_post' = "RMSPE"
 
 	/* if user wants plot or save */
 	if "`keep'" != "" | "`figure'" != "" {
@@ -621,7 +703,7 @@ program synth2 , eclass
 		qui svmat double `Ysynth' , names(_Ysynthetic)
 		qui svmat double `gap' , names(_gap)
 		/* time variable for plotting */
-		tempvar timetemp
+		tempname timetemp
 		mat input `timetemp' = (`resultsperiod')
 		mat `timetemp' = (`timetemp')'
 		qui svmat double `timetemp' , names(_time)
@@ -676,24 +758,34 @@ program synth2 , eclass
 	mat rowname `V' = `prednames'
 	mat colname `V' = `prednames'
 	ereturn mat V_matrix    `V'
-	ereturn scalar RMSPE_scal = `loss'[1,1]
+	ereturn scalar RMSPE_pre = `loss'[1,1]
+	ereturn scalar RMSPE_post  = `loss_post'[1,1]
 	ereturn mat RMSPE `loss'
 	ereturn mat X_balance   `Xbal'
 	ereturn mat Ybal `Ybal'
 	ereturn mat Zbal `Zbal'
 
 	/* drop global macros */
-	macro drop Xtr Xco bslack
+	macro drop Xtr Xco
 
 	mat drop xcomat xtrmat vmat fmat matout
 	cap mat drop emat
 	
-	*ereturn mat X1    `Xtr'
-	*ereturn mat X0    `Xco'
+	ereturn mat X1    `Xtr'
+	ereturn mat X0    `Xco'
 	ereturn mat X1_normalized    `Xtr_norm'
 	ereturn mat X0_normalized    `Xco_norm'
 	*ereturn mat Z1    `Ztr'
 	*ereturn mat Z0    `Zco'
+	if "`spread'"!=""{
+		ereturn scalar spread_diff_m = `spread_diff_m'
+		cap confirm matrix `wsol_first'
+		if !_rc{
+			ereturn mat W_weights_first    `wsol_first'
+			ereturn scalar spread_opt_succ = 1
+		}
+		else ereturn scalar spread_opt_succ = 0
+	}
 
 end
 
@@ -733,24 +825,6 @@ program missingchecker , rclass
 		qui drop `misscheck'
 	}
 end
-
-/* subroutine gettabstatmat: heavily reduced version of SSC "tabstatmat" program by Nick Cox */
-/*program gettabstatmat
-        version 9.2
-        syntax name(name=matout)
-        local I = 1
-        while "`r(name`I')'" != "" {
-                local ++I
-        }
-        local --I
-        tempname tempmat
-        forval i = 1/`I' {
-            matrix `tempmat' = nullmat(`tempmat') \ r(Stat`i')
-            local names   `"`names' `"`r(name`i')'"'"'
-        }
-        matrix rownames `tempmat' = `names'
-        matrix `matout' = `tempmat'
-end*/
 
 /* subroutine agmat: aggregate x-values over time, checks missing, and returns predictor matrix */
 program agmat
