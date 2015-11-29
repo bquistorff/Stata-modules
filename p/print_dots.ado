@@ -5,7 +5,12 @@
 program print_dots
     version 12
 	args curr end
+	
+	if `c(noisily)'==0 exit 0 //only have one timer going at at time.
+	
 	local timernum 13
+	if "$PRINTDOTS_WIDTH"=="" local width 50
+	else local width = clip(${PRINTDOTS_WIDTH},1,50)
 	
 	*See if passed in both
 	if "`end'"==""{
@@ -29,9 +34,9 @@ program print_dots
 		timer on `timernum'
 		if `used'>60 {
 			local remaining = `used'*(`end'/`curr'-1)
-			local remaining_toprint = round(`remaining')
-			local used_toprint = round(`used')
-			display "After `=`curr'-1': " `used_toprint' "s elapsed, " `remaining_toprint' "s est. remaining"
+			format_time `= round(`remaining')', local(remaining_toprint)
+			format_time `= round(`used')', local(used_toprint)
+			display "After `=`curr'-1': `used_toprint' elapsed, `remaining_toprint' est. remaining"
 		}
 		exit 0
 	}
@@ -41,15 +46,17 @@ program print_dots
 		local used `r(t`timernum')'
 		timer on `timernum'
 		local remaining = `used'*(`end'/`curr'-1)
-		local remaining_toprint = round(`remaining')
-		local used_toprint = round(`used')
-		display "After `=`curr'-1': " `used_toprint' "s elapsed, " `remaining_toprint' "s est. remaining"
+		format_time `= round(`remaining')', local(remaining_toprint)
+		format_time `= round(`used')', local(used_toprint)
+		display "After `=`curr'-1': `used_toprint' elapsed, `remaining_toprint' est. remaining"
 		
-		if `end'<50{
+		if `end'<`width'{
 			di "|" _column(`end') "|" _continue
 		}
 		else{
-			di "----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5" _continue
+			local full_header "----+--- 1 ---+--- 2 ---+--- 3 ---+--- 4 ---+--- 5"
+			local header = substr("`full_header'",1,`width')
+			di "`header'" _continue
 		}
 		di " Total: `end'"
 		forval i=1/`start_point'{
@@ -58,22 +65,43 @@ program print_dots
 		exit 0
 	}
 	
-	if (mod(`curr', 50)==0 | `curr'==`end'){
+	if (mod(`curr', `width')==0 | `curr'==`end'){
 		timer off `timernum'
 		qui timer list  `timernum'
 		local used `r(t`timernum')'
-		local used_toprint = round(`used')
+		format_time `= round(`used')', local(used_toprint)
 		if `end'>`curr'{
 			timer on `timernum'
 			local remaining = `used'*(`end'/`curr'-1)
-			local remaining_toprint = round(`remaining')
-			display ". " `used_toprint' "s elapsed. " `remaining_toprint' "s remaining"
+			format_time `= round(`remaining')', local(remaining_toprint)
+			display ". `used_toprint' elapsed. `remaining_toprint' remaining"
 		}
 		else{
-			di "| " `used_toprint' "s elapsed. "
+			di "| `used_toprint' elapsed. "
 		}
 	}
 	else{
 		di "." _continue
 	}
 end
+
+program format_time
+	syntax anything(name=time), local(string)
+	
+	local suff "s"
+	if `time'>100{
+		local time=`time'/60
+		local suff "m"
+		if `time'>100{
+			local time = `time'/60
+			local suff "h"
+			if `time'>36{
+				local time = `time'/24
+				local suff "d"
+			}
+		}
+	}
+	local str =string(`time', "%9.2f")
+	c_local `local' `str'`suff'
+end
+

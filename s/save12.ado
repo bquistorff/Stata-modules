@@ -7,6 +7,8 @@
 program save12
 	syntax anything [, replace datasig compress]
 	
+	if "`compress'"!="" compress
+	
 	if "`datasig'"!="" {
 		datasig set, reset
 		*remove dates so dta file is the same across runs (normalized)
@@ -16,8 +18,6 @@ program save12
 	
 	cap unab temp: _*
 	if `:list sizeof temp'>0 di "Warning: Saving with temporary (_*) vars"
-	
-	if "`compress'"!="" compress
 	
 	if `c(stata_version)'>=13{
 		if `c(stata_version)'>=15 di "save12 untested for Stata v>=15"

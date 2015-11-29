@@ -1,4 +1,4 @@
-*! version 0.2
+*! version 0.1
 *! Brian Quistorff
 *! Usage:
 *! change_line using table.tex, ln(10) insert("blah")
@@ -11,7 +11,7 @@ program change_line
 	tempfile newfile
 	tempname fh fh_new
 	file open `fh' using `"`using'"', read text
-	qui file open `fh_new' using `newfile', write text replace
+	file open `fh_new' using `newfile', write text replace
 	
 	file read `fh' line
 	local linenum = 0
@@ -21,14 +21,14 @@ program change_line
 		if `ln'==`linenum'{
 			if `"`insert'"'!=""{
 				file write `fh_new' `"`insert'"' _newline
-				file write `fh_new' `"`macval(line)'"' _newline
+				file write `fh_new' `"`line'"' _newline
 			}
 			else{
-				if "`replace'"==""   file write `fh_new' `"`replace'"' _newline
+				if "`replace'"!=""   file write `fh_new' `"`replace'"' _newline
 			}
 		}
 		else{
-			file write `fh_new' `"`macval(line)'"' _newline
+			file write `fh_new' `"`line'"' _newline
 		}
 		
 		file read `fh' line
