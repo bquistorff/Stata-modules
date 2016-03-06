@@ -48,6 +48,26 @@ The algorithms have varying tradeoffs. Most people will likely find {opt handle_
 {phang2}{cmd:. *Now the strata we care about has smallest differences possible given cell-level balance.}{p_end}
 {phang2}{cmd:. tab strat_var2 treatment_redux}{p_end}
 
+{title:Citation of assign_treatment}
+
+{p}{cmd:assign_treatment} is not an official Stata command. It is a free contribution
+to the research community, like a paper. Please cite it as such: {p_end}
+
+{phang}Brian Quistorff. assign_treatment: A Tool for Stratified Randomization, Sep 2015. {browse "http://bquistorff.blogspot.com/2015/09/stratified-randomization.html":http://bquistorff.blogspot.com/2015/09/stratified-randomization.html}. Version 1.1.1.
+{p_end}
+
+{p}And in bibtex format:{p_end}
+
+@Misc{Qui15,
+  Title  = {assign_treatment: A Tool for Stratified Randomization},
+  Author = {Brian Quistorff},
+  Month  = {Sep},
+  Note   = {Version 1.2},
+  Year   = {2015},
+  Url    = {http://bquistorff.blogspot.com/2015/09/stratified-randomization.html}
+}
+
+
 {marker references}{...}
 {title:References}
 
