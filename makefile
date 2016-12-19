@@ -4,9 +4,9 @@
 pkg_files := $(wildcard */*.pkg)
 toc_files := $(wildcard */*.toc)
 
-.PHONY : all install clean check_pkg_files check_stata_code
+.PHONY : all install clean check_pkg_files check_stata_code check_smcl
 
-all : stata.trk pkg_list.txt check_pkg_files check_stata_code
+all : stata.trk pkg_list.txt check_pkg_files check_stata_code check_smcl
 	cd src && $(MAKE) all
 
 install : 
@@ -23,6 +23,12 @@ stata.trk : $(pkg_files)
 
 pkg_list.txt : $(toc_files)
 	bin/gen_pkg_list.sh
+
+#See http://www.statalist.org/forums/forum/general-stata-discussion/general/6850-text-goes-missing-in-sthlp-file where it says that lines shouldn't be longer than 244
+check_smcl :
+	grep -r --include "*.sthlp" '.\{245\}'
+	#Also -help usersite- says "The text listed on the second and subsequent d lines in both stata.toc and pkgname.pkg may contain SMCL as long as you include v 3 (or v 2)"
+
 
 .PHONY : ados_witout_version pkgs_without_distr pkgs_not_in_toc ados_missing_tempname
 check_pkg_files : pkgs_without_distr pkgs_not_in_toc

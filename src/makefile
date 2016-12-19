@@ -8,7 +8,7 @@ DIRS = synth2
 lperm_inference.mlib : perm_inference.mata
 	../bin/statab.sh do cli_build_mlib.do "$@ $^"
 
-.PHONY : all install clean
+.PHONY : all install clean check
 
 all: lperm_inference.mlib
 	for d in $(DIRS); do (cd $$d && $(MAKE) all); done
@@ -20,3 +20,7 @@ install:
 clean:
 	rm -f *.mlib
 	for d in $(DIRS); do (cd $$d && $(MAKE) clean); done
+
+#TODO: Full integrate this
+check:
+	-grep "\`[^\"]" *.mata | grep -v '\^*'

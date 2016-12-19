@@ -11,18 +11,18 @@ clear all
 sysdir set PERSONAL "`c(pwd)'/ado"
 sysdir set PLUS "`c(pwd)'/ado"
 global S_ADO "PERSONAL;BASE"
+net set ado PLUS
+net set other PLUS
 set more off
 
 cap confirm file ado/s/synth.ado
 if _rc!=0{
 	mkdir ado
 	
-	net set ado PLUS
-	net set other PLUS
-	local lcl_repo "`c(pwd)'/../.."
-	ssc install synth, all
-	net install synth2, from(`lcl_repo'/s) all
+	ssc install synth, all replace
+	net install synth2, from(`c(pwd)'/../../s) all force
 	
+	local lcl_repo "`c(pwd)'/../.."
 	net install b_file_ops, from(`lcl_repo'/b) all
 	find_in_file using ado/s/synth.ado , regexp("qui plugin call synthopt") local(pluginline)
 	change_line  using ado/s/synth.ado , ln(`pluginline')      insert(" timer on  1")
@@ -59,16 +59,23 @@ plugin call synth2opt , c H A b l u 10 0.005 20 12 wsol
 assert wsol[1,1]+1.5<0.001 & wsol[2,1]+2<0.001 & wsol[3,1]-3<0.001
 }
 
+
 *Test basic equality between synth and synth2
-if 0{
+if 1{
 sysuse smoking, clear
-drop if lnincome==.
 tsset state year
 
-synth cigsale beer(1984(1)1988) lnincome retprice age15to24 cigsale(1988 1980 1975), trunit(3) trperiod(1989)
+profiler on
+qui synth cigsale beer(1984(1)1988) lnincome retprice age15to24 cigsale(1988 1980 1975), trunit(3) trperiod(1989)
+profiler off
 mat w = e(W_weights)
-
-synth2 cigsale beer(1984(1)1988) lnincome retprice age15to24 cigsale(1988 1980 1975), trunit(3) trperiod(1989)
+profiler report
+profiler clear
+profiler on
+qui synth2 cigsale beer(1984(1)1988) lnincome retprice age15to24 cigsale(1988 1980 1975), trunit(3) trperiod(1989)
+profiler off
+profiler report
+profiler clear
 mat w2 = e(W_weights)
 
 mat diff = w-w2
@@ -98,7 +105,7 @@ assert x[1,2]!=.
 }
 
 *Speed test synth vs synth2
-if 1{
+if 0{
 sysuse smoking, clear
 drop if lnincome==.
 label values state
@@ -142,5 +149,64 @@ timer list
 timer clear
 }
 
-clear all //needed to copy over the plugin file (release the file lock)
+
+if 0{
+cap noisily program synth2opt, plugin
+mat co_data = (-1, 1 \ .1, 1 \ 1, 1 \ -.1, -1)'
+local cono = colsof(co_data)
+mat tr_data = (0,0)'
+mat u = J(`cono',1,1)
+mat l = J(`cono',1,0)
+
+*Orig pass
+mat V = I(2)
+mat c1 = (-1 * ((tr_data)' * V * co_data))'
+mat H1 =  (co_data)' * V * co_data
+mat A1 = J(1,`cono',1)
+mat b1 = (1)
+mat wsol = J(`cono',1,.)
+plugin call synth2opt , c1 H1 A1 b1 l u 10 0.005 20 12 wsol
+mat li wsol
+
+*Spread pass
+mat c2 = J(`cono',1,0)
+mat H2 = I(`cono')
+mat A2 = J(1,`cono',1) \ co_data[1,1...] \ co_data[2,1...]
+mat b2 = 1             \ tr_data[1,1...] \ tr_data[2,1...]
+mat wsol = J(`cono',1,.)
+plugin call synth2opt , c2 H2 A2 b2 l u 10 0.005 20 12 wsol
+mat li wsol
+}
+
+if 0{
+sysuse smoking, clear
+drop if lnincome==.
+tsset state year
+qui levelsof state, local(state_ids)
+cap mat drop spreads w_2
+foreach state_id of local state_ids{
+	qui synth2 cigsale /*cigsale(1980) cigsale(1981) cigsale(1982) cigsale(1983)*/ cigsale(1984) ///
+		cigsale(1985) cigsale(1986) cigsale(1987) cigsale(1988), ///
+		trunit(`state_id') trperiod(1989) mspeperiod(1984(1)1988) spread spread_limit(.1)
+	mat spreads = nullmat(spreads) \ ( `state_id', `e(spread_diff_m)')
+}
+drop _all
+svmat spreads
+rename s* (id spread)
+sort spread
+kdensity spread
+}
+
+if 0{
+sysuse smoking, clear
+drop if lnincome==.
+tsset state year
+local trunit 18 //from the min spread from above
+
+synth2 cigsale cigsale(1983) cigsale(1984) cigsale(1985) cigsale(1986) cigsale(1987) ///
+	cigsale(1988), trunit(`trunit') /*mspeperiod(1983(1)1988)*/ trperiod(1989) /*spread spread_limit(0.005)*/
+
+}
+
+*clear all //needed to copy over the plugin file (release the file lock)
 log close test

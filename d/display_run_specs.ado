@@ -12,7 +12,7 @@ program display_run_specs
 	di _skip(17) as text "Flavor = " as result "`r(product_name)'"
 	
 	qui update
-	di _skip(15) as text "Revision = " as result %td r(inst_exe)
+	di _skip(15) as text "Revision = " as result %tddd_Mon_CCYY r(inst_exe)
 	
 	*query compilenumber //This executable should be identified completely from other info
 	

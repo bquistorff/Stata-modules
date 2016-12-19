@@ -1,7 +1,11 @@
 *! Version 1.1
-*! Prints a simple progress bar and time estimates
+*! A variant of _dots (simple progress bar) with time estimates
 *! If you don't want to keep track of curr (e.g. in a foreach loop)
 *! Then just pass in one parameter being the end.
+/* To make deterministic output
+s/^After .+/-normalized-/g
+s/^(\.[^0-9]*)[0-9]+(s elapsed\.)/\1-normalized-\2/g
+*/
 program print_dots
     version 12
 	args curr end
