@@ -62,7 +62,7 @@ if [ $rc == "0" ]
 then
     # use --max-count to avoid matching final line ("end of do-file") when
     # do-file terminates with error
-    if egrep --before-context=1 --max-count=1 "^r\([0-9]+\);$" "$log"
+    if grep --max-count=1 "^r([0-9]\+);" "$log"
     then
         rc=1
     fi
