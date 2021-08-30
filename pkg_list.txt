@@ -6,7 +6,7 @@ b_var_ops - Some replacements for variable operations
 closeallmatafiles - Closes all files that were open in mata. -clear all- doesn't close mata open files!
 collapseandpreserve - This will collapse the dataset and preserve the variable and value labels. 
 clear_all - Really resets everything (-clear all- doesn't clear all)
-char_ops - Some utilities for handling characteristics.v 3
+char_ops - Some utilities for handling characteristics.
 crossfit Generate out-of-sample predictions/residuals using cross-fitting.
 display_run_specs - Lists installation details necessarily for numerical replication
 drop_if - like -droif- but appends the if condition to the # dropped msg
@@ -15,7 +15,7 @@ escape_latex - Escapes Latex meta-chatacters for strings. Use for writing to tex
 ereturn_do - Passthrough command allowing one to use the -ereturn- cmds easily.
 fsample - Similar to sample but for data in file (so useful for very big datasets). 
 gen_robust_id - Generates a unique id for each pair (like egen ... group()) but makes sure they don't have leading 0s
-get_config_value - Allows you to store preferences separate from codev 3
+get_config_value - Allows you to store preferences separate from code
 iso8601_strs - A program to return ISO 8601 date/time strings
 ivreg2out - Combine stage estimates of ivreg2 into single estimate
 log_axis_ticks - Creates axis ticks (major & minor) for log scales
@@ -23,7 +23,7 @@ latabstat_simple - modification of -latabstat- (see SSC) to remove the Source fo
 latex_multiline_cell - Making multiline cells in Latex tables
 matrix_post_lines - Creates the post init and post string lines that will come from a matrix
 matrixsort - Sorts a Stata matrix by a column. Fixes problem in -matsort- where row labels with spaces are mangled
-matsave_simple - Fork of -matsave-v 3
+matsave_simple - Fork of -matsave-
 nice_profile_report - Replaces -profiler report- and create a dta as output (rather than a text file). Requires: save_cmd_output.ado
 net_install - Provides replacement utilities for working with modules where the source of installation files is a relative path
 outtable_simple - A modified version of -outtable- v1.0.7 (see SSC) to remove the outer \table output so that it can be included in LyX

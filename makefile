@@ -21,6 +21,7 @@ test:
 stata.trk : $(pkg_files)
 	bin/gen_stata.trk.sh
 
+# Make sure all the toc_files have empty line at the end or a "v 3" will get added (can search this to check)
 pkg_list.txt : $(toc_files)
 	bin/gen_pkg_list.sh
 
