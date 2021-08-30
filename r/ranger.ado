@@ -40,7 +40,7 @@ program ranger
 	*rcall_check rpart>=4.0, rversion(3.5.0)
 	rcall vanilla `debug': suppressWarnings(suppressPackageStartupMessages(library(ranger))); df <- st.data(); for(vname in strsplit("`as_f'", " ")[[1]]){ if(!is.factor(df[[vname]])) df[[vname]] = as.factor(df[[vname]]);}; cc = complete.cases(df); df_est=df[cc,]; form=as.formula(paste0("`outcome' ~", gsub(" ", " + ", "`ctrl_vars'"))); rf_fit=ranger(form, df_est, num.trees=`num_trees', respect.unordered.factors="`respect_unordered_factors'" `w_opt'); `pred_code' df_est = df_est[,c("`id_varname'" `final_vars')]; save.dta13(df_est, "`pred_file'"); rm(cc, df, rf_fit, form, df_est); 
 	restore
-	merge 1:1 `id_varname' using `pred_file', keep(master match) nogenerate
+	qui merge 1:1 `id_varname' using `pred_file', keep(master match) nogenerate
 	
 	drop `id_varname'
 end
