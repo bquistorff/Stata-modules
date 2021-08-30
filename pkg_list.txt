@@ -7,6 +7,7 @@ closeallmatafiles - Closes all files that were open in mata. -clear all- doesn't
 collapseandpreserve - This will collapse the dataset and preserve the variable and value labels. 
 clear_all - Really resets everything (-clear all- doesn't clear all)
 char_ops - Some utilities for handling characteristics.v 3
+crossfit Generate out-of-sample predictions/residuals using cross-fitting.
 display_run_specs - Lists installation details necessarily for numerical replication
 drop_if - like -droif- but appends the if condition to the # dropped msg
 ds_version - Shows the version of the Stata dataset whose filename is passed in.
