@@ -31,6 +31,7 @@ print_dots - Prints a simple progress bar and time estimates
 post_eb_eV - Post your own matrices to e(b) and e(V)
 reset_ADO - Resets the ADO to the standard ordering. Helpful because S_ADO isn't reset by clearing.
 rng_advance - A simple way to advance the Stata RNG state by a fixed amount. Will also fill a variable with a sequence of such states
+ranger - Stata bindings for R's ranger package for random forest.
 save_cmd_output - Saves the output from a shell command to a file
 save_fig - Programs to helsave graphs and derivatives.
 set_key - Stores and retrieves the unique key for a dataset

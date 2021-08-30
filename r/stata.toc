@@ -3,3 +3,4 @@ d R-directory
 
 p reset_ADO Resets the ADO to the standard ordering. Helpful because S_ADO isn't reset by clearing.
 p rng_advance A simple way to advance the Stata RNG state by a fixed amount. Will also fill a variable with a sequence of such states
+p ranger Stata bindings for R's ranger package for random forest.
