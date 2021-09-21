@@ -14,7 +14,7 @@
 
 {p 8 17 2}
 {cmd:ranger}
-	{it:varlist(fv)} [{cmd:if}] [{cmd:pw}] [{cmd:,} {opt predict(newvarname)} {opt predict_oob(newvarname)} num_trees(int 500)] 
+	{it:varlist(fv)} [{cmd:if}] [{cmd:pw}] [{cmd:,} {opt predict(newvarname)} {opt predict_oob(newvarname)} num_trees(int 500) seed(string)] 
 
 {synoptset 23 tabbed}{...}
 {marker options_table}{...}
@@ -27,6 +27,7 @@
 {synopt :{opt predict(newvarname)}}Name of variable to store the predictions.{p_end}
 {synopt :{opt predict_oob(newvarname)}}Name of variable to store the out-of-bag (a form of out-of-sample) predictions.{p_end}
 {synopt :{opt num_trees(#)}}Number of trees in the forest to run. This increases the run-time.{p_end}
+{synopt :{opt seed(string)}}Set to specific integer to make results reproducible. Omit to use R's default (based on time).{p_end}
 
 {synoptline}
 {p2colreset}{...}

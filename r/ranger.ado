@@ -5,8 +5,9 @@ program ranger
 	version 12.0 //guess
 	*TODO: Allow different sample for predict then fit
 	*TODO: Could additionally make predictions for obs missing value in variables specified in estimation, but not used any trees in the forest. (though ensure that ranger doesn't error out for that.)
-	syntax varlist(fv) [if] [pw/], [predict(string) predict_oob(string) num_trees(int 500) respect_unordered_factors(string) debug]
+	syntax varlist(fv) [if] [pw/], [predict(string) predict_oob(string) num_trees(int 500) respect_unordered_factors(string) seed(string) debug]
 	if "`respect_unordered_factors'"=="" loc respect_unordered_factors "order"
+	if "`seed'"=="" loc seed "NULL"
 	tempvar id_varname
 	_assert "`predict'`predict_oob'"!="", msg("-predict()- or -predict_oob()- required.")
 	
@@ -38,7 +39,7 @@ program ranger
 	}
 	
 	*rcall_check rpart>=4.0, rversion(3.5.0)
-	rcall vanilla `debug': suppressWarnings(suppressPackageStartupMessages(library(ranger))); df <- st.data(); for(vname in strsplit("`as_f'", " ")[[1]]){ if(!is.factor(df[[vname]])) df[[vname]] = as.factor(df[[vname]]);}; cc = complete.cases(df); df_est=df[cc,]; form=as.formula(paste0("`outcome' ~", gsub(" ", " + ", "`ctrl_vars'"))); rf_fit=ranger(form, df_est, num.trees=`num_trees', respect.unordered.factors="`respect_unordered_factors'" `w_opt'); `pred_code' df_est = df_est[,c("`id_varname'" `final_vars')]; save.dta13(df_est, "`pred_file'"); rm(cc, df, rf_fit, form, df_est); 
+	rcall vanilla `debug': suppressWarnings(suppressPackageStartupMessages(library(ranger))); df <- st.data(); for(vname in strsplit("`as_f'", " ")[[1]]){ if(!is.factor(df[[vname]])) df[[vname]] = as.factor(df[[vname]]);}; cc = complete.cases(df); df_est=df[cc,]; form=as.formula(paste0("`outcome' ~", gsub(" ", " + ", "`ctrl_vars'"))); rf_fit=ranger(form, df_est, num.trees=`num_trees', respect.unordered.factors="`respect_unordered_factors'", seed=`seed' `w_opt'); `pred_code' df_est = df_est[,c("`id_varname'" `final_vars')]; save.dta13(df_est, "`pred_file'"); rm(cc, df, rf_fit, form, df_est); 
 	restore
 	qui merge 1:1 `id_varname' using `pred_file', keep(master match) nogenerate
 	
