@@ -7,7 +7,7 @@ program ranger, eclass
 	version 12.0 //guess
 	*TODO: Allow different sample for predict then fit
 	*TODO: Could additionally make predictions for obs missing value in variables specified in estimation, but not used any trees in the forest. (though ensure that ranger doesn't error out for that.)
-	syntax varlist(fv) [if/] [pw/], [predict(string) predict_oob(string) num_trees(int 500) respect_unordered_factors(string) seed(string) debug importance(string)]
+	syntax varlist(fv) [if/] [aw pw/], [predict(string) predict_oob(string) num_trees(int 500) respect_unordered_factors(string) seed(string) debug importance(string)]
 	if "`respect_unordered_factors'"=="" loc respect_unordered_factors "order"
 	if "`importance'"!="" {
 		loc importance_opt `", importance="`importance'" "'
@@ -38,7 +38,7 @@ program ranger, eclass
 	}
 	keep `id_varname' `est_vars' `if_est'
 	
-	if "`pw'"!="" loc w_opt `", case.weights=df[["`exp'"]]"'
+	if "`exp'"!="" loc w_opt `", case.weights=df[cc `est_logic',"`exp'"]"'
 	if "`predict'`predict_oob'"!="" {
 		tempfile pred_file
 		loc pred_file = subinstr("`pred_file'", "\", "/", .)
@@ -54,6 +54,7 @@ program ranger, eclass
 	}
 	
 	*rcall_check rpart>=4.0, rversion(3.5.0)
+	*save _st.data.dta, replace
 	rcall vanilla `shell' `debug': suppressWarnings(suppressPackageStartupMessages(library(ranger))); df <- st.data(); for(vname in strsplit("`as_f'", " ")[[1]]){ if(!is.factor(df[[vname]])) df[[vname]] = as.factor(df[[vname]]);}; cc = complete.cases(df); df_est=df[cc `est_logic',]; form=as.formula(paste0("`outcome' ~", gsub(" ", " + ", "`ctrl_vars'"))); rf_fit=ranger(form, df_est, num.trees=`num_trees', respect.unordered.factors="`respect_unordered_factors'", seed=`seed' `w_opt' `importance_opt'); `pred_code' `pred_code2' `importance_code' rm(cc, df, rf_fit, form, df_est `pred_vars'); 
 	if "`importance'"!="" {
 		tempname vi
