@@ -36,9 +36,13 @@ program ranger, eclass
 		gen byte `if_est' = `if'
 		loc est_logic `"& df[["`if_est'"]]"'
 	}
+	
 	keep `id_varname' `est_vars' `if_est'
 	
-	if "`exp'"!="" loc w_opt `", case.weights=df[cc `est_logic',"`exp'"]"'
+	if "`exp'"!="" {
+		loc w_opt `", case.weights=df[cc `est_logic',"`exp'"]"'
+		loc weight_str "[`weight'=`exp']"
+	}
 	if "`predict'`predict_oob'"!="" {
 		tempfile pred_file
 		loc pred_file = subinstr("`pred_file'", "\", "/", .)
@@ -67,6 +71,19 @@ program ranger, eclass
 	if "`predict'`predict_oob'"!="" {
 		qui merge 1:1 `id_varname' using `pred_file', keep(master match) nogenerate
 		sort `id_varname'
+	}
+	if "`importance'"!="" & "`predict'"!="" {
+		tempvar n_miss
+		egen `n_miss' = rowmiss(`est_vars')
+		*loc if_standalone = cond("`if'"=="", "", "if `if'")
+		loc if_part = cond("`if'"=="", "", "`if' &")
+		qui count if `if_part' `n_miss'==0
+		loc e_N = r(N)
+		ereturn scalar N = `e_N'
+	
+		qui corr `outcome' `predict' if `if_part' `n_miss'==0 `weight_str'
+		ereturn scalar r2  = r(rho)*r(rho)
+		drop `n_miss'
 	}
 	drop `id_varname'
 end
